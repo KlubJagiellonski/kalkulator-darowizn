@@ -1,0 +1,162 @@
+@import '../styles/variables.scss';
+
+.donation-form {
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+    align-items: center;
+    background-color: $light-gray;
+    padding: 2 * $space;
+    text-align: center;
+    font-family: Roboto;
+
+    header,
+    section {
+        margin-bottom: 2 * $space;
+        width: 42em;
+    }
+    section {
+        padding-top: $space;
+    }
+
+    h2 {
+        margin-bottom: $space;
+    }
+
+    .tax-type-select {
+        border-top: 1px solid darken($light-gray, 10);
+        padding-top: $space;
+
+        .tax-options {
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+
+            .option {
+                display: flex;
+                flex-flow: row nowrap;
+                margin-bottom: $space;
+            }
+        }
+    }
+
+    .income-options {
+        display: flex;
+        flex-flow: column;
+
+        .option {
+            display: flex;
+            flex-flow: row nowrap;
+            margin-bottom: $space;
+
+            .income-input {
+                flex: 1 1 auto;
+                width: auto;
+                line-height: 2em;
+                height: 2em;
+                font-size: 1.4em;
+                padding: 0 1em;
+            }
+        }
+    }
+
+    .validation-message {
+        background-color: #eeee00;
+        border-radius: 1rem;
+        padding: 1em;
+    }
+
+    .tax-output {
+        .max-donation {
+            margin: 1em 0 2em 0;
+            font-size: 2rem;
+        }
+    }
+
+    .actions {
+        border-top: 1px solid darken($light-gray, 10);
+        padding-top: $space;
+
+        #calculate-donation-btn {
+            width: 6em;
+            height: 3em;
+            border-radius: 0;
+            background-color: $blue;
+            transition-duration: 0.5s;
+            font-size: 1.4em;
+            padding: $space 2 * $space;
+            border: none;
+
+            &[disabled] {
+                background-color: $gray;
+                color: darken($gray, 20);
+
+                &:hover {
+                    background-color: $gray;
+                    color: darken($gray, 20);
+                }
+            }
+
+            &:hover {
+                background-color: lighten($gray, 10);
+            }
+        }
+    }
+}
+
+.radio-option {
+    flex: 1 1 10em;
+    display: flex;
+    position: relative;
+    padding-left: 4 * $space;
+    margin-right: $space;
+    cursor: pointer;
+    font-size: 1.4em;
+    line-height: 2em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    input ~ .checkmark,
+    &:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+
+        &:checked ~ .checkmark {
+            background-color: #2196f3;
+        }
+        &:checked ~ .checkmark:after {
+            display: block;
+        }
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 2em;
+        width: 2em;
+        background-color: #eee;
+        border-radius: 50%;
+
+        &:after {
+            content: '';
+            position: absolute;
+            display: none;
+            top: 0.5em;
+            left: 0.5em;
+            width: 1em;
+            height: 1em;
+            border-radius: 50%;
+            background: white;
+        }
+    }
+}

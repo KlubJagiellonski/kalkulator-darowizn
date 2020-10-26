@@ -1,0 +1,66 @@
+<template>
+  <link href="form.css" rel="stylesheet"></head>
+  <form class="donation-form">
+    <header><h1>Kalkulator darowizn</h1></header>
+
+    <section class="tax-type-select">
+      <h2>Jesteś podatnikiem PIT czy CIT?</h2> 
+      <div class="tax-options">
+        <!-- <div class="tax-circle tax-pit"><span>PIT</span></div>
+        <div class="tax-circle tax-cit"><span>CIT</span></div> -->
+        <div class="option tax-pit">
+          <label class="radio-option">
+            <span>PIT (progresywny)</span>
+            <input type="radio" id="PIT" class="radio-input" name="tax" value="pit">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+          <div class="option tax-cit">
+          <label class="radio-option">
+            <span>CIT</span>
+            <input type="radio" id="CIT" class="radio-input" name="tax" value="cit">
+            <span class="checkmark"></span>
+          </label>
+      </div>
+      </div>
+    </section>
+
+    <section class="income-input">
+      <h2>Podaj kwotę swojego szacowanego dochodu?</h2>
+      <div class="income-options">
+        
+        <div class="option month-income">
+          <label class="radio-option">
+            <span>Średni miesięczny (brutto)</span>
+            <input type="radio" id="monthly" class="radio-input" name="income" value="monthly">
+            <span class="checkmark"></span>
+          </label>
+          <div class="input-wrapper">
+            <input type="text" class="income-input">
+            <div class="validation"></div>
+          </div>  
+        </div>
+        
+        <div class="option annual-income">
+          <label class="radio-option">
+            <span>Całkowity roczny (brutto)</span>
+            <input type="radio" id="annualy" class="radio-input" name="income" value="annualy">
+            <span class="checkmark"></span>
+          </label>
+          <div class="input-wrapper">
+            <input type="text" class="income-input">
+            <div class="validation"></div>
+          </div>
+        </div> 
+
+      </div>
+    </section>
+
+    <section class="actions">
+        <button id="calculate-donation-btn" class="button">Oblicz</button>
+    </section>
+
+    <section class="tax-output" />
+</form>
+
+</template>
