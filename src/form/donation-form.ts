@@ -1,10 +1,10 @@
 import { Tax, IncomeType } from '../donations/types';
 import { getTemplate, preventPropagationInvoke } from '../utils/templates';
-import { calculateDonation } from '../donations/calculate-donation';
+import { calculateForPIT } from '../donations/pit-calculations';
+import { calculateForCIT } from '../donations/cit-calculations';
 
 import '../styles/reset.scss';
 import './donation-form.scss';
-import { wrap } from 'module';
 
 interface IDonationFormState {
     selectedTax?: Tax;
@@ -26,6 +26,14 @@ class DonationForm extends HTMLElement {
         this.shadow = this.attachShadow({ mode: 'open' });
     }
 
+    updateState(newState: Partial<IDonationFormState>) {
+        this.state = {
+            ...this.state,
+            ...newState,
+        };
+        this.render();
+    }
+
     async connectedCallback() {
         const template = await getTemplate('./form.html');
         this.shadow.appendChild(template?.content.cloneNode(true));
@@ -34,6 +42,12 @@ class DonationForm extends HTMLElement {
         taxPIT?.addEventListener(
             'change',
             preventPropagationInvoke(() => this.handleTaxSelection(Tax.PIT)),
+        );
+
+        const taxPIT19 = this.find('.tax-pit19 .radio-input');
+        taxPIT19?.addEventListener(
+            'change',
+            preventPropagationInvoke(() => this.setIncorectTaxMessage(true)),
         );
 
         const taxCIT = this.find('.tax-cit .radio-input');
@@ -81,6 +95,29 @@ class DonationForm extends HTMLElement {
         });
     };
 
+    handleTaxSelection = (tax: Tax) => {
+        this.setIncorectTaxMessage(false);
+
+        this.updateState({ selectedTax: tax });
+    };
+
+    setIncorectTaxMessage = (visible: boolean) => {
+        const incorrectTax = this.find('section.incorrect-tax');
+        const incomeInput = this.find('section.income-input');
+
+        if (visible) {
+            incorrectTax?.classList.add('visible');
+            incomeInput?.classList.remove('visible');
+        } else {
+            incorrectTax?.classList.remove('visible');
+            incomeInput?.classList.add('visible');
+        }
+    };
+
+    handleIcomeSelection = (type: IncomeType) => (e: Event) => {
+        this.updateState({ selectedIncome: type });
+    };
+
     handleCalculation = () => {
         const taxOutput = this.find('.tax-output');
 
@@ -91,24 +128,19 @@ class DonationForm extends HTMLElement {
         });
 
         if (this.state.selectedTax && this.state.annualIncome) {
-            const result = calculateDonation(this.state.annualIncome, this.state.selectedTax);
+            const result =
+                this.state.selectedTax === Tax.PIT
+                    ? calculateForPIT(this.state.annualIncome)
+                    : calculateForCIT(this.state.annualIncome);
             const donation = formatter.format(result.donationSum);
             const taxFree = formatter.format(result.taxDeduction.toFixed(2));
 
             taxOutput?.innerHTML = `
                 <p>Od podatku możesz odliczyć darowizny w maksymalnej kwocie:</p>
                 <div class="max-donation">${donation}</div>
-                <p>W ten sposób zapłacisz nawet o ${taxFree} mniej podatku!</p>
+                <p>W ten sposób zapłacisz nawet o <strong>${taxFree}</strong> mniej podatku!</p>
             `;
         }
-    };
-
-    handleTaxSelection = (tax: Tax) => {
-        this.updateState({ selectedTax: tax });
-    };
-
-    handleIcomeSelection = (type: IncomeType) => (e: Event) => {
-        this.updateState({ selectedIncome: type });
     };
 
     validateNumberInput = (elementClass: string, value: number, message: string) => {
@@ -135,15 +167,6 @@ class DonationForm extends HTMLElement {
 
         const button = this.find('#calculate-donation-btn');
         button.disabled = !this.state.selectedTax || !this.state.annualIncome;
-    }
-
-    updateState(newState: Partial<IDonationFormState>) {
-        this.state = {
-            ...this.state,
-            ...newState,
-        };
-        console.log('form state', this.state);
-        this.render();
     }
 }
 

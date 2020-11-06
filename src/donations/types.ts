@@ -9,6 +9,6 @@ export enum IncomeType {
 }
 
 export interface Result {
-    donationSum: number;
+    donationSum: number; 
     taxDeduction: number;
-}
+};

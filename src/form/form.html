@@ -3,11 +3,9 @@
   <form class="donation-form">
     <header><h1>Kalkulator darowizn</h1></header>
 
-    <section class="tax-type-select">
+    <section class="tax-type-select visible">
       <h2>Jesteś podatnikiem PIT czy CIT?</h2> 
       <div class="tax-options">
-        <!-- <div class="tax-circle tax-pit"><span>PIT</span></div>
-        <div class="tax-circle tax-cit"><span>CIT</span></div> -->
         <div class="option tax-pit">
           <label class="radio-option">
             <span>PIT (progresywny)</span>
@@ -15,23 +13,35 @@
             <span class="checkmark"></span>
           </label>
         </div>
-          <div class="option tax-cit">
+        <div class="option tax-pit19">
+          <label class="radio-option">
+            <span>PIT (liniowy)</span>
+            <input type="radio" id="PIT19" class="radio-input" name="tax" value="pit19">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <div class="option tax-cit">
           <label class="radio-option">
             <span>CIT</span>
             <input type="radio" id="CIT" class="radio-input" name="tax" value="cit">
             <span class="checkmark"></span>
           </label>
-      </div>
+        </div>
       </div>
     </section>
 
-    <section class="income-input">
+    <section class="incorrect-tax">
+      <h2>Uwaga</h2>
+      <p>Podatnikom rozliczającym się według liniowej stawki PIT nie przysługuje odliczenie darowizn od dochodu.</p>
+    </section>
+
+    <section class="income-input visible">
       <h2>Podaj kwotę swojego szacowanego dochodu?</h2>
       <div class="income-options">
         
         <div class="option month-income">
           <label class="radio-option">
-            <span>Średni miesięczny (brutto)</span>
+            <span>Średni miesięczny (zł brutto)</span>
             <input type="radio" id="monthly" class="radio-input" name="income" value="monthly">
             <span class="checkmark"></span>
           </label>
@@ -43,7 +53,7 @@
         
         <div class="option annual-income">
           <label class="radio-option">
-            <span>Całkowity roczny (brutto)</span>
+            <span>Całkowity roczny (zł brutto)</span>
             <input type="radio" id="annualy" class="radio-input" name="income" value="annualy">
             <span class="checkmark"></span>
           </label>
@@ -56,11 +66,11 @@
       </div>
     </section>
 
-    <section class="actions">
+    <section class="actions visible">
         <button id="calculate-donation-btn" class="button">Oblicz</button>
     </section>
 
-    <section class="tax-output" />
+    <section class="tax-output visible" />
 </form>
 
 </template>

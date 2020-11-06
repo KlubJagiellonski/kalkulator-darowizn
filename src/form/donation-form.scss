@@ -6,26 +6,31 @@
     align-content: center;
     align-items: center;
     background-color: $light-gray;
-    padding: 2 * $space;
+    padding: $padding;
     text-align: center;
     font-family: Roboto;
 
     header,
     section {
-        margin-bottom: 2 * $space;
-        width: 42em;
+        margin-bottom: $padding;
+        width: 45em;
     }
     section {
-        padding-top: $space;
+        padding-top: $padding-small;
+        display: none;
+
+        &.visible {
+            display: block;
+        }
     }
 
     h2 {
-        margin-bottom: $space;
+        margin-bottom: $padding-small;
     }
 
     .tax-type-select {
         border-top: 1px solid darken($light-gray, 10);
-        padding-top: $space;
+        padding-top: $padding-small;
 
         .tax-options {
             display: flex;
@@ -35,7 +40,7 @@
             .option {
                 display: flex;
                 flex-flow: row nowrap;
-                margin-bottom: $space;
+                margin-bottom: $padding-small;
             }
         }
     }
@@ -47,23 +52,23 @@
         .option {
             display: flex;
             flex-flow: row nowrap;
-            margin-bottom: $space;
+            margin-bottom: $padding-small;
 
             .income-input {
                 flex: 1 1 auto;
                 width: auto;
-                line-height: 2em;
-                height: 2em;
+                line-height: $height;
+                height: $height;
                 font-size: 1.4em;
-                padding: 0 1em;
+                padding: 0 $padding;
             }
         }
     }
 
     .validation-message {
-        background-color: #eeee00;
-        border-radius: 1rem;
+        background-color: #ff9999;
         padding: 1em;
+        margin-top: 0.5em;
     }
 
     .tax-output {
@@ -75,7 +80,7 @@
 
     .actions {
         border-top: 1px solid darken($light-gray, 10);
-        padding-top: $space;
+        padding-top: $padding;
 
         #calculate-donation-btn {
             width: 6em;
@@ -84,7 +89,7 @@
             background-color: $blue;
             transition-duration: 0.5s;
             font-size: 1.4em;
-            padding: $space 2 * $space;
+            padding: $padding-small;
             border: none;
 
             &[disabled] {
@@ -108,11 +113,11 @@
     flex: 1 1 10em;
     display: flex;
     position: relative;
-    padding-left: 4 * $space;
-    margin-right: $space;
+    padding-left: 4 * $padding-small;
+    margin-right: $padding-small;
     cursor: pointer;
     font-size: 1.4em;
-    line-height: 2em;
+    line-height: $height;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -142,8 +147,8 @@
         position: absolute;
         top: 0;
         left: 0;
-        height: 2em;
-        width: 2em;
+        height: $height;
+        width: $height;
         background-color: #eee;
         border-radius: 50%;
 
@@ -153,8 +158,8 @@
             display: none;
             top: 0.5em;
             left: 0.5em;
-            width: 1em;
-            height: 1em;
+            width: $height / 2;
+            height: $height / 2;
             border-radius: 50%;
             background: white;
         }
