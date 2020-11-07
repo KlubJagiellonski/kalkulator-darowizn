@@ -12,3 +12,8 @@ export const preventPropagationInvoke = (callback: () => void) => (e: Event) => 
     e.stopPropagation();
     callback();
 };
+
+export const preventPropagation = (e: Event) => {
+    e.preventDefault();
+    e.stopPropagation();
+};

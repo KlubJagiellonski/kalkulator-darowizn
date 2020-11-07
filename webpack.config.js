@@ -13,7 +13,7 @@ const mode = process.env.NODE_ENV;
 const config = {
     name: 'kj-darowizny-config',
     mode: 'production',
-    //devtool: 'cheap-module-source-map',
+    devtool: mode === 'development' ? 'cheap-module-source-map' : undefined,
     entry: {
         form: ['./src/form/donation-form.ts'],
     },
