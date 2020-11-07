@@ -2,6 +2,7 @@ import { Tax, IncomeType } from '../donations/types';
 import { getTemplate, preventPropagationInvoke } from '../utils/templates';
 import { calculateForPIT } from '../donations/pit-calculations';
 import { calculateForCIT } from '../donations/cit-calculations';
+import { CurrencyFormatter } from '../utils/currency-formatter';
 
 import '../styles/reset.scss';
 import './donation-form.scss';
@@ -38,41 +39,42 @@ class DonationForm extends HTMLElement {
         const template = await getTemplate('./form.html');
         this.shadow.appendChild(template?.content.cloneNode(true));
 
-        const taxPIT = this.find('.tax-pit .radio-input');
-        taxPIT?.addEventListener(
-            'change',
+        this.setChangeHandler(
+            '.tax-pit .radio-input',
             preventPropagationInvoke(() => this.handleTaxSelection(Tax.PIT)),
         );
-
-        const taxPIT19 = this.find('.tax-pit19 .radio-input');
-        taxPIT19?.addEventListener(
-            'change',
-            preventPropagationInvoke(() => this.setIncorectTaxMessage(true)),
+        this.setChangeHandler(
+            '.tax-pit19 .radio-input',
+            preventPropagationInvoke(() => this.showIncorectTaxMessage(true)),
         );
-
-        const taxCIT = this.find('.tax-cit .radio-input');
-        taxCIT?.addEventListener(
-            'change',
+        this.setChangeHandler(
+            '.tax-cit .radio-input',
             preventPropagationInvoke(() => this.handleTaxSelection(Tax.CIT)),
         );
 
-        const monthIncomeRadio = this.find('.month-income .radio-input');
-        monthIncomeRadio?.addEventListener('change', this.handleIcomeSelection(IncomeType.MONTHLY));
+        this.setChangeHandler('.month-income .radio-input', this.handleIcomeSelection(IncomeType.MONTHLY));
+        this.setInputHandler('.month-income .income-input', this.handleMonthIcomeInput);
 
-        const monthIncomeInput = this.find('.month-income .income-input');
-        monthIncomeInput?.addEventListener('input', this.handleMonthIcomeInput);
+        this.setChangeHandler('.annual-income .radio-input', this.handleIcomeSelection(IncomeType.ANNUAL));
+        this.setInputHandler('.annual-income .income-input', this.handleAnnualIncomeInput);
 
-        const annualIncomeRadio = this.find('.annual-income .radio-input');
-        annualIncomeRadio?.addEventListener('change', this.handleIcomeSelection(IncomeType.ANNUAL));
-
-        const annualIncomeInput = this.find('.annual-income .income-input');
-        annualIncomeInput?.addEventListener('input', this.handleAnnualIncomeInput);
-
-        const button = this.find('#calculate-donation-btn');
-        button?.addEventListener('click', preventPropagationInvoke(this.handleCalculation));
+        this.setClickHandler('#calculate-donation-btn', preventPropagationInvoke(this.handleCalculation));
 
         this.render();
     }
+
+    setChangeHandler = (selector: string, callback: (e: Event) => void) => {
+        const element = this.find(selector);
+        element?.addEventListener('change', callback);
+    };
+    setInputHandler = (selector: string, callback: (e: Event) => void) => {
+        const element = this.find(selector);
+        element?.addEventListener('input', callback);
+    };
+    setClickHandler = (selector: string, callback: (e: Event) => void) => {
+        const element = this.find(selector);
+        element?.addEventListener('click', callback);
+    };
 
     find = (selector: string) => {
         return this.shadow.querySelector(selector);
@@ -96,12 +98,12 @@ class DonationForm extends HTMLElement {
     };
 
     handleTaxSelection = (tax: Tax) => {
-        this.setIncorectTaxMessage(false);
+        this.showIncorectTaxMessage(false);
 
         this.updateState({ selectedTax: tax });
     };
 
-    setIncorectTaxMessage = (visible: boolean) => {
+    showIncorectTaxMessage = (visible: boolean) => {
         const incorrectTax = this.find('section.incorrect-tax');
         const incomeInput = this.find('section.income-input');
 
@@ -121,11 +123,7 @@ class DonationForm extends HTMLElement {
     handleCalculation = () => {
         const taxOutput = this.find('.tax-output');
 
-        const formatter = new Intl.NumberFormat('pl-PL', {
-            style: 'currency',
-            currency: 'PLN',
-            minimumFractionDigits: 2,
-        });
+        const formatter = new CurrencyFormatter('PLN', 'pl-PL');
 
         if (this.state.selectedTax && this.state.annualIncome) {
             const result =
