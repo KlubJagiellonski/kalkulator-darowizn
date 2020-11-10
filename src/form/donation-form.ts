@@ -20,7 +20,7 @@ class DonationForm extends HTMLElement {
     private state: IDonationFormState;
     private formatter: CurrencyFormatter;
 
-    constructor() {
+    constructor() { 
         super();
 
         this.state = {};
