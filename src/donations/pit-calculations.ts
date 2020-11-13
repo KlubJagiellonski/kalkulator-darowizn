@@ -11,8 +11,8 @@ const TAX_2_RATE: number = 0.32;
 const TAX_2: number = 127000;
 
 export const calculateForPIT = (annualIncome: number): Result => {
-    const donationSum = countDonationForPIT(annualIncome);
-    const taxDeduction = countTax(annualIncome) - countTax(annualIncome - donationSum);
+    const donationSum = Math.round(countDonationForPIT(annualIncome));
+    const taxDeduction = Math.round(countTax(annualIncome) - countTax(annualIncome - donationSum));
 
     return {
         donationSum,
@@ -20,28 +20,41 @@ export const calculateForPIT = (annualIncome: number): Result => {
     };
 };
 
-const countDonationForPIT = (annualIncome: number): number =>
-    annualIncome > TAX_FREE ? DONATION_RATE * annualIncome : 0;
-
-const countTax = (annualIncome: number): number => {
-    const getTaxFreeForFirstRate = (annualIncome: number): number =>
-        SOCIAL_SECURITY_TOTAL -
-        ((SOCIAL_SECURITY_TOTAL - SOCIAL_SECURITY_FREE) / (TAX_0 - TAX_FREE)) * (annualIncome - TAX_FREE);
-
-    const getTaxFreeForSecondRate = (annualIncome: number): number =>
-        SOCIAL_SECURITY_FREE - (SOCIAL_SECURITY_FREE / (TAX_2 - TAX_1)) * (annualIncome - TAX_1);
-
-    if (annualIncome <= TAX_FREE) {
-        return 0;
-    } else if (annualIncome <= TAX_0) {
-        const taxFree = getTaxFreeForFirstRate(annualIncome);
-        return TAX_1_RATE * annualIncome - taxFree;
-    } else if (annualIncome <= TAX_1) {
-        return TAX_1_RATE * annualIncome - SOCIAL_SECURITY_FREE;
-    } else if (annualIncome <= TAX_2) {
-        const taxFree = getTaxFreeForSecondRate(annualIncome);
-        return TAX_1_RATE * TAX_1 + TAX_2_RATE * (annualIncome - TAX_1) - taxFree;
-    } else {
-        return TAX_1_RATE * TAX_1 + TAX_2_RATE * (annualIncome - TAX_1);
+const countDonationForPIT = (income: number): number => {
+    let donation = 0;
+    if (income > TAX_FREE) {
+        if ((1 - DONATION_RATE) * income > TAX_FREE) {
+            donation = DONATION_RATE * income;
+        } else {
+            donation = income - TAX_FREE;
+        }
     }
+
+    return donation;
+};
+
+const countTax = (income: number): number => {
+    const getTaxFreeForFirstRate = (income: number): number =>
+        SOCIAL_SECURITY_TOTAL -
+        ((SOCIAL_SECURITY_TOTAL - SOCIAL_SECURITY_FREE) / (TAX_0 - TAX_FREE)) * (income - TAX_FREE);
+
+    const getTaxFreeForSecondRate = (income: number): number =>
+        SOCIAL_SECURITY_FREE - (SOCIAL_SECURITY_FREE / (TAX_2 - TAX_1)) * (income - TAX_1);
+
+    let tax = 0;
+    if (income <= TAX_FREE) {
+        return 0;
+    } else if (income <= TAX_0) {
+        const taxFree = getTaxFreeForFirstRate(income);
+        tax = TAX_1_RATE * income - taxFree;
+    } else if (income <= TAX_1) {
+        tax = TAX_1_RATE * income - SOCIAL_SECURITY_FREE;
+    } else if (income <= TAX_2) {
+        const taxFree = getTaxFreeForSecondRate(income);
+        tax = TAX_1_RATE * TAX_1 + TAX_2_RATE * (income - TAX_1) - taxFree;
+    } else {
+        tax = TAX_1_RATE * TAX_1 + TAX_2_RATE * (income - TAX_1);
+    }
+
+    return tax;
 };

@@ -12,8 +12,8 @@
         "prodw": "npm run clean-prod && cross-env NODE_ENV=production \"./node_modules/.bin/webpack\" -w",
         "start": "npm run build && live-server --port=8082 --open=\"build/index.html\"",
         "start-prod": "npm run prod && live-server --port=8082 --open=\"prod/index.html\"",
-        "test": "./node_modules/.bin/mocha tests",
-        "testw": "./node_modules/.bin/mocha tests -w",
+        "unit": "ts-mocha --require ignore-styles --paths \"./src/**/*.specs.ts\"",
+        "unitw": "ts-mocha --require ignore-styles --paths \"./src/**/*.specs.ts\" -w --watch-extensions ts",
         "prettier": "prettier --write src/**/*.{js,scss,ts}"
     },
     "repository": {
