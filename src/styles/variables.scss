@@ -1,10 +1,17 @@
-$light-gray: #eeeeee;
-$gray: #bbbbbb;
+$light-gray: #efefef;
+$gray: #eeeeee;
 
 $blue: #2196f3;
 $orange: #ff4400;
 $green: #00ff44;
 
-$padding-small: 1rem;
-$padding: 2rem;
+$padding-small: 0.5rem;
+$padding: 1rem;
+$padding-large: 2rem;
 $height: 2em;
+
+@mixin phone() {
+    @media screen and (max-width: 1024px) {
+        @content;
+    }
+}

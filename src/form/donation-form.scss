@@ -9,15 +9,23 @@
     padding: $padding;
     text-align: center;
     font-family: Roboto;
+    box-sizing: border-box;
+    //width: 100%;
+
+    @include phone() {
+        padding: $padding-small;
+    }
 
     header,
     section {
         margin-bottom: $padding;
-        width: 45em;
+        width: 100%;
+        max-width: 45em;
     }
     section {
-        padding-top: $padding-small;
+        padding-top: $padding;
         display: none;
+        border-top: 1px solid darken($light-gray, 10);
 
         &.visible {
             display: block;
@@ -29,9 +37,6 @@
     }
 
     .tax-type-select {
-        border-top: 1px solid darken($light-gray, 10);
-        padding-top: $padding-small;
-
         .tax-options {
             display: flex;
             flex-flow: column;
@@ -45,14 +50,28 @@
         }
     }
 
+    .incorrect-tax {
+        text-align: left;
+        line-height: 1.5em;
+        p {
+            margin-bottom: $padding;
+        }
+    }
+
     .income-options {
         display: flex;
         flex-flow: column;
 
         .option {
             display: flex;
-            flex-flow: row nowrap;
-            margin-bottom: $padding-small;
+            flex-flow: column;
+            margin-bottom: $padding;
+
+            .text {
+                min-width: 8em;
+                line-height: 2em;
+                text-align: left;
+            }
 
             .income-input {
                 flex: 1 1 auto;
@@ -60,7 +79,11 @@
                 line-height: $height;
                 height: $height;
                 font-size: 1.4em;
-                padding: 0 $padding;
+                padding-left: $padding;
+
+                @include phone() {
+                    margin: 0;
+                }
             }
         }
     }
@@ -72,10 +95,8 @@
     }
 
     .tax-output {
-        .max-donation {
-            margin: 1em 0 2em 0;
-            font-size: 2rem;
-        }
+        text-align: left;
+        line-height: 1.5em;
     }
 
     .actions {
@@ -91,77 +112,6 @@
             font-size: 1.4em;
             padding: $padding-small;
             border: none;
-
-            &[disabled] {
-                background-color: $gray;
-                color: darken($gray, 20);
-
-                &:hover {
-                    background-color: $gray;
-                    color: darken($gray, 20);
-                }
-            }
-
-            &:hover {
-                background-color: lighten($gray, 10);
-            }
-        }
-    }
-}
-
-.radio-option {
-    flex: 1 1 10em;
-    display: flex;
-    position: relative;
-    padding-left: 4 * $padding-small;
-    margin-right: $padding-small;
-    cursor: pointer;
-    font-size: 1.4em;
-    line-height: $height;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    input ~ .checkmark,
-    &:hover input ~ .checkmark {
-        background-color: #ccc;
-    }
-
-    input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-
-        &:checked ~ .checkmark {
-            background-color: #2196f3;
-        }
-        &:checked ~ .checkmark:after {
-            display: block;
-        }
-    }
-
-    .checkmark {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: $height;
-        width: $height;
-        background-color: #eee;
-        border-radius: 50%;
-
-        &:after {
-            content: '';
-            position: absolute;
-            display: none;
-            top: 0.5em;
-            left: 0.5em;
-            width: $height / 2;
-            height: $height / 2;
-            border-radius: 50%;
-            background: white;
         }
     }
 }
