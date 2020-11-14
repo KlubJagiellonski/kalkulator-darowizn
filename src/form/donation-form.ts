@@ -94,7 +94,7 @@ class DonationForm extends HTMLElement {
         return this.shadow.querySelector(selector);
     };
 
-    isValid = (value: any) => isValidNumber(value) && isPositiveNumber(value);
+    isValid = (value: any) => !!value && isValidNumber(value) && isPositiveNumber(value);
 
     handleMonthIcomeInput = (e: Event) => {
         if (e.currentTarget) {
@@ -177,7 +177,7 @@ class DonationForm extends HTMLElement {
         );
 
         const button = this.find('#calculate-donation-btn')! as HTMLButtonElement;
-        button.disabled = !this.state.selectedTax || !this.state.annualIncome;
+        button.disabled = !this.state.selectedTax || !this.isValid(this.state.annualIncome);
     }
 
     renderInput = (selector: string, value: number, ...validators: Validator<number>[]) => {
