@@ -2,16 +2,8 @@
 
 .radio-option {
     display: flex;
-    //flex: 1 1 auto;
     align-items: center;
-    // @include phone() {
-    //     flex: 1 1 2em;
-    // }
-
     position: relative;
-    //padding-left: 2 * $padding;
-    //margin-right: 2 * $padding-small;
-
     margin-bottom: $padding-small;
 
     cursor: pointer;
@@ -35,7 +27,6 @@
     }
 
     input {
-        //position: absolute;
         opacity: 0;
         cursor: pointer;
         height: 0;

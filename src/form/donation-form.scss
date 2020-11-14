@@ -1,29 +1,28 @@
 @import '../styles/variables.scss';
 
+body {
+    background-color: $light-gray;
+}
+
 .donation-form {
     display: flex;
     flex-flow: column;
     align-content: center;
     align-items: center;
-    background-color: $light-gray;
+    background-color: transparent;
     padding: $padding;
     text-align: center;
     font-family: Roboto;
     box-sizing: border-box;
-    //width: 100%;
-
-    @include phone() {
-        padding: $padding-small;
-    }
 
     header,
     section {
-        margin-bottom: $padding;
+        margin-bottom: $padding-large;
         width: 100%;
         max-width: 45em;
     }
     section {
-        padding-top: $padding;
+        padding-top: $padding-large;
         display: none;
         border-top: 1px solid darken($light-gray, 10);
 
@@ -41,6 +40,10 @@
             display: flex;
             flex-flow: column;
             justify-content: center;
+
+            input {
+                display: none;
+            }
 
             .option {
                 display: flex;
@@ -95,6 +98,7 @@
     }
 
     .tax-output {
+        margin-top: $padding;
         text-align: left;
         line-height: 1.5em;
     }

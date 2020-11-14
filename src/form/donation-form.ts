@@ -3,7 +3,7 @@ import { getTemplate, preventPropagationInvoke } from '../utils/templates';
 import { calculateForPIT } from '../donations/pit-calculations';
 import { calculateForCIT } from '../donations/cit-calculations';
 import { CurrencyFormatter } from '../utils/currency-formatter';
-import { applyValidation, isValidNumber } from './form-validation';
+import { applyValidation, isPositiveNumber, isValidNumber } from './form-validation';
 
 import '../styles/reset.scss';
 import './donation-form.scss';
@@ -22,7 +22,6 @@ class DonationForm extends HTMLElement {
     private formatter: CurrencyFormatter;
 
     private taxRadio = ['.tax-pit .text', '.tax-pit19 .text', '.tax-cit .text'];
-    private incomeRadio = ['.month-income .text', '.annual-income .text'];
 
     constructor() {
         super();
@@ -95,11 +94,16 @@ class DonationForm extends HTMLElement {
         return this.shadow.querySelector(selector);
     };
 
+    isValid = (value: any) => isValidNumber(value) && isPositiveNumber(value);
+
     handleMonthIcomeInput = (e: Event) => {
         if (e.currentTarget) {
             this.updateState({
                 monthlyIncome: e.currentTarget.value,
-                annualIncome: 12 * e.currentTarget.value,
+                annualIncome:
+                    !!e.currentTarget.value && this.isValid(e.currentTarget.value)
+                        ? 12 * e.currentTarget.value
+                        : undefined,
             });
         }
     };
@@ -108,7 +112,7 @@ class DonationForm extends HTMLElement {
         if (e.currentTarget) {
             this.updateState({
                 monthlyIncome:
-                    !!e.currentTarget.value && isValidNumber(e.currentTarget.value)
+                    !!e.currentTarget.value && this.isValid(e.currentTarget.value)
                         ? (e.currentTarget.value / 12).toFixed(2)
                         : undefined,
                 annualIncome: e.currentTarget.value,
@@ -137,11 +141,6 @@ class DonationForm extends HTMLElement {
         }
     };
 
-    // handleIncomeSelection = (type: IncomeType, selector: string) => (e: Event) => {
-    //     this.addSelectedClass(this.incomeRadio, selector);
-    //     this.updateState({ selectedIncome: type });
-    // };
-
     handleCalculation = () => {
         if (this.state.selectedTax && isValidNumber(this.state.annualIncome)) {
             const taxOutput = this.find('.tax-output')!;
@@ -163,15 +162,19 @@ class DonationForm extends HTMLElement {
      * Update component rendering
      */
     async render() {
-        this.renderInput('.month-income', this.state.monthlyIncome || 0, [
-            isValidNumber,
-            'Miesięczny dochód powinien być liczbą',
-        ]);
+        this.renderInput(
+            '.month-income',
+            this.state.monthlyIncome || 0,
+            [isValidNumber, 'Miesięczny dochód powinien być liczbą'],
+            [isPositiveNumber, 'Miesięczny dochód powinien być dodatni'],
+        );
 
-        this.renderInput('.annual-income', this.state.annualIncome || 0, [
-            isValidNumber,
-            'Roczny dochód powinien być liczbą',
-        ]);
+        this.renderInput(
+            '.annual-income',
+            this.state.annualIncome || 0,
+            [isValidNumber, 'Roczny dochód powinien być liczbą'],
+            [isPositiveNumber, 'Roczny dochód powinien być dodatni'],
+        );
 
         const button = this.find('#calculate-donation-btn')! as HTMLButtonElement;
         button.disabled = !this.state.selectedTax || !this.state.annualIncome;
@@ -181,7 +184,7 @@ class DonationForm extends HTMLElement {
         const inputElement = this.find(selector + ' .income-input') as HTMLInputElement;
         if (inputElement) {
             inputElement.value = value ? value.toString() : '';
-            const wrapper = this.find(`${selector} .input-wrapper .validation`);
+            const wrapper = this.find(`${selector} .validation`);
             if (wrapper) {
                 applyValidation(wrapper, value, validators);
             }
