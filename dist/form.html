@@ -8,69 +8,53 @@
       <div class="tax-options">
         <div class="option tax-pit">
           <label class="radio-option">
-            <span>PIT (progresywny)</span>
             <input type="radio" id="PIT" class="radio-input" name="tax" value="pit">
             <span class="checkmark"></span>
+            <span class="text">PIT</span>
           </label>
         </div>
         <div class="option tax-pit19">
           <label class="radio-option">
-            <span>PIT (liniowy)</span>
             <input type="radio" id="PIT19" class="radio-input" name="tax" value="pit19">
             <span class="checkmark"></span>
+            <span class="text">PIT (liniowy lub ryczałt)</span>
           </label>
         </div>
         <div class="option tax-cit">
           <label class="radio-option">
-            <span>CIT</span>
             <input type="radio" id="CIT" class="radio-input" name="tax" value="cit">
             <span class="checkmark"></span>
+            <span class="text">CIT</span>
           </label>
         </div>
       </div>
     </section>
 
     <section class="incorrect-tax">
-      <h2>Uwaga</h2>
-      <p>Podatnikom rozliczającym się według liniowej stawki PIT nie przysługuje odliczenie darowizn od dochodu.</p>
+      <p>Uwaga - podatnikom rozliczającym się według liniowej stawki PIT co do zasady nie przysługuje odliczenie darowizn od dochodu.</p>
+      <p>W przypadku podatników PIT rozliczających się ryczałtem: masz prawo do odliczenia od podstawy darowizn w wysokości 6% dochodu. Aby wyliczyć maksymalną kwotę darowizn, którą możesz odliczyć, pomnóż swój roczny dochód razy 6%. Z kolei jeśli chcesz dowiedzieć się, o ile mniej podatku zapłacisz - przemnóż kwotę darowizn przez Twoją stawkę podatku ryczałtowego.</p>
     </section>
 
     <section class="income-input visible">
-      <h2>Podaj kwotę swojego szacowanego dochodu?</h2>
       <div class="income-options">
-        
         <div class="option month-income">
-          <label class="radio-option">
-            <span>Średni miesięczny (zł brutto)</span>
-            <input type="radio" id="monthly" class="radio-input" name="income" value="monthly">
-            <span class="checkmark"></span>
-          </label>
-          <div class="input-wrapper">
-            <input type="text" class="income-input">
-            <div class="validation"></div>
-          </div>  
+          <span class="text">Podaj kwotę swojego szacowanego miesięcznego dochodu:</span>
+          <input type="text" class="income-input">
+          <div class="validation"></div>
         </div>
-        
+        <h2>lub</h2>
         <div class="option annual-income">
-          <label class="radio-option">
-            <span>Całkowity roczny (zł brutto)</span>
-            <input type="radio" id="annualy" class="radio-input" name="income" value="annualy">
-            <span class="checkmark"></span>
-          </label>
-          <div class="input-wrapper">
-            <input type="text" class="income-input">
-            <div class="validation"></div>
-          </div>
+          <span class="text">Podaj kwotę swojego szacowanego rocznego dochodu:</span>
+          <input type="text" class="income-input">
+          <div class="validation"></div>
         </div> 
-
       </div>
     </section>
 
     <section class="actions visible">
         <button id="calculate-donation-btn" class="button">Oblicz</button>
+        <div class="tax-output"></div>
     </section>
-
-    <section class="tax-output visible" />
 </form>
 
 </template>
