@@ -152,8 +152,9 @@ class DonationForm extends HTMLElement {
             const taxFree = this.formatter.format(result.taxDeduction);
 
             taxOutput.innerHTML = `
-                <p>Od podatku możesz odliczyć darowizny w maksymalnej kwocie: <strong>${donation}</strong></p>
-                <p>W ten sposób zapłacisz nawet o <strong>${taxFree}</strong> mniej podatku!</p>
+                <p>Od podatku możesz odliczyć darowizny w maksymalnej kwocie:</p>
+                <p><strong class="donation-result">${donation}</strong></p>
+                <p>W ten sposób zapłacisz nawet o <strong class="tax-result">${taxFree}</strong> mniej podatku!</p>
             `;
         }
     };
