@@ -152,8 +152,6 @@ class DonationForm extends HTMLElement {
             const donation = this.formatter.format(result.donationSum);
             const taxFree = this.formatter.format(result.taxDeduction);
 
-            console.log('this', this.selectors);
-
             this.selectors.taxSelection?.classList.remove('visible');
             this.selectors.incomeInput?.classList.remove('visible');
             this.selectors.actions?.classList.add('visible');
