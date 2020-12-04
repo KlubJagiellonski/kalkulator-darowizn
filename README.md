@@ -30,7 +30,7 @@ mały podatnik - oznacza to podatnika, u którego wartość przychodu ze sprzeda
 
 ## PIT
 
-Y = 0.06 × X (6% dochodu możliwe do odliczenia, jednak tylko jeśli (X-Y) >= 8000 - kwota wolna od podatku)  
+Y = 0.06 × X (6% dochodu możliwe do odliczenia, jednak tylko jeśli (X-Y) >= 8000, czyli kwota wolna)  
   = 0 (w przypadku, kiedy dochód nie przekracza kwoty wolnej, odliczenie nie ma sensu)
 
 Z = Z1-Z2 (zobacz poniżej)
