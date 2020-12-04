@@ -161,11 +161,11 @@ class DonationForm extends HTMLElement {
             this.selectors.taxOutput.innerHTML = `
                 <h3>Twój wynik</h3>
                 <p>
-                    <span>Od podatku możesz odliczyć darowizny w maksymalnej kwocie: </span>
+                    <span>W zeznaniu podatkowym możesz odliczyć darowizny w maksymalnej kwocie około* </span>
                     <strong class="donation-result">${donation}</strong>
                 </p>
                 <p>
-                    <span>W ten sposób zapłacisz nawet o </span>
+                    <span>W ten sposób szacunkowo* zapłacisz nawet o </span>
                     <strong class="tax-result">${taxFree}</strong>
                     <span> mniej podatku!</span>
                 </p>

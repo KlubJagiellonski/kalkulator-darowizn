@@ -9,7 +9,7 @@ body {
     height: 3em;
     border-radius: 0;
     background-color: $blue;
-    transition-duration: 0.25s;
+    transition-duration: $animation-time / 4;
     font-size: 1.4em;
     padding: $padding-small;
     border: none;
@@ -56,7 +56,7 @@ body {
     section {
         padding-top: $padding;
         border-top: 1px solid darken($light-gray, 10);
-        transition-duration: 1s;
+        transition-duration: $animation-time;
         opacity: 0;
 
         &.visible {
@@ -139,7 +139,7 @@ body {
         #calculate-donation-btn {
             align-self: center;
             display: none;
-            transition-duration: 1s;
+            transition-duration: $animation-time;
 
             &.visible {
                 display: block;
@@ -170,7 +170,7 @@ body {
             margin: $padding 0;
             text-align: left;
             font-size: 1.25em;
-            line-height: 1.25em;
+            line-height: 1.5em;
 
             h2,
             h3 {
@@ -208,7 +208,7 @@ body {
 
         #change-data-btn {
             display: none;
-            transition-duration: 1s;
+            transition-duration: $animation-time;
 
             &.visible {
                 display: block;
