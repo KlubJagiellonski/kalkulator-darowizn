@@ -3,7 +3,7 @@ import { getTemplate, preventPropagationInvoke } from '../utils/templates';
 import { calculateForPIT } from '../donations/pit-calculations';
 import { calculateForCIT } from '../donations/cit-calculations';
 import { CurrencyFormatter } from '../utils/currency-formatter';
-import { applyValidation, isPositiveNumber, isValidNumber } from './form-validation';
+import { applyValidation, isPositiveNumber, isValidNumber, Validator } from './form-validation';
 
 import '../styles/reset.scss';
 import './donation-form.scss';
@@ -21,6 +21,8 @@ class DonationForm extends HTMLElement {
     private state: IDonationFormState;
     private formatter: CurrencyFormatter;
 
+    private selectors: { [key: string]: Element };
+
     private taxRadio = ['.tax-pit .text', '.tax-pit19 .text', '.tax-cit .text'];
 
     constructor() {
@@ -29,6 +31,7 @@ class DonationForm extends HTMLElement {
         this.state = {};
         this.shadow = this.attachShadow({ mode: 'open' });
         this.formatter = new CurrencyFormatter('PLN', 'pl-PL');
+        this.selectors = {};
     }
 
     updateState(newState: Partial<IDonationFormState>) {
@@ -64,6 +67,7 @@ class DonationForm extends HTMLElement {
         this.setInputHandler('.annual-income .income-input', this.handleAnnualIncomeInput);
 
         this.setClickHandler('#calculate-donation-btn', preventPropagationInvoke(this.handleCalculation));
+        this.setClickHandler('#change-data-btn', preventPropagationInvoke(this.handleChangeData));
 
         this.render();
     }
@@ -128,22 +132,19 @@ class DonationForm extends HTMLElement {
     };
 
     showIncorectTaxMessage = (visible: boolean, selector: string) => {
-        const incorrectTax = this.find('section.incorrect-tax');
-        const incomeInput = this.find('section.income-input');
         this.addSelectedClass(this.taxRadio, selector);
 
         if (visible) {
-            incorrectTax?.classList.add('visible');
-            incomeInput?.classList.remove('visible');
+            this.selectors.incorrectTax?.classList.add('visible');
+            this.selectors.incomeInput?.classList.remove('visible');
         } else {
-            incorrectTax?.classList.remove('visible');
-            incomeInput?.classList.add('visible');
+            this.selectors.incorrectTax?.classList.remove('visible');
+            this.selectors.incomeInput?.classList.add('visible');
         }
     };
 
     handleCalculation = () => {
         if (this.state.selectedTax && isValidNumber(this.state.annualIncome)) {
-            const taxOutput = this.find('.tax-output')!;
             const result =
                 this.state.selectedTax === Tax.PIT
                     ? calculateForPIT(this.state.annualIncome || 0)
@@ -151,38 +152,70 @@ class DonationForm extends HTMLElement {
             const donation = this.formatter.format(result.donationSum);
             const taxFree = this.formatter.format(result.taxDeduction);
 
-            taxOutput.innerHTML = `
-                <p>Od podatku możesz odliczyć darowizny w maksymalnej kwocie:</p>
-                <p><strong class="donation-result">${donation}</strong></p>
-                <p>W ten sposób zapłacisz nawet o <strong class="tax-result">${taxFree}</strong> mniej podatku!</p>
+            console.log('this', this.selectors);
+
+            this.selectors.taxSelection?.classList.remove('visible');
+            this.selectors.incomeInput?.classList.remove('visible');
+            this.selectors.actions?.classList.add('visible');
+            this.selectors.calculateButton?.classList.remove('visible');
+            this.selectors.changeButton?.classList.add('visible');
+
+            this.selectors.taxOutput.innerHTML = `
+                <h3>Twój wynik</h3>
+                <p>
+                    <span>Od podatku możesz odliczyć darowizny w maksymalnej kwocie: </span>
+                    <strong class="donation-result">${donation}</strong>
+                </p>
+                <p>
+                    <span>W ten sposób zapłacisz nawet o </span>
+                    <strong class="tax-result">${taxFree}</strong>
+                    <span> mniej podatku!</span>
+                </p>
             `;
         }
+    };
+
+    handleChangeData = () => {
+        this.selectors.taxSelection?.classList.add('visible');
+        this.selectors.incomeInput?.classList.add('visible');
+        this.selectors.actions?.classList.remove('visible');
+        this.selectors.calculateButton?.classList.add('visible');
+        this.selectors.changeButton?.classList.remove('visible');
+        this.selectors.taxOutput.innerHTML = '';
     };
 
     /**
      * Update component rendering
      */
     async render() {
-        this.renderInput(
+        this.selectors.taxSelection = this.find('section.tax-type-select')!;
+        this.selectors.incomeInput = this.find('section.income-input')!;
+        this.selectors.incorrectTax = this.find('section.incorrect-tax')!;
+        this.selectors.actions = this.find('section.actions')!;
+        this.selectors.taxOutput = this.find('.tax-output')!;
+        this.selectors.calculateButton = this.find('button#calculate-donation-btn')! as HTMLButtonElement;
+        this.selectors.changeButton = this.find('button#change-data-btn')! as HTMLButtonElement;
+
+        this.renderInputField(
             '.month-income',
             this.state.monthlyIncome || 0,
             [isValidNumber, 'Miesięczny dochód powinien być liczbą'],
             [isPositiveNumber, 'Miesięczny dochód powinien być dodatni'],
         );
 
-        this.renderInput(
+        this.renderInputField(
             '.annual-income',
             this.state.annualIncome || 0,
             [isValidNumber, 'Roczny dochód powinien być liczbą'],
             [isPositiveNumber, 'Roczny dochód powinien być dodatni'],
         );
 
-        const button = this.find('#calculate-donation-btn')! as HTMLButtonElement;
-        button.disabled = !this.state.selectedTax || !this.isValid(this.state.annualIncome);
+        (this.selectors.calculateButton as HTMLButtonElement).disabled =
+            !this.state.selectedTax || !this.isValid(this.state.annualIncome);
     }
 
-    renderInput = (selector: string, value: number, ...validators: Validator<number>[]) => {
-        const inputElement = this.find(selector + ' .income-input') as HTMLInputElement;
+    renderInputField = (selector: string, value: number, ...validators: Validator<number>[]) => {
+        const inputElement = this.find(`${selector} .income-input`) as HTMLInputElement;
         if (inputElement) {
             inputElement.value = value ? value.toString() : '';
             const wrapper = this.find(`${selector} .validation`);

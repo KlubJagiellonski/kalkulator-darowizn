@@ -4,6 +4,29 @@ body {
     background-color: $light-gray;
 }
 
+.button {
+    width: 8em;
+    height: 3em;
+    border-radius: 0;
+    background-color: $blue;
+    transition-duration: 0.25s;
+    font-size: 1.4em;
+    padding: $padding-small;
+    border: none;
+
+    &[disabled] {
+        background-color: darken($light-gray, 10);
+        cursor: default;
+        color: darken($gray, 10);
+    }
+
+    &:not([disabled]) {
+        &:hover {
+            background-color: lighten($blue, 10);
+        }
+    }
+}
+
 .donation-form {
     display: flex;
     flex-flow: column;
@@ -19,6 +42,12 @@ body {
         margin-top: $padding;
     }
 
+    content {
+        position: relative;
+        width: 100%;
+        max-width: 45em;
+    }
+
     header,
     section {
         margin-bottom: $padding-large;
@@ -26,17 +55,20 @@ body {
         max-width: 45em;
     }
     section {
-        padding-top: $padding-large;
-        display: none;
+        padding-top: $padding;
         border-top: 1px solid darken($light-gray, 10);
+        transition-duration: 1s;
+        opacity: 0;
 
         &.visible {
-            display: block;
+            opacity: 1;
         }
     }
 
-    h2 {
-        margin-bottom: $padding;
+    h2,
+    h3,
+    h4 {
+        margin: $padding-small 0;
     }
 
     .tax-type-select {
@@ -58,39 +90,60 @@ body {
     }
 
     .incorrect-tax {
+        display: none;
         text-align: left;
         line-height: 1.5em;
         p {
             margin-bottom: $padding;
         }
+
+        &.visible {
+            display: block;
+        }
     }
 
-    .income-options {
+    .income-input {
         display: flex;
         flex-flow: column;
 
-        .option {
+        .income-options {
             display: flex;
             flex-flow: column;
             margin-bottom: $padding;
 
-            .text {
-                min-width: 8em;
-                line-height: 2em;
-                text-align: left;
-            }
+            .option {
+                display: flex;
+                flex-flow: column;
+                margin-bottom: $padding;
 
-            .income-input {
-                flex: 1 1 auto;
-                width: auto;
-                line-height: $height;
-                height: $height;
-                font-size: 1.4em;
-                padding-left: $padding;
-
-                @include phone() {
-                    margin: 0;
+                .text {
+                    min-width: 8em;
+                    line-height: 2em;
+                    text-align: left;
                 }
+
+                .income-input {
+                    flex: 1 1 auto;
+                    width: auto;
+                    line-height: $height;
+                    height: $height;
+                    font-size: 1.4em;
+                    padding-left: $padding;
+
+                    @include phone() {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+
+        #calculate-donation-btn {
+            align-self: center;
+            display: none;
+            transition-duration: 1s;
+
+            &.visible {
+                display: block;
             }
         }
     }
@@ -101,47 +154,64 @@ body {
         margin-top: 0.5em;
     }
 
-    .tax-output {
-        margin-top: $padding;
-        text-align: left;
-        font-size: 1.25em;
-        line-height: 2em;
-
-        p {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0.8em;
-
-            .donation-result,
-            .tax-result {
-                font-size: 1.5em;
-                margin: 0 0.25em;
-            }
-            .tax-result {
-                color: green;
-            }
-        }
-    }
-
     .actions {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
         border-top: 1px solid darken($light-gray, 10);
         padding-top: $padding;
+        top: 16em;
 
-        #calculate-donation-btn {
-            width: 6em;
-            height: 3em;
-            border-radius: 0;
-            background-color: $blue;
-            transition-duration: 0.5s;
-            font-size: 1.4em;
-            padding: $padding-small;
-            border: none;
+        &.visible {
+            position: absolute;
+            top: 0;
+        }
 
-            &[disabled] {
-                background-color: darken($light-gray, 10);
-                cursor: default;
-                color: darken($gray, 10);
+        .tax-output {
+            margin: $padding 0;
+            text-align: left;
+            font-size: 1.25em;
+            line-height: 1.25em;
+
+            h2,
+            h3 {
+                text-align: center;
+            }
+
+            p {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 1.5rem;
+                text-align: center;
+
+                flex-flow: row wrap;
+                @include phone() {
+                    flex-flow: column;
+                    span,
+                    strong {
+                        margin-bottom: 1rem;
+                    }
+                }
+
+                .donation-result,
+                .tax-result {
+                    font-size: 1.5em;
+                    margin-left: 0.25em;
+                    margin-right: 0.25em;
+                }
+                .tax-result {
+                    color: green;
+                }
+            }
+        }
+
+        #change-data-btn {
+            display: none;
+            transition-duration: 1s;
+
+            &.visible {
+                display: block;
             }
         }
     }
