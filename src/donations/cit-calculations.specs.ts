@@ -1,17 +1,6 @@
 import { expect } from 'chai';
+import { testCase } from 'src/utils/test-case';
 import { calculateForCIT } from './cit-calculations';
-
-interface ITestCase {
-    annualIncome: number;
-    donationSum: number;
-    taxDeduction: number;
-}
-
-const testCase = (annualIncome: number, donationSum: number, taxDeduction: number): ITestCase => ({
-    annualIncome,
-    donationSum,
-    taxDeduction,
-});
 
 describe('CIT calculations for annual income:', () => {
     [testCase(1, 0, 0), testCase(54000, 5400, 486), testCase(6000000, 600000, 114000)].forEach((test) => {

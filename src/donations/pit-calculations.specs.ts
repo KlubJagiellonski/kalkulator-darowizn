@@ -1,17 +1,6 @@
 import { expect } from 'chai';
+import { testCase } from 'src/utils/test-case';
 import { calculateForPIT } from './pit-calculations';
-
-interface ITestCase {
-    annualIncome: number;
-    donationSum: number;
-    taxDeduction: number;
-}
-
-const testCase = (annualIncome: number, donationSum: number, taxDeduction: number): ITestCase => ({
-    annualIncome,
-    donationSum,
-    taxDeduction,
-});
 
 describe('PIT calculations for annual income:', () => {
     [

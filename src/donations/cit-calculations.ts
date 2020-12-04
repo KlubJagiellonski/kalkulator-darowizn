@@ -23,10 +23,7 @@ const countDonationForCIT = (income: number): number => {
 
 const countDeductionForCIT = (income: number): number => {
     const deduction =
-        income <= TAX_THRESHOLD
-            ? TAX_1_RATE * countDonationForCIT(income)
-            : TAX_1_RATE * countDonationForCIT(TAX_THRESHOLD) +
-              TAX_2_RATE * countDonationForCIT(income - TAX_THRESHOLD);
+        income <= TAX_THRESHOLD ? TAX_1_RATE * countDonationForCIT(income) : TAX_2_RATE * countDonationForCIT(income);
 
     return deduction;
 };
