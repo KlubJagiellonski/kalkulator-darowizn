@@ -102,24 +102,20 @@ class DonationForm extends HTMLElement {
 
     handleMonthIcomeInput = (e: Event) => {
         if (e.currentTarget) {
+            const value = e.currentTarget.value.replaceAll(',', '.');
             this.updateState({
-                monthlyIncome: e.currentTarget.value,
-                annualIncome:
-                    !!e.currentTarget.value && this.isValid(e.currentTarget.value)
-                        ? 12 * e.currentTarget.value
-                        : undefined,
+                monthlyIncome: value,
+                annualIncome: !!value && this.isValid(value) ? 12 * value : undefined,
             });
         }
     };
 
     handleAnnualIncomeInput = (e: Event) => {
         if (e.currentTarget) {
+            const value = e.currentTarget.value.replaceAll(',', '.');
             this.updateState({
-                monthlyIncome:
-                    !!e.currentTarget.value && this.isValid(e.currentTarget.value)
-                        ? (e.currentTarget.value / 12).toFixed(2)
-                        : undefined,
-                annualIncome: e.currentTarget.value,
+                monthlyIncome: !!value && this.isValid(value) ? (value / 12).toFixed(2) : undefined,
+                annualIncome: value,
             });
         }
     };
