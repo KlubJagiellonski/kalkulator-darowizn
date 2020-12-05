@@ -20,9 +20,9 @@ Z = kwota, o którą zmniejszy się podatek do zapłacenia (PIT lub CIT) w wynik
 
 ## CIT
 
-Y = 0.1 * X (10% dochodu możliwe do odliczenia)  
-Z = 0.09 * Y  (dla CIT "małych podatników", poniżej 1,200,000 EUR, wg. kursu z dnia 1.10.2020]  
-  = 0.19*Y (standardowy CIT 19% powyżej ww. kwoty)  
+Y = 0.1 × X (10% dochodu możliwe do odliczenia)  
+Z = 0.09 × Y  (dla CIT "małych podatników", poniżej 1,200,000 EUR, wg. kursu z dnia 1.10.2020]  
+  = 0.19 × Y (standardowy CIT 19% powyżej ww. kwoty)  
 
 Notatki: standardowa stawka CIT to 19%; 9% to stawka - w przypadku małych podatników lub podatników rozpoczynających działalność, od przychodów (dochodów) innych niż z zysków kapitałowych.
 mały podatnik - oznacza to podatnika, u którego wartość przychodu ze sprzedaży (wraz z kwotą należnego podatku od towarów i usług) nie przekroczyła w poprzednim roku podatkowym wyrażonej w złotych kwoty odpowiadającej równowartości 1 200 000 euro; przeliczenia kwot wyrażonych w euro dokonuje się według średniego kursu euro ogłaszanego przez Narodowy Bank Polski na pierwszy dzień roboczy października poprzedniego roku podatkowego, w zaokrągleniu do 1000 zł;
@@ -30,7 +30,7 @@ mały podatnik - oznacza to podatnika, u którego wartość przychodu ze sprzeda
 
 ## PIT
 
-Y = 0.06*X (6% dochodu możliwe do odliczenia, jednak tylko jeśli (X-Y) >= 8000 - kwota wolna od podatku)
+Y = 0.06 × X (6% dochodu możliwe do odliczenia, jednak tylko jeśli (X-Y) >= 8000, czyli kwota wolna)  
   = 0 (w przypadku, kiedy dochód nie przekracza kwoty wolnej, odliczenie nie ma sensu)
 
 Z = Z1-Z2 (zobacz poniżej)
@@ -38,10 +38,10 @@ Z = Z1-Z2 (zobacz poniżej)
 ### Wysokość podatku PIT (bez darowizny): (zmienna Z1)
 jeśli X [dochód, tutaj traktowany jako podstawa opodatkowania] jest   
 <=8000zł: Z1 = 0  
-8 001 – 13 000: Z1 = 0,17 * X - KW1  
-13 001 – 85 528 zł: Z1 = 0,17 * X - 525,12 zł  
-85 529 zł – 127 000: Z1 = 0,17 * 85529zł + 0,32 * (X-85529) - KW2  
-127 001 i więcej: Z1 = 0,17 * 85529zł + 0,32 * (X-85529)  
+8 001 – 13 000: Z1 = 0,17 × X - KW1  
+13 001 – 85 528 zł: Z1 = 0,17 × X - 525,12 zł  
+85 529 zł – 127 000zł: Z1 = 0,17 × 85529zł + 0,32 × (X-85529) - KW2  
+127 001 i więcej: Z1 = 0,17 × 85529zł + 0,32 × (X-85529)  
 
 kwota wolna 1: KW1 = 1 360 zł - (834,88zł × (X-8000 zł) ÷ 5000 zł)  
 kwota wolna 2: KW2 = 525,12 zł - (525 zł 12 gr × (X-85528 zł) ÷ 41472 zł)  
@@ -51,10 +51,10 @@ kwota wolna 2: KW2 = 525,12 zł - (525 zł 12 gr × (X-85528 zł) ÷ 41472 zł)
 ### Wysokość podatku PIT (z odliczeniem darowizny): (zmienna Z2)
 jeśli X-Y [dochód minus darowizna] jest:  
 <=8000zł: Z2 = 0  
-8 001 – 13 000: Z2 = 0,17*(X-Y) - KW1  
-13 001 – 85 528 zł: Z2 = 0,17*(X-Y) - 525,12 zł  
-85 529 zł – 127 000: Z2 = 0,17*85528zł + 0.32(X-Y-85528zł) - KW2  
-127 001 i więcej: Z2 = 0,17*85528zł + 0.32(X-Y-85528zł)  
+8 001 – 13 000: Z2 = 0,17 × (X-Y) - KW1  
+13 001 – 85 528 zł: Z2 = 0,17 × (X-Y) - 525,12 zł  
+85 529 zł – 127 000: Z2 = 0,17 × 85528zł + 0.32(X-Y-85528zł) - KW2  
+127 001 i więcej: Z2 = 0,17 × 85528zł + 0.32(X-Y-85528zł)  
 
 gdzie:  
 kwota wolna 1: KW1 = 1 360 zł - (834,88zł × (X-Y-8000 zł) ÷ 5000 zł)  
@@ -71,4 +71,4 @@ od 127 000 zł – kwoty wolnej od podatku brak.
 Źródła: https://poradnikprzedsiebiorcy.pl/-jak-obliczyc-podatek-dochodowy, https://poradnikprzedsiebiorcy.pl/-nowa-skala-podatkowa-od-2020-roku-obnizka-do-17 
 
 ### Widzisz błąd? Napisz do nas:
-Bartosz Paszcza, bartosz.paszcza@klubjagiellonski.pl
+Bartosz Paszcza, bartosz.paszcza  {at} klubjagiellonski.pl
