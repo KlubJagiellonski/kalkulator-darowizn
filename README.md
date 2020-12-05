@@ -71,4 +71,4 @@ od 127 000 zł – kwoty wolnej od podatku brak.
 Źródła: https://poradnikprzedsiebiorcy.pl/-jak-obliczyc-podatek-dochodowy, https://poradnikprzedsiebiorcy.pl/-nowa-skala-podatkowa-od-2020-roku-obnizka-do-17 
 
 ### Widzisz błąd? Napisz do nas:
-Bartosz Paszcza, bartosz.paszcza@klubjagiellonski.pl
+Bartosz Paszcza, bartosz.paszcza  {at} klubjagiellonski.pl
