@@ -1,6 +1,6 @@
 # Kalkulator darowizn
 
-Kalalkulator darowizn do odliczenia od PIT/CIT na stronę Klubu Jagiellońskiego. Możesz zobaczyć go pod adresem: https://klubjagiellonski.pl/kalkulator-darow…nt-innym-i-sobie/  
+Kalalkulator darowizn do odliczenia od PIT/CIT na stronę Klubu Jagiellońskiego. Możesz zobaczyć go pod adresem: https://klubjagiellonski.pl/kalkulator-darowizn/  
 Element zbudowany w formie czystego web component ([https://www.webcomponents.org/introduction](https://www.webcomponents.org/introduction)) bez użycia frameworków.
 
 ### `npm run build` lub `npm run buildw`
