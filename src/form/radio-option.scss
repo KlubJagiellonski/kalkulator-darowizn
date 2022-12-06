@@ -58,8 +58,8 @@
             display: none;
             top: 0.5em;
             left: 0.5em;
-            width: $height / 2;
-            height: $height / 2;
+            width: calc($height / 2);
+            height: calc($height / 2);
 
             border-radius: 50%;
             background: $light-gray;

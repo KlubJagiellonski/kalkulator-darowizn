@@ -5,9 +5,10 @@ import { calculateForCIT } from '../donations/cit-calculations';
 import { CurrencyFormatter } from '../utils/currency-formatter';
 import { applyValidation, isPositiveNumber, isValidNumber, Validator } from './form-validation';
 
-import '../styles/reset.scss';
-import './donation-form.scss';
-import './radio-option.scss';
+import resetStyles from '../styles/reset.scss';
+import formStyles from './donation-form.scss';
+import radioStyles from './radio-option.scss';
+import { StyleBuilder } from '../utils/style-builder';
 
 interface IDonationFormState {
     selectedTax?: Tax;
@@ -16,22 +17,25 @@ interface IDonationFormState {
     annualIncome?: number;
 }
 
-class DonationForm extends HTMLElement {
+class DonationForm extends window.HTMLElement {
     private shadow: ShadowRoot;
-    private state: IDonationFormState;
-    private formatter: CurrencyFormatter;
+    public state: IDonationFormState = {};
+    private readonly formatter: CurrencyFormatter = new CurrencyFormatter('PLN', 'pl-PL');
 
-    private selectors: { [key: string]: Element };
+    private selectors: { [key: string]: Element } = {};
 
     private taxRadio = ['.tax-pit .text', '.tax-pit19 .text', '.tax-cit .text'];
 
     constructor() {
         super();
-
-        this.state = {};
         this.shadow = this.attachShadow({ mode: 'open' });
-        this.formatter = new CurrencyFormatter('PLN', 'pl-PL');
-        this.selectors = {};
+        const styleBuilder = new StyleBuilder();
+
+        this.shadow.adoptedStyleSheets = styleBuilder
+            .addStyleSheet(resetStyles)
+            .addStyleSheet(formStyles)
+            .addStyleSheet(radioStyles)
+            .build();
     }
 
     updateState(newState: Partial<IDonationFormState>) {
@@ -46,28 +50,30 @@ class DonationForm extends HTMLElement {
      * Invoked when web component is rendered into HTML document
      */
     async connectedCallback() {
-        const template = await getTemplate('./form.html');
+        const template = (await getTemplate(
+            process.env.NODE_ENV === 'development' ? 'src/form/form.html' : './form.html',
+        )) as Element & { content: any };
         this.shadow.appendChild(template?.content.cloneNode(true));
 
-        this.setChangeHandler(
+        this.onRadioChange(
             '.tax-pit .radio-input',
             preventPropagationInvoke(() => this.handleTaxSelection(Tax.PIT, '.tax-pit .text')),
         );
-        this.setChangeHandler(
+        this.onRadioChange(
             '.tax-pit19 .radio-input',
             preventPropagationInvoke(() => this.showIncorectTaxMessage(true, '.tax-pit19 .text')),
         );
-        this.setChangeHandler(
+        this.onRadioChange(
             '.tax-cit .radio-input',
             preventPropagationInvoke(() => this.handleTaxSelection(Tax.CIT, '.tax-cit .text')),
         );
 
-        this.setInputHandler('.month-income .income-input', this.handleMonthIcomeInput);
+        this.onInputChange('.month-income .income-input', this.handleMonthIcomeInput);
 
-        this.setInputHandler('.annual-income .income-input', this.handleAnnualIncomeInput);
+        this.onInputChange('.annual-income .income-input', this.handleAnnualIncomeInput);
 
-        this.setClickHandler('#calculate-donation-btn', preventPropagationInvoke(this.handleCalculation));
-        this.setClickHandler('#change-data-btn', preventPropagationInvoke(this.handleChangeData));
+        this.onClick('#calculate-donation-btn', preventPropagationInvoke(this.handleCalculation));
+        this.onClick('#change-data-btn', preventPropagationInvoke(this.handleChangeData));
 
         this.render();
     }
@@ -81,15 +87,15 @@ class DonationForm extends HTMLElement {
         });
     };
 
-    setChangeHandler = (selector: string, callback: (e: Event) => void) => {
+    onRadioChange = (selector: string, callback: (e: Event) => void) => {
         const element = this.find(selector);
         element?.addEventListener('change', callback);
     };
-    setInputHandler = (selector: string, callback: (e: Event) => void) => {
+    onInputChange = (selector: string, callback: (e: Event) => void) => {
         const element = this.find(selector);
         element?.addEventListener('input', callback);
     };
-    setClickHandler = (selector: string, callback: (e: Event) => void) => {
+    onClick = (selector: string, callback: (e: Event) => void) => {
         const element = this.find(selector);
         element?.addEventListener('click', callback);
     };
@@ -102,20 +108,27 @@ class DonationForm extends HTMLElement {
 
     handleMonthIcomeInput = (e: Event) => {
         if (e.currentTarget) {
-            const value = e.currentTarget.value.replaceAll(',', '.');
+            const inputValue = (e.currentTarget as HTMLInputElement).value;
+            const formattedValue = inputValue.replaceAll(',', '.');
+            const numericValue = parseFloat(formattedValue);
             this.updateState({
-                monthlyIncome: value,
-                annualIncome: !!value && this.isValid(value) ? 12 * value : undefined,
+                monthlyIncome: numericValue,
+                annualIncome: !!numericValue && this.isValid(numericValue) ? 12 * numericValue : undefined,
             });
         }
     };
 
     handleAnnualIncomeInput = (e: Event) => {
         if (e.currentTarget) {
-            const value = e.currentTarget.value.replaceAll(',', '.');
+            const inputValue = (e.currentTarget as HTMLInputElement).value;
+            const formattedValue = inputValue.replaceAll(',', '.');
+            const numericValue = parseFloat(formattedValue);
             this.updateState({
-                monthlyIncome: !!value && this.isValid(value) ? (value / 12).toFixed(2) : undefined,
-                annualIncome: value,
+                monthlyIncome:
+                    !!numericValue && this.isValid(numericValue)
+                        ? parseFloat((numericValue / 12).toFixed(2))
+                        : undefined,
+                annualIncome: numericValue,
             });
         }
     };

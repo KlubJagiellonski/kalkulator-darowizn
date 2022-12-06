@@ -9,7 +9,7 @@ body {
     height: 3em;
     border-radius: 0;
     background-color: $blue;
-    transition-duration: $animation-time / 4;
+    transition-duration: calc($animation-time / 4);
     font-size: 1.4em;
     padding: $padding-small;
     border: none;
