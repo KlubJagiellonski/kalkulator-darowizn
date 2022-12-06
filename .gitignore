@@ -12,7 +12,7 @@
 # production
 /prod
 
-
+/dist
 dist
 dist-ssr
 *.local
