@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
+        "outDir": "./dist",
         "noImplicitAny": true,
         "noEmitOnError": true,
         "removeComments": false,
@@ -17,8 +18,9 @@
         "isolatedModules": true,
         "noEmit": true,
         "forceConsistentCasingInFileNames": true,
-        "typeRoots": ["./node_modules/@types", "./types/"],
+        "typeRoots": ["@types", "./node_modules/@types", "./types/"],
         "useDefineForClassFields": true,
+        "types": ["cypress", "node"],
         "lib": ["es5", "es6", "dom", "dom.iterable", "esnext"]
     },
     "include": ["src/**/*"],
