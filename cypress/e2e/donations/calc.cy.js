@@ -36,6 +36,28 @@ describe('About Page', () => {
         form().find('.tax-output').find('.tax-result').contains('2 156,00 zł');
     });
 
+    it('should count PPE correctly', () => {
+        form().find('h3').should('contain.text', 'Jesteś podatnikiem PIT czy CIT?');
+        form().find('div.option.tax-pit19').find('.radio-option').click();
+
+        form()
+            .find('div.option.month-income')
+            .find('.income-input')
+            .invoke('val', monthlyIncome)
+            .trigger('input')
+            .should('have.value', monthlyIncome);
+
+        form()
+            .find('div.option.annual-income')
+            .find('.income-input')
+            .should('have.value', monthlyIncome * 12);
+
+        form().find('#calculate-donation-btn').click();
+
+        form().find('.tax-output').find('.donation-result').contains('6 480,00 zł');
+        form().find('.tax-output').find('.tax-result').contains('972,00 zł');
+    });
+
     it('should count CIT correctly', () => {
         form().find('h3').should('contain.text', 'Jesteś podatnikiem PIT czy CIT?');
         form().find('div.option.tax-cit').find('.radio-option').click();

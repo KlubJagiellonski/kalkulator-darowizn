@@ -1,7 +1,7 @@
 import { Tax, IncomeType } from '../donations/types';
 import { getTemplate, preventPropagationInvoke } from '../utils/templates';
-import { calculateForPIT } from '../donations/pit-calculations';
-import { calculateForCIT } from '../donations/cit-calculations';
+import { calculateForPIT2022 } from '../donations/pit-calculations-2022';
+import { calculateForCIT2022 } from '../donations/cit-calculations';
 import { CurrencyFormatter } from '../utils/currency-formatter';
 import { applyValidation, isPositiveNumber, isValidNumber, Validator } from './form-validation';
 
@@ -9,10 +9,12 @@ import resetStyles from '../styles/reset.scss';
 import formStyles from './donation-form.scss';
 import radioStyles from './radio-option.scss';
 import { StyleBuilder } from '../utils/style-builder';
+import { calculateForPPE2022 } from '../donations/ppe-calculations-2022';
 
 interface IDonationFormState {
     selectedTax?: Tax;
     selectedIncome?: IncomeType;
+    ppeRate?: number;
     monthlyIncome?: number;
     annualIncome?: number;
 }
@@ -24,7 +26,7 @@ class DonationForm extends window.HTMLElement {
 
     private selectors: { [key: string]: Element } = {};
 
-    private taxRadio = ['.tax-pit .text', '.tax-pit19 .text', '.tax-cit .text'];
+    private taxRadio = ['.tax-pit .text', '.tax-pit19 .text', '.tax-ppe .text', '.tax-cit .text'];
 
     constructor() {
         super();
@@ -64,9 +66,15 @@ class DonationForm extends window.HTMLElement {
             preventPropagationInvoke(() => this.showIncorectTaxMessage(true, '.tax-pit19 .text')),
         );
         this.onRadioChange(
+            '.tax-ppe .radio-input',
+            preventPropagationInvoke(() => this.handleTaxSelection(Tax.PPE, '.tax-ppe .text')),
+        );
+        this.onRadioChange(
             '.tax-cit .radio-input',
             preventPropagationInvoke(() => this.handleTaxSelection(Tax.CIT, '.tax-cit .text')),
         );
+
+        this.onInputChange('.ppe-rate .income-input', this.handlePpeRateInput);
 
         this.onInputChange('.month-income .income-input', this.handleMonthIcomeInput);
 
@@ -106,6 +114,17 @@ class DonationForm extends window.HTMLElement {
 
     isValid = (value: any) => !!value && isValidNumber(value) && isPositiveNumber(value);
 
+    handlePpeRateInput = (e: Event) => {
+        if (e.currentTarget) {
+            const inputValue = (e.currentTarget as HTMLInputElement).value;
+            const formattedValue = inputValue.replaceAll(',', '.');
+            const numericValue = parseFloat(formattedValue);
+            this.updateState({
+                ppeRate: numericValue,
+            });
+        }
+    };
+
     handleMonthIcomeInput = (e: Event) => {
         if (e.currentTarget) {
             const inputValue = (e.currentTarget as HTMLInputElement).value;
@@ -137,6 +156,13 @@ class DonationForm extends window.HTMLElement {
         this.showIncorectTaxMessage(false, selector);
         this.addSelectedClass(this.taxRadio, selector);
 
+        if (tax === Tax.PPE) {
+            this.selectors.ppeInput?.classList.add('visible');
+            this.selectors.ppeInput?.classList.remove('hidden');
+        } else {
+            this.selectors.ppeInput?.classList.remove('visible');
+            this.selectors.ppeInput?.classList.add('hidden');
+        }
         this.updateState({ selectedTax: tax });
     };
 
@@ -154,39 +180,69 @@ class DonationForm extends window.HTMLElement {
 
     handleCalculation = () => {
         if (this.state.selectedTax && isValidNumber(this.state.annualIncome)) {
-            const result =
-                this.state.selectedTax === Tax.PIT
-                    ? calculateForPIT(this.state.annualIncome || 0)
-                    : calculateForCIT(this.state.annualIncome || 0);
+            let result = this.calculateResult(this.state.selectedTax);
+            //     this.state.selectedTax === Tax.PIT
+            //         ? calculateForPIT(this.state.annualIncome || 0)
+            //         : calculateForCIT(this.state.annualIncome || 0);
             const donation = this.formatter.format(result.donationSum);
             const taxFree = this.formatter.format(result.taxDeduction);
 
-            this.selectors.taxSelection?.classList.remove('visible');
-            this.selectors.incomeInput?.classList.remove('visible');
-            this.selectors.actions?.classList.add('visible');
-            this.selectors.calculateButton?.classList.remove('visible');
-            this.selectors.changeButton?.classList.add('visible');
+            this.hideIncomeForm();
+            this.showResultPanel(donation, taxFree);
+        }
+    };
 
-            this.selectors.taxOutput.innerHTML = `
-                <h3>Twój wynik</h3>
-                <p>
-                    <span>W zeznaniu podatkowym możesz odliczyć darowizny w maksymalnej kwocie około* </span>
-                    <strong class="donation-result">${donation}</strong>
-                </p>
-                <p>
-                    <span>W ten sposób szacunkowo* zapłacisz nawet o </span>
-                    <strong class="tax-result">${taxFree}</strong>
-                    <span> mniej podatku!</span>
-                </p>
-            `;
+    calculateResult = (tax: Tax) => {
+        switch (tax) {
+            case Tax.PIT:
+                return calculateForPIT2022(this.state.annualIncome || 0);
+            case Tax.PPE:
+                return calculateForPPE2022(this.state.annualIncome || 0, this.state.ppeRate || 0);
+            case Tax.CIT:
+                return calculateForCIT2022(this.state.annualIncome || 0);
         }
     };
 
     handleChangeData = () => {
+        this.showIncomeForm();
+        this.hideResultPanel();
+    };
+
+    showIncomeForm = () => {
+        this.selectors.ppeInput?.classList.add('visible');
+        this.selectors.ppeInput?.classList.remove('hidden');
         this.selectors.taxSelection?.classList.add('visible');
         this.selectors.incomeInput?.classList.add('visible');
-        this.selectors.actions?.classList.remove('visible');
         this.selectors.calculateButton?.classList.add('visible');
+    };
+
+    hideIncomeForm = () => {
+        this.selectors.ppeInput?.classList.remove('visible');
+        this.selectors.ppeInput?.classList.add('hidden');
+        this.selectors.taxSelection?.classList.remove('visible');
+        this.selectors.incomeInput?.classList.remove('visible');
+        this.selectors.calculateButton?.classList.remove('visible');
+    };
+
+    showResultPanel = (donation: string, taxFree: string) => {
+        this.selectors.actions?.classList.add('visible');
+        this.selectors.changeButton?.classList.add('visible');
+        this.selectors.taxOutput.innerHTML = `
+            <h3>Twój wynik</h3>
+            <p>
+                <span>W zeznaniu podatkowym możesz odliczyć darowizny w maksymalnej kwocie około* </span>
+                <strong class="donation-result">${donation}</strong>
+            </p>
+            <p>
+                <span>W ten sposób szacunkowo* zapłacisz nawet o </span>
+                <strong class="tax-result">${taxFree}</strong>
+                <span> mniej podatku!</span>
+            </p>
+        `;
+    };
+
+    hideResultPanel = () => {
+        this.selectors.actions?.classList.remove('visible');
         this.selectors.changeButton?.classList.remove('visible');
         this.selectors.taxOutput.innerHTML = '';
     };
@@ -196,12 +252,20 @@ class DonationForm extends window.HTMLElement {
      */
     async render() {
         this.selectors.taxSelection = this.find('section.tax-type-select')!;
+        this.selectors.ppeInput = this.find('section.ppe-input')!;
         this.selectors.incomeInput = this.find('section.income-input')!;
         this.selectors.incorrectTax = this.find('section.incorrect-tax')!;
         this.selectors.actions = this.find('section.actions')!;
         this.selectors.taxOutput = this.find('.tax-output')!;
         this.selectors.calculateButton = this.find('button#calculate-donation-btn')! as HTMLButtonElement;
         this.selectors.changeButton = this.find('button#change-data-btn')! as HTMLButtonElement;
+
+        this.renderInputField(
+            '.ppe-rate',
+            this.state.ppeRate || 0,
+            [isValidNumber, 'Stawka ryczałtu powinna być liczbą'],
+            [isPositiveNumber, 'Stawka ryczałtu powinna być dodatnia'],
+        );
 
         this.renderInputField(
             '.month-income',
@@ -218,7 +282,9 @@ class DonationForm extends window.HTMLElement {
         );
 
         (this.selectors.calculateButton as HTMLButtonElement).disabled =
-            !this.state.selectedTax || !this.isValid(this.state.annualIncome);
+            !this.state.selectedTax ||
+            !this.isValid(this.state.annualIncome) ||
+            (this.state.selectedTax === Tax.PPE && !this.isValid(this.state.ppeRate));
     }
 
     renderInputField = (selector: string, value: number, ...validators: Validator<number>[]) => {

@@ -62,6 +62,9 @@ body {
         &.visible {
             opacity: 1;
         }
+        &.hidden {
+            display: none;
+        }
     }
 
     h2,
@@ -101,7 +104,8 @@ body {
         }
     }
 
-    .income-input {
+    .income-input,
+    .ppe-input {
         display: flex;
         flex-flow: column;
 

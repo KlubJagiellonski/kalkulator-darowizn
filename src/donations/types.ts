@@ -1,5 +1,6 @@
 export enum Tax {
     'PIT' = 'PIT',
+    'PPE' = 'PPE',
     'CIT' = 'CIT',
 }
 
@@ -9,6 +10,6 @@ export enum IncomeType {
 }
 
 export interface Result {
-    donationSum: number; 
+    donationSum: number;
     taxDeduction: number;
-};
+}
