@@ -33,12 +33,28 @@ describe('About Page', () => {
         form().find('#calculate-donation-btn').click();
 
         form().find('.tax-output').find('.donation-result').contains('6 480,00 zł');
-        form().find('.tax-output').find('.tax-result').contains('2 156,00 zł');
+        form().find('.tax-output').find('.tax-result').contains('2 074,00 zł');
+    });
+
+    it('should count PIT (liniowy) correctly', () => {
+        form().find('h3').should('contain.text', 'Jesteś podatnikiem PIT czy CIT?');
+        form().find('div.option.tax-pit19').find('.radio-option').click();
+
+        form()
+            .find('.incorrect-tax.visible')
+            .contains('Uwaga - podatnikom rozliczającym się według liniowej stawki PIT');
     });
 
     it('should count PPE correctly', () => {
         form().find('h3').should('contain.text', 'Jesteś podatnikiem PIT czy CIT?');
-        form().find('div.option.tax-pit19').find('.radio-option').click();
+        form().find('div.option.tax-ppe').find('.radio-option').click();
+
+        form()
+            .find('div.option.ppe-rate')
+            .find('.income-input')
+            .invoke('val', 12)
+            .trigger('input')
+            .should('have.value', 12);
 
         form()
             .find('div.option.month-income')
@@ -55,7 +71,7 @@ describe('About Page', () => {
         form().find('#calculate-donation-btn').click();
 
         form().find('.tax-output').find('.donation-result').contains('6 480,00 zł');
-        form().find('.tax-output').find('.tax-result').contains('972,00 zł');
+        form().find('.tax-output').find('.tax-result').contains('778,00 zł');
     });
 
     it('should count CIT correctly', () => {

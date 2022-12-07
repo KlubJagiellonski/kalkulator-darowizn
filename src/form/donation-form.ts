@@ -112,42 +112,41 @@ class DonationForm extends window.HTMLElement {
         return this.shadow.querySelector(selector);
     };
 
-    isValid = (value: any) => !!value && isValidNumber(value) && isPositiveNumber(value);
+    isValid = (value: number | undefined) => !!value && isValidNumber(value) && isPositiveNumber(value);
+    isValidPercentage = (value: number | undefined) => !!value && this.isValid(value) && value < 100;
+
+    countNumber = (input: HTMLInputElement) => {
+        const inputValue = input.value;
+        const formattedValue = inputValue.replaceAll(',', '.');
+        const numericValue = parseFloat(formattedValue);
+        return numericValue;
+    };
 
     handlePpeRateInput = (e: Event) => {
         if (e.currentTarget) {
-            const inputValue = (e.currentTarget as HTMLInputElement).value;
-            const formattedValue = inputValue.replaceAll(',', '.');
-            const numericValue = parseFloat(formattedValue);
+            const value = this.countNumber(e.currentTarget as HTMLInputElement);
             this.updateState({
-                ppeRate: numericValue,
+                ppeRate: value,
             });
         }
     };
 
     handleMonthIcomeInput = (e: Event) => {
         if (e.currentTarget) {
-            const inputValue = (e.currentTarget as HTMLInputElement).value;
-            const formattedValue = inputValue.replaceAll(',', '.');
-            const numericValue = parseFloat(formattedValue);
+            const value = this.countNumber(e.currentTarget as HTMLInputElement);
             this.updateState({
-                monthlyIncome: numericValue,
-                annualIncome: !!numericValue && this.isValid(numericValue) ? 12 * numericValue : undefined,
+                monthlyIncome: value,
+                annualIncome: !!value && this.isValid(value) ? 12 * value : undefined,
             });
         }
     };
 
     handleAnnualIncomeInput = (e: Event) => {
         if (e.currentTarget) {
-            const inputValue = (e.currentTarget as HTMLInputElement).value;
-            const formattedValue = inputValue.replaceAll(',', '.');
-            const numericValue = parseFloat(formattedValue);
+            const value = this.countNumber(e.currentTarget as HTMLInputElement);
             this.updateState({
-                monthlyIncome:
-                    !!numericValue && this.isValid(numericValue)
-                        ? parseFloat((numericValue / 12).toFixed(2))
-                        : undefined,
-                annualIncome: numericValue,
+                monthlyIncome: !!value && this.isValid(value) ? parseFloat((value / 12).toFixed(2)) : undefined,
+                annualIncome: value,
             });
         }
     };
@@ -172,18 +171,17 @@ class DonationForm extends window.HTMLElement {
         if (visible) {
             this.selectors.incorrectTax?.classList.add('visible');
             this.selectors.incomeInput?.classList.remove('visible');
+            this.hidePPETaxRate();
         } else {
             this.selectors.incorrectTax?.classList.remove('visible');
             this.selectors.incomeInput?.classList.add('visible');
+            this.showPPETaxRate();
         }
     };
 
     handleCalculation = () => {
         if (this.state.selectedTax && isValidNumber(this.state.annualIncome)) {
             let result = this.calculateResult(this.state.selectedTax);
-            //     this.state.selectedTax === Tax.PIT
-            //         ? calculateForPIT(this.state.annualIncome || 0)
-            //         : calculateForCIT(this.state.annualIncome || 0);
             const donation = this.formatter.format(result.donationSum);
             const taxFree = this.formatter.format(result.taxDeduction);
 
@@ -209,19 +207,26 @@ class DonationForm extends window.HTMLElement {
     };
 
     showIncomeForm = () => {
-        this.selectors.ppeInput?.classList.add('visible');
-        this.selectors.ppeInput?.classList.remove('hidden');
+        this.showPPETaxRate();
         this.selectors.taxSelection?.classList.add('visible');
         this.selectors.incomeInput?.classList.add('visible');
         this.selectors.calculateButton?.classList.add('visible');
     };
 
     hideIncomeForm = () => {
-        this.selectors.ppeInput?.classList.remove('visible');
-        this.selectors.ppeInput?.classList.add('hidden');
+        this.hidePPETaxRate();
         this.selectors.taxSelection?.classList.remove('visible');
         this.selectors.incomeInput?.classList.remove('visible');
         this.selectors.calculateButton?.classList.remove('visible');
+    };
+
+    showPPETaxRate = () => {
+        this.selectors.ppeInput?.classList.add('visible');
+        this.selectors.ppeInput?.classList.remove('hidden');
+    };
+    hidePPETaxRate = () => {
+        this.selectors.ppeInput?.classList.remove('visible');
+        this.selectors.ppeInput?.classList.add('hidden');
     };
 
     showResultPanel = (donation: string, taxFree: string) => {
@@ -284,7 +289,7 @@ class DonationForm extends window.HTMLElement {
         (this.selectors.calculateButton as HTMLButtonElement).disabled =
             !this.state.selectedTax ||
             !this.isValid(this.state.annualIncome) ||
-            (this.state.selectedTax === Tax.PPE && !this.isValid(this.state.ppeRate));
+            (this.state.selectedTax === Tax.PPE && !this.isValidPercentage(this.state.ppeRate));
     }
 
     renderInputField = (selector: string, value: number, ...validators: Validator<number>[]) => {
