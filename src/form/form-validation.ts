@@ -1,9 +1,13 @@
 export type Validator<T> = [(value: T) => boolean, string];
 
-export const isValidNumber = (value: any) => !value || !isNaN(value);
-export const isPositiveNumber = (value: any) => !value || value > -1;
+export const isValidNumber = (value: any) => !!value && !isNaN(value);
+export const isPositiveNumber = (value: any) => !!value && value > 0;
 
-export const applyValidation = (element: Element, value: number, validators: Validator<number>[]) => {
+export const applyValidation = (
+    element: Element,
+    value: number | undefined,
+    validators: Validator<number | undefined>[],
+) => {
     element.innerHTML = '';
     for (let validator of validators) {
         const isValid = validator[0];
