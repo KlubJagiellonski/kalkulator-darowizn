@@ -28,12 +28,12 @@ describe('About Page', () => {
         form()
             .find('div.option.annual-income')
             .find('.income-input')
-            .should('have.value', monthlyIncome * 12);
+            .should('have.value', monthlyIncome * 12 + '.00');
 
         form().find('#calculate-donation-btn').click();
 
         form().find('.tax-output').find('.donation-result').contains('6 480,00 zł');
-        form().find('.tax-output').find('.tax-result').contains('2 074,00 zł');
+        form().find('.tax-output').find('.tax-result').contains('778,00 zł');
     });
 
     it('should count PIT (liniowy) correctly', () => {
@@ -50,11 +50,11 @@ describe('About Page', () => {
         form().find('div.option.tax-ppe').find('.radio-option').click();
 
         form()
-            .find('div.option.ppe-rate')
-            .find('.income-input')
+            .find('.ppe-input .rate-dropdown')
+            .select('12')
             .invoke('val', 12)
-            .trigger('input')
-            .should('have.value', 12);
+            .trigger('change')
+            .should('have.value', '12');
 
         form()
             .find('div.option.month-income')
@@ -66,7 +66,7 @@ describe('About Page', () => {
         form()
             .find('div.option.annual-income')
             .find('.income-input')
-            .should('have.value', monthlyIncome * 12);
+            .should('have.value', monthlyIncome * 12 + '.00');
 
         form().find('#calculate-donation-btn').click();
 
@@ -88,7 +88,7 @@ describe('About Page', () => {
         form()
             .find('div.option.annual-income')
             .find('.income-input')
-            .should('have.value', monthlyIncome * 12);
+            .should('have.value', monthlyIncome * 12 + '.00');
 
         form().find('#calculate-donation-btn').click();
 
