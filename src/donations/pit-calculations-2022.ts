@@ -11,6 +11,7 @@ export const calculateForPIT2022 = (annualIncome: number): Result => {
     const donationSum = Math.round(countDonationForPIT(annualIncome));
     const z1 = Math.round(countTax(annualIncome));
     const z2 = Math.round(countTax(annualIncome, donationSum));
+    console.log({ z1, z2 });
     const taxDeduction = z1 - z2;
 
     return {
@@ -31,9 +32,12 @@ const countDonationForPIT = (income: number): number => {
 const countTax = (income: number, donation: number = 0): number => {
     if (income <= TAX_FREE) {
         return 0;
-    } else if (income <= TAX_2) {
-        return TAX_1_RATE * (income - donation) - SOCIAL_SECURITY_FREE;
     } else {
-        return TAX_2_RATE * (income - donation - TAX_2) + 10800;
+        const restIncome = income - donation;
+        if (restIncome <= TAX_2) {
+            return TAX_1_RATE * restIncome - SOCIAL_SECURITY_FREE;
+        } else {
+            return TAX_2_RATE * (restIncome - TAX_2) + 10800;
+        }
     }
 };
