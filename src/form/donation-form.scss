@@ -149,6 +149,10 @@ body {
                 display: block;
             }
         }
+
+        select.rate-dropdown {
+            padding-top: 0.5rem;
+        }
     }
 
     .validation-message {

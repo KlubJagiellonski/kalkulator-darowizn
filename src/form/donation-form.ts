@@ -74,7 +74,7 @@ class DonationForm extends window.HTMLElement {
             preventPropagationInvoke(() => this.handleTaxSelection(Tax.CIT, '.tax-cit .text')),
         );
 
-        this.onInputChange('.ppe-rate .income-input', this.handlePpeRateInput);
+        this.onSelectChange('.ppe-dropdown .rate-dropdown', this.handlePpeRateDropdown);
 
         this.onInputChange('.month-income .income-input', this.handleMonthIcomeInput);
 
@@ -103,6 +103,10 @@ class DonationForm extends window.HTMLElement {
         const element = this.find(selector);
         element?.addEventListener('input', callback);
     };
+    onSelectChange = (selector: string, callback: (e: Event) => void) => {
+        const element = this.find(selector);
+        element?.addEventListener('change', callback);
+    };
     onClick = (selector: string, callback: (e: Event) => void) => {
         const element = this.find(selector);
         element?.addEventListener('click', callback);
@@ -122,7 +126,7 @@ class DonationForm extends window.HTMLElement {
         return numericValue;
     };
 
-    handlePpeRateInput = (e: Event) => {
+    handlePpeRateDropdown = (e: Event) => {
         if (e.currentTarget) {
             const value = this.countNumber(e.currentTarget as HTMLInputElement);
             this.updateState({
@@ -302,6 +306,8 @@ class DonationForm extends window.HTMLElement {
             }
         }
     };
+
+    renderDropdown = (slector: string, value: number) => {};
 }
 
 if (!customElements.get('donation-form')) {

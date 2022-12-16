@@ -45,9 +45,21 @@
   
       <section class="ppe-input hidden">
         <div class="income-options">
-          <div class="option ppe-rate">
-            <span class="text">Podaj stawkę ryczałtu [%]:</span>
-            <input type="text" class="income-input">
+          <div class="option ppe-dropdown">
+            <span class="text">Wybierz stawkę ryczałtu:</span>
+            <select name="ppe-rate-dropdown" class="income-input rate-dropdown">
+              <option selected="selected">stawka</option>
+              <option value="2">2%</option>
+              <option value="3">3%</option>
+              <option value="5.5">5,5%</option>
+              <option value="8.5">8,5%</option>
+              <option value="10">10%</option>
+              <option value="12">12%</option>
+              <option value="12.5">12,5%</option>
+              <option value="14">14%</option>
+              <option value="15">15%</option>
+              <option value="17">17%</option>
+            </select>
             <div class="validation"></div>
           </div>
         </div>
@@ -69,8 +81,7 @@
         <button id="calculate-donation-btn" class="button visible">Oblicz</button>
       </section>
   
-      <section class="actions">
-          
+      <section class="actions">         
           <div class="tax-output"></div>
           <button id="change-data-btn" class="button">Zmień dane</button>
       </section>
