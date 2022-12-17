@@ -9,7 +9,7 @@ describe('PIT 2022 calculations for annual income:', () => {
         testCase(12000, 0, 0),
         testCase(13200, 0, 0),
         testCase(29900, 0, 0),
-        testCase(30001, 0, 0),
+        testCase(30001, 1, 0),
         testCase(36000, 2160, 259),
         testCase(70000, 4200, 504),
         testCase(84960, 5098, 612),

@@ -9,7 +9,7 @@ const TAX_2: number = 120000;
 const TAX_2_RATE: number = 0.32;
 
 export const calculateForPIT2022 = (annualIncome: number): Result => {
-    const donationSum = roundNumber(countDonationForPIT(annualIncome));
+    const donationSum = Math.round(countDonationForPIT(annualIncome));
     const z1 = Math.round(countTax(annualIncome));
     const z2 = Math.round(countTax(annualIncome, donationSum));
     console.log({ z1, z2 });

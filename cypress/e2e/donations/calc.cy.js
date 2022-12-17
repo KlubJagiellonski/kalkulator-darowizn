@@ -44,7 +44,7 @@ describe('About Page', () => {
     });
 
     it('should count PIT for income 120001 correctly', () => {
-        const data = new TestCase(120001, '7 200,06 zł', '864,00 zł');
+        const data = new TestCase(120001, '7 200,00 zł', '864,00 zł');
 
         form().find('div.option.tax-pit').find('.radio-option').click();
 
