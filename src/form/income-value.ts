@@ -1,3 +1,4 @@
+import { roundNumber } from '../utils/numeric';
 import { isValidNumber } from './form-validation';
 
 export class IncomeValue {
@@ -11,19 +12,11 @@ export class IncomeValue {
         } else if (text) {
             this.text = text;
             const formattedValue = text.replaceAll(' ', '').replace(',', '.').replace(/\.$/, '.0');
-            this.value = isValidNumber(formattedValue)
-                ? IncomeValue.roundNumber(parseFloat(formattedValue), 2)
-                : undefined;
+            this.value = isValidNumber(formattedValue) ? roundNumber(parseFloat(formattedValue)) : undefined;
         } else if (value) {
             this.text = value.toFixed(2);
-            this.value = IncomeValue.roundNumber(value, 2);
+            this.value = roundNumber(value);
         }
-    }
-
-    protected static roundNumber(value: number, decimals: number) {
-        var scale = Math.pow(10, decimals);
-        var rounded = Math.round((value + Number.EPSILON) * scale) / scale;
-        return rounded;
     }
 
     public static fromString(text?: string) {

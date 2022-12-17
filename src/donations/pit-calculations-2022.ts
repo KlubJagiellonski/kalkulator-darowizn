@@ -1,3 +1,4 @@
+import { roundNumber } from '../utils/numeric';
 import { Result } from './types';
 
 const SOCIAL_SECURITY_FREE: number = 3600;
@@ -8,7 +9,7 @@ const TAX_2: number = 120000;
 const TAX_2_RATE: number = 0.32;
 
 export const calculateForPIT2022 = (annualIncome: number): Result => {
-    const donationSum = Math.round(countDonationForPIT(annualIncome));
+    const donationSum = roundNumber(countDonationForPIT(annualIncome));
     const z1 = Math.round(countTax(annualIncome));
     const z2 = Math.round(countTax(annualIncome, donationSum));
     console.log({ z1, z2 });

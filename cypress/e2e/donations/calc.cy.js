@@ -15,25 +15,26 @@ describe('About Page', () => {
     });
 
     it('should count PIT correctly', () => {
+        const secondTaxIncome = 120001;
         form().find('h3').should('contain.text', 'Jesteś podatnikiem PIT czy CIT?');
         form().find('div.option.tax-pit').find('.radio-option').click();
 
         form()
-            .find('div.option.month-income')
-            .find('.income-input')
-            .invoke('val', monthlyIncome)
-            .trigger('input')
-            .should('have.value', monthlyIncome);
-
-        form()
             .find('div.option.annual-income')
             .find('.income-input')
-            .should('have.value', monthlyIncome * 12 + '.00');
+            .invoke('val', secondTaxIncome)
+            .trigger('input')
+            .should('have.value', secondTaxIncome);
+
+        form()
+            .find('div.option.month-income')
+            .find('.income-input')
+            .should('have.value', parseFloat(secondTaxIncome / 12).toFixed(2));
 
         form().find('#calculate-donation-btn').click();
 
-        form().find('.tax-output').find('.donation-result').contains('6 480,00 zł');
-        form().find('.tax-output').find('.tax-result').contains('778,00 zł');
+        form().find('.tax-output').find('.donation-result').contains('7 200,06 zł');
+        form().find('.tax-output').find('.tax-result').contains('864,00 zł');
     });
 
     it('should count PIT (liniowy) correctly', () => {
