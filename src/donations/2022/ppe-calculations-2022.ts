@@ -1,4 +1,4 @@
-import { Result } from './types';
+import { Result } from '../types';
 
 const DONATION_RATE: number = 0.06;
 

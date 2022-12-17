@@ -17,6 +17,11 @@ dist
 dist-ssr
 *.local
 
+# tests
+/screenshots
+/videos
+*.mp4
+
 # misc
 .DS_Store
 .env.local

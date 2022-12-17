@@ -1,7 +1,7 @@
 import { Tax, IncomeType } from '../donations/types';
 import { getTemplate, preventPropagationInvoke } from '../utils/templates';
-import { calculateForPIT2022 } from '../donations/pit-calculations-2022';
-import { calculateForCIT2022 } from '../donations/cit-calculations';
+import { calculateForPIT2022 } from '../donations/2022/pit-calculations-2022';
+import { calculateForCIT2022 } from '../donations/2020/cit-calculations';
 import { CurrencyFormatter } from '../utils/currency-formatter';
 import { applyValidation, isPositiveNumber, isValidNumber, Validator } from './form-validation';
 
@@ -9,7 +9,7 @@ import resetStyles from '../styles/reset.scss';
 import formStyles from './donation-form.scss';
 import radioStyles from './radio-option.scss';
 import { StyleBuilder } from '../utils/style-builder';
-import { calculateForPPE2022 } from '../donations/ppe-calculations-2022';
+import { calculateForPPE2022 } from '../donations/2022/ppe-calculations-2022';
 import { IncomeValue } from './income-value';
 
 interface IDonationFormState {
@@ -27,7 +27,7 @@ class DonationForm extends window.HTMLElement {
 
     private selectors: { [key: string]: Element } = {};
 
-    private taxRadio = ['.tax-pit .text', '.tax-pit19 .text', '.tax-ppe .text', '.tax-cit .text'];
+    private taxRadioSelectors = ['.tax-pit .text', '.tax-pit19 .text', '.tax-ppe .text', '.tax-cit .text'];
 
     constructor() {
         super();
@@ -46,8 +46,6 @@ class DonationForm extends window.HTMLElement {
             ...this.state,
             ...newState,
         };
-
-        console.log('state', this.state);
         this.render();
     }
 
@@ -66,7 +64,7 @@ class DonationForm extends window.HTMLElement {
         );
         this.onRadioChange(
             '.tax-pit19 .radio-input',
-            preventPropagationInvoke(() => this.showIncorectTaxMessage(true, '.tax-pit19 .text')),
+            preventPropagationInvoke(() => this.showIncorectTaxMessage('.tax-pit19 .text')),
         );
         this.onRadioChange(
             '.tax-ppe .radio-input',
@@ -90,6 +88,15 @@ class DonationForm extends window.HTMLElement {
     }
 
     addSelectedClass = (selectors: string[], selectedValue: string): void => {
+        selectors.forEach((selector: string) => {
+            const classes = this.find(selector)?.classList;
+            if (classes) {
+                selector === selectedValue ? classes.add('selected') : classes?.remove('selected');
+            }
+        });
+    };
+
+    toggleClass = (selectors: string[], selectedValue: string): void => {
         selectors.forEach((selector: string) => {
             const classes = this.find(selector)?.classList;
             if (classes) {
@@ -167,8 +174,8 @@ class DonationForm extends window.HTMLElement {
     };
 
     handleTaxSelection = (tax: Tax, selector: string) => {
-        this.showIncorectTaxMessage(false, selector);
-        this.addSelectedClass(this.taxRadio, selector);
+        this.hideIncorectTaxMessage(selector);
+        this.addSelectedClass(this.taxRadioSelectors, selector);
 
         if (tax === Tax.PPE) {
             this.selectors.ppeInput?.classList.add('visible');
@@ -180,18 +187,20 @@ class DonationForm extends window.HTMLElement {
         this.updateState({ selectedTax: tax });
     };
 
-    showIncorectTaxMessage = (visible: boolean, selector: string) => {
-        this.addSelectedClass(this.taxRadio, selector);
+    showIncorectTaxMessage = (selector: string) => {
+        this.addSelectedClass(this.taxRadioSelectors, selector);
 
-        if (visible) {
-            this.selectors.incorrectTax?.classList.add('visible');
-            this.selectors.incomeInput?.classList.remove('visible');
-            this.hidePPETaxRate();
-        } else {
-            this.selectors.incorrectTax?.classList.remove('visible');
-            this.selectors.incomeInput?.classList.add('visible');
-            this.showPPETaxRate();
-        }
+        this.selectors.incorrectTax?.classList.add('visible');
+        this.selectors.incomeInput?.classList.remove('visible');
+        this.hidePPETaxRate();
+    };
+
+    hideIncorectTaxMessage = (selector: string) => {
+        this.addSelectedClass(this.taxRadioSelectors, selector);
+
+        this.selectors.incorrectTax?.classList.remove('visible');
+        this.selectors.incomeInput?.classList.add('visible');
+        this.showPPETaxRate();
     };
 
     handleCalculation = () => {

@@ -1,4 +1,4 @@
-import { Result } from './types';
+import { Result } from '../types';
 
 const SOCIAL_SECURITY_TOTAL: number = 1360;
 const SOCIAL_SECURITY_FREE: number = 525.12;

@@ -1,5 +1,5 @@
-import { roundNumber } from '../utils/numeric';
-import { Result } from './types';
+import { roundNumber } from '../../utils/numeric';
+import { Result } from '../types';
 
 const SOCIAL_SECURITY_FREE: number = 3600;
 const DONATION_RATE: number = 0.06;
@@ -22,9 +22,14 @@ export const calculateForPIT2022 = (annualIncome: number): Result => {
 };
 
 const countDonationForPIT = (income: number): number => {
+    const maxDonation = DONATION_RATE * income;
     let donation = 0;
-    if ((1 - DONATION_RATE) * income >= TAX_FREE) {
-        donation = DONATION_RATE * income;
+
+    if (income - maxDonation >= TAX_FREE) {
+        donation = maxDonation;
+    } else if (income > TAX_FREE) {
+        const taxableIncome = income - TAX_FREE;
+        donation = Math.min(taxableIncome, maxDonation);
     }
 
     return donation;

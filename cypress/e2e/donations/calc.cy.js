@@ -1,3 +1,12 @@
+class TestCase {
+    constructor(annual, donation, taxFree) {
+        this.annual = annual;
+        this.monthly = parseFloat(annual / 12).toFixed(2);
+        this.donation = donation;
+        this.taxFree = taxFree;
+    }
+}
+
 describe('About Page', () => {
     const monthlyIncome = 9000;
 
@@ -10,35 +19,50 @@ describe('About Page', () => {
         cy.visit(baseUrl);
     });
 
-    it('should show website title', () => {
+    it('should show titles', () => {
         cy.title().should('eq', 'Kalkulator Darowizn');
+        form().find('h3').should('contain.text', 'Jesteś podatnikiem PIT czy CIT?');
     });
 
-    it('should count PIT correctly', () => {
-        const secondTaxIncome = 120001;
-        form().find('h3').should('contain.text', 'Jesteś podatnikiem PIT czy CIT?');
+    it('should count PIT for income 30001 correctly', () => {
+        const data = new TestCase(30001, '1,00 zł', '0,00 zł');
+
         form().find('div.option.tax-pit').find('.radio-option').click();
 
         form()
             .find('div.option.annual-income')
             .find('.income-input')
-            .invoke('val', secondTaxIncome)
+            .invoke('val', data.annual)
             .trigger('input')
-            .should('have.value', secondTaxIncome);
-
-        form()
-            .find('div.option.month-income')
-            .find('.income-input')
-            .should('have.value', parseFloat(secondTaxIncome / 12).toFixed(2));
+            .should('have.value', data.annual);
+        form().find('div.option.month-income').find('.income-input').should('have.value', data.monthly);
 
         form().find('#calculate-donation-btn').click();
 
-        form().find('.tax-output').find('.donation-result').contains('7 200,06 zł');
-        form().find('.tax-output').find('.tax-result').contains('864,00 zł');
+        form().find('.tax-output').find('.donation-result').contains(data.donation);
+        form().find('.tax-output').find('.tax-result').contains(data.taxFree);
+    });
+
+    it('should count PIT for income 120001 correctly', () => {
+        const data = new TestCase(120001, '7 200,06 zł', '864,00 zł');
+
+        form().find('div.option.tax-pit').find('.radio-option').click();
+
+        form()
+            .find('div.option.annual-income')
+            .find('.income-input')
+            .invoke('val', data.annual)
+            .trigger('input')
+            .should('have.value', data.annual);
+        form().find('div.option.month-income').find('.income-input').should('have.value', data.monthly);
+
+        form().find('#calculate-donation-btn').click();
+
+        form().find('.tax-output').find('.donation-result').contains(data.donation);
+        form().find('.tax-output').find('.tax-result').contains(data.taxFree);
     });
 
     it('should count PIT (liniowy) correctly', () => {
-        form().find('h3').should('contain.text', 'Jesteś podatnikiem PIT czy CIT?');
         form().find('div.option.tax-pit19').find('.radio-option').click();
 
         form()
@@ -47,7 +71,6 @@ describe('About Page', () => {
     });
 
     it('should count PPE correctly', () => {
-        form().find('h3').should('contain.text', 'Jesteś podatnikiem PIT czy CIT?');
         form().find('div.option.tax-ppe').find('.radio-option').click();
 
         form()
@@ -76,7 +99,6 @@ describe('About Page', () => {
     });
 
     it('should count CIT correctly', () => {
-        form().find('h3').should('contain.text', 'Jesteś podatnikiem PIT czy CIT?');
         form().find('div.option.tax-cit').find('.radio-option').click();
 
         form()

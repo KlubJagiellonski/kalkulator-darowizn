@@ -14,8 +14,8 @@
         "unit": "ts-mocha --require ignore-styles --paths \"./src/**/*.specs.ts\"",
         "unitw": "ts-mocha --require ignore-styles --paths \"./src/**/*.specs.ts\" -w --watch-extensions ts",
         "preview": "vite preview",
-        "cypress:run1": "cypress run --headless --browser chrome",
-        "cypress:open1": "cypress open",
+        "e2e": "cypress run --headless --browser chrome",
+        "cypress": "cypress open",
         "prettier": "prettier --write src/**/*.{js,scss,ts}"
     },
     "devDependencies": {

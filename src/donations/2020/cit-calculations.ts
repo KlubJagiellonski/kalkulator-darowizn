@@ -1,4 +1,4 @@
-import { Result } from './types';
+import { Result } from '../types';
 
 const EUR_PLN_2022 = 4.6208; // http://rss.nbp.pl/kursy/TabRss.aspx?n=2021/a/21a211
 const TAX_THRESHOLD_2022: number = 1200000 * EUR_PLN_2022;
