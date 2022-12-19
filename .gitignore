@@ -20,7 +20,7 @@ dist-ssr
 # tests
 /screenshots
 /videos
-*.mp4
+*.mp4*
 
 # misc
 .DS_Store
