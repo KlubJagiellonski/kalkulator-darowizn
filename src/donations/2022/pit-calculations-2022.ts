@@ -1,4 +1,3 @@
-import { roundNumber } from '../../utils/numeric';
 import { Result } from '../types';
 
 const SOCIAL_SECURITY_FREE: number = 3600;
@@ -27,9 +26,8 @@ const countDonationForPIT = (income: number): number => {
 
     if (income - maxDonation >= TAX_FREE) {
         donation = maxDonation;
-    } else if (income > TAX_FREE) {
-        const taxableIncome = income - TAX_FREE;
-        donation = Math.min(taxableIncome, maxDonation);
+    } else if (income > TAX_FREE && income - maxDonation < TAX_FREE) {
+        donation = income - TAX_FREE;
     }
 
     return donation;
