@@ -7,5 +7,13 @@
     "editor.formatOnSave": true,
     "[javascript]": {
         "editor.formatOnSave": true
-    }
+    },
+    "overrides": [
+        {
+            "files": "*.yaml",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
 }
