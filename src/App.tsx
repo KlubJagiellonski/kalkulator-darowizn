@@ -16,7 +16,7 @@ function App() {
               <p className='text'>Cztery pytania. Policzymy odliczenie zgodnie z Twoją formą rozliczenia i pokażemy, ile z tej kwoty pokrywa podatek.</p>
             </div>
             <div className='header-toggle'>
-              <Toggle position={position} setPosition={setPosition} />
+              <Toggle position={position} setPosition={setPosition} firstItem='Tryb prosty' secondItem='Tryb rozszerzony'/>
               <p className='text'>Jedno pytanie na ekran, cztery kroki. Wynik liczy się od razu.</p>
             </div>
           </div>

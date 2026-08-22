@@ -8,7 +8,7 @@ describe("Toggle", () => {
         const setPosition = vi.fn();
 
         render(
-            <Toggle position="second" setPosition={setPosition} />
+            <Toggle position="second" setPosition={setPosition} firstItem="Tryb prosty" secondItem="Tryb rozszerzony"/>
         );
 
         await userEvent.click(
@@ -22,7 +22,7 @@ describe("Toggle", () => {
         const setPosition = vi.fn();
 
         render(
-            <Toggle position="second" setPosition={setPosition} />
+            <Toggle position="second" setPosition={setPosition} firstItem="Tryb prosty" secondItem="Tryb rozszerzony" />
         );
 
         await userEvent.click(
