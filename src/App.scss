@@ -1,0 +1,88 @@
+@use "./variables" as *;
+
+.calculator-container {
+  container-type: inline-size;
+}
+
+.calculator-wrapper {
+  border: $border-primary;
+  margin: auto;
+
+  .header-wrapper {
+    border-bottom: $border-primary;
+    padding: 20px;
+
+    .header-box {
+      max-width: 350px;
+      margin: auto;
+
+      .header-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .text {
+          text-align: right;
+          color: $text-secondary;
+          display: none;
+        }
+      }
+
+      .header-text {
+        padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        .text {
+          color: $text-muted;
+          display: none;
+        }
+
+        .company-name {
+          font-family: IBM Plex Mono;
+          font-weight: 400;
+          font-style: Regular;
+          font-size: 0.625rem;
+          line-height: 1.5;
+          letter-spacing: 0.05rem;
+          color: $text-muted;
+        }
+      }
+    }
+  }
+}
+
+@container (min-width: 768px) {
+  .calculator-wrapper {
+    max-width: 1240px;
+    border-radius: 28px;
+
+    .header-wrapper {
+      padding: 32px 36px;
+
+      .header-box {
+        display: flex;
+        max-width: none;
+        justify-content: space-between;
+
+        .header-toggle {
+          width: 275px;
+
+          .text {
+            display: block;
+          }
+        }
+
+        .header-text {
+          max-width: 560px;
+          gap: 8px;
+
+          .text {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}

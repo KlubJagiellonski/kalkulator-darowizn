@@ -1,0 +1,52 @@
+@use "./../variables.scss" as *;
+
+.toggle-wrapper {
+  border: $border-primary;
+  padding: 3px;
+  background-color: $bg-secondary;
+  border-radius: 14px;
+  display: flex;
+  position: relative;
+  max-width: 350px;
+
+  .toggle-cover {
+    background-color: $white;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    right: 3px;
+    bottom: 3px;
+    clip-path: inset(0 50% 0 0 round 11px);
+    transition: clip-path 0.3s ease-in-out;
+  }
+
+  .toggle-item {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 13px 0;
+    font-size: 0.875rem;
+    color: $text-muted;
+    position: relative;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &.first {
+    .toggle-item-1 {
+      color: $text-primary;
+      font-weight: 600;
+    }
+  }
+
+  &.second {
+    .toggle-item-2 {
+      color: $text-primary;
+      font-weight: 600;
+    }
+
+    .toggle-cover {
+      clip-path: inset(0 0 0 50% round 11px);
+    }
+  }
+}

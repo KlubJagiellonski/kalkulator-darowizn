@@ -1,0 +1,43 @@
+@use "./variables" as *;
+
+body {
+  margin: 0;
+}
+
+* {
+  font-family: "Schibsted Grotesk", sans-serif;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 1.25rem;
+  letter-spacing: -0.025rem;
+  line-height: 1.25;
+  font-weight: 600;
+  margin: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: $text-primary;
+}
+
+p{
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+@container (min-width: 768px) {
+  h1 {
+    font-size: 1.625rem;
+    line-height: 1.269;
+    letter-spacing: -0.0325rem;
+
+  }
+}
