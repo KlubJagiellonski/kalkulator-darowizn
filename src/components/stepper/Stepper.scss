@@ -134,15 +134,19 @@
 
     .steps-box {
       display: flex;
-      transition: transform 0.5s ease-in-out, height 0.5s ease-in-out;
+      transition: transform 0.5s ease-in-out;
       align-items: flex-start;
+
+      &.ready {
+        transition: transform 0.5s ease-in-out, height 0.5s ease-in-out;
+      }
 
       .step {
         flex: 1;
         overflow: hidden;
 
-        .step-content{
-          .title{
+        .step-content {
+          .title {
             font-size: 0.9375rem;
             font-weight: 600;
             padding-bottom: 10px;

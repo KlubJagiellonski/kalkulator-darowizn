@@ -14,6 +14,7 @@ interface StepperProps {
 
 function Stepper({ items, step, setStep }: StepperProps) {
     const [height, setHeight] = useState(0)
+    const [ready, setready] = useState(false)
     const activeStepRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -21,6 +22,11 @@ function Stepper({ items, step, setStep }: StepperProps) {
             setHeight(activeStepRef.current.scrollHeight)
         }
     }, [step])
+
+    const changeStep = (step: number) => {
+        setready(true)
+        setStep(step)
+    }
 
     return (
         <div className={`stepper-wrapper`}>
@@ -48,9 +54,9 @@ function Stepper({ items, step, setStep }: StepperProps) {
                         ))}
                     </div>
                     {items.map((el, id) => (
-                        <div className="dot-box" data-testid={`step-${id + 1}`} key={id} onClick={() => setStep(id + 1)}
+                        <div className="dot-box" data-testid={`step-${id + 1}`} key={id} onClick={() => changeStep(id + 1)}
                         >
-                            <div className={`dot`}/>
+                            <div className={`dot`} />
                             <p className={`dot-title ${step === id + 1 ? "active" : ""}`}>{id + 1} · {el.name}</p>
                         </div>
                     ))}
@@ -71,7 +77,7 @@ function Stepper({ items, step, setStep }: StepperProps) {
                 </div>
             </div>
             <div className="steps">
-                <div className="steps-box" style={{ height, width: `${100 * items.length}%`, transform: `translateX(${-(step - 1) * 100 / items.length}%)` }}>
+                <div className={`steps-box ${ready ? "ready" : ""}`} style={{ height, width: `${100 * items.length}%`, transform: `translateX(${-(step - 1) * 100 / items.length}%)` }}>
                     {items.map((item, id) =>
                         <div key={id} className={`step`} ref={step === id + 1 ? activeStepRef : undefined}>
                             {item.children}
@@ -80,8 +86,8 @@ function Stepper({ items, step, setStep }: StepperProps) {
                 </div>
             </div>
             <div className="btns">
-                <button disabled={step == 1} className="button button--ghost button-stepper" onClick={() => setStep(step - 1)}>← Wstecz</button>
-                <button disabled={step == items.length} className="button button--dark button-stepper" onClick={() => setStep(step + 1)}>Dalej →</button>
+                <button disabled={step == 1} className="button button--ghost button-stepper" onClick={() => changeStep(step - 1)}>← Wstecz</button>
+                <button disabled={step == items.length} className="button button--dark button-stepper" onClick={() => changeStep(step + 1)}>Dalej →</button>
             </div>
         </div>
     )
