@@ -140,6 +140,14 @@
       .step {
         flex: 1;
         overflow: hidden;
+
+        .step-content{
+          .title{
+            font-size: 0.9375rem;
+            font-weight: 600;
+            padding-bottom: 10px;
+          }
+        }
       }
     }
   }

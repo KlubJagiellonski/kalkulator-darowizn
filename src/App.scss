@@ -22,11 +22,13 @@
         display: flex;
         flex-direction: column;
         gap: 12px;
+        flex-shrink: 0;
 
         .text {
           text-align: right;
           color: $text-secondary;
           display: none;
+          font-size: 0.8125rem;
         }
       }
 

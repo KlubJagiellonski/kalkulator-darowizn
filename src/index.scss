@@ -52,9 +52,23 @@ p {
   font-family: SchibstedGrotesk;
   border-radius: 16px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 
-  &:disabled{
+  &:disabled {
     cursor: default;
+  }
+
+  &--chip {
+    background-color: $white;
+    border: $border-secondary;
+    font-weight: 400;
+
+    &.active {
+      background-color: $color-primary;
+      color: $white;
+      font-weight: 600;
+      border-color: $color-primary;
+    }
   }
 
   &--dark {

@@ -1,0 +1,51 @@
+@use "./../../variables.scss" as *;
+
+.who {
+    .who-btns {
+        display: flex;
+        gap: 8px;
+
+        .btn-who {
+            flex: 1;
+            padding-left: 0;
+            padding-right: 0;
+
+            span {
+                color: $text-muted;
+                transition: color 0.3s ease-in-out;
+            }
+
+            &.active {
+                span {
+                    color: $white;
+                }
+            }
+
+            span {
+                display: none;
+                font-weight: 400;
+                font-size: 0.75rem;
+                line-height: 1.5;
+            }
+        }
+    }
+}
+
+@container (min-width: 768px) {
+    .who {
+        .who-btns {
+            gap: 10px;
+
+            .btn-who {
+                text-align: left;
+                padding-left: 18px;
+                padding-right: 18px;
+
+                span {
+                    display: block;
+                }
+            }
+        }
+    }
+
+}

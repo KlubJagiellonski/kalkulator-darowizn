@@ -10,13 +10,14 @@ import FourthStep from './components/stepper/FourthStep'
 function App() {
   const [position, setPosition] = useState<"first" | "second">("first")
   const [step, setStep] = useState(1)
+  const [values, setValues] = useState({pit: true, cit: false})
 
   const steps = [
     {
       title: "Kto przekazuje darowiznę?",
       subtitle: "Osoba prywatna czy firma",
       name: "Kto",
-      children: <FirstStep />
+      children: <FirstStep values={values} setValues={setValues}/>
     },
     {
       title: "Forma rozliczenia PIT",
