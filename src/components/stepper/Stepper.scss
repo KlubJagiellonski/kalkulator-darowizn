@@ -146,10 +146,23 @@
         overflow: hidden;
 
         .step-content {
-          .title {
-            font-size: 0.9375rem;
-            font-weight: 600;
+          .title-wrapper {
+            display: flex;
+            gap: 5px;
+            align-items: center;
             padding-bottom: 10px;
+
+            .number {
+              font-size: 0.75rem;
+              line-height: 1.5;
+              color: $text-secondary;
+              display: none;
+            }
+
+            .title {
+              font-size: 0.9375rem;
+              font-weight: 600;
+            }
           }
         }
       }
@@ -236,6 +249,19 @@
       padding: 0;
       padding-bottom: 28px;
       flex: 1;
+
+      .steps-box {
+        .step {
+          .step-content {
+            .title-wrapper {
+
+              .number {
+                display: block;
+              }
+            }
+          }
+        }
+      }
     }
 
     .btns {

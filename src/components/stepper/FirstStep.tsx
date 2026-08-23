@@ -19,7 +19,10 @@ function FirstStep({ values, setValues }: FirstStepProps) {
 
     return (
         <div className="who step-content">
-            <p className="title">Kto przekazuje?</p>
+            <div className="title-wrapper">
+                <p className="number">01</p>
+                <p className="title">Kto przekazuje darowiznę?</p>
+            </div>
             <div className="who-btns">
                 <button className={`button button--chip btn-who ${pit ? "active" : ""}`} onClick={handleClick}>Osoba Prywatna<span>PIT · limit 6% dochodu</span></button>
                 <button className={`button button--chip btn-who ${cit ? "active" : ""}`} onClick={handleClick}>Firma<span>CIT · limit 10% dochodu</span></button>
