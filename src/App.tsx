@@ -1,9 +1,42 @@
 import { useState } from 'react'
 import './App.scss'
-import Toggle from './components/Toggle'
+import Toggle from './components/UI/Toggle'
+import Stepper from './components/stepper/Stepper'
+import FirstStep from './components/stepper/FirstStep'
+import SecondStep from './components/stepper/SecondStep'
+import ThirdStep from './components/stepper/ThirdStep'
+import FourthStep from './components/stepper/FourthStep'
 
 function App() {
   const [position, setPosition] = useState<"first" | "second">("first")
+  const [step, setStep] = useState(1)
+
+  const steps = [
+    {
+      title: "Kto przekazuje darowiznę?",
+      subtitle: "Osoba prywatna czy firma",
+      name: "Kto",
+      children: <FirstStep />
+    },
+    {
+      title: "Forma rozliczenia PIT",
+      subtitle: "Decyduje o stawce i o tym, czy odliczenie jest możliwe",
+      name: "Rozliczenie",
+      children: <SecondStep />
+    },
+    {
+      title: "Twój roczny dochód brutto",
+      subtitle: "Wyznacza limit odliczenia",
+      name: "Dochód",
+      children: <ThirdStep />
+    },
+    {
+      title: "Kwota darowizny",
+      subtitle: "Jednorazowo albo co miesiąc",
+      name: "Kwota",
+      children: <FourthStep />
+    },
+  ]
 
   return (
     <div className='calculator-container'>
@@ -16,10 +49,14 @@ function App() {
               <p className='text'>Cztery pytania. Policzymy odliczenie zgodnie z Twoją formą rozliczenia i pokażemy, ile z tej kwoty pokrywa podatek.</p>
             </div>
             <div className='header-toggle'>
-              <Toggle position={position} setPosition={setPosition} firstItem='Tryb prosty' secondItem='Tryb rozszerzony'/>
+              <Toggle position={position} setPosition={setPosition} firstItem='Tryb prosty' secondItem='Tryb rozszerzony' />
               <p className='text'>Jedno pytanie na ekran, cztery kroki. Wynik liczy się od razu.</p>
             </div>
           </div>
+        </div>
+        <div className='content-wrapper'>
+          <Stepper step={step} items={steps} setStep={setStep} />
+          <div className='left-panel'></div>
         </div>
       </div>
     </div>

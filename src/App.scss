@@ -7,6 +7,8 @@
 .calculator-wrapper {
   border: $border-primary;
   margin: auto;
+  height: 100dvh;
+  overflow: hidden;
 
   .header-wrapper {
     border-bottom: $border-primary;
@@ -51,12 +53,17 @@
       }
     }
   }
+
+  .content-wrapper {
+    display: block;
+  }
 }
 
 @container (min-width: 768px) {
   .calculator-wrapper {
     max-width: 1240px;
     border-radius: 28px;
+    height: auto;
 
     .header-wrapper {
       padding: 32px 36px;
@@ -83,6 +90,10 @@
           }
         }
       }
+    }
+
+    .content-wrapper {
+      display: flex;
     }
   }
 }

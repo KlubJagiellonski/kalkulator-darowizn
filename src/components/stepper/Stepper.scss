@@ -1,0 +1,241 @@
+@use "./../../variables.scss" as *;
+
+.stepper-wrapper {
+  padding: 20px;
+  max-width: 390px;
+  margin: auto;
+
+  .stepper-count {
+    display: grid;
+    overflow: hidden;
+
+    .title-wrapper {
+      position: relative;
+
+      .title {
+        transition: transform 0.5s ease-in-out;
+        position: absolute;
+        width: 100%;
+        top: 0;
+
+        &.l {
+          transition: transform 0.5s ease-in-out, opacity 0s ease-in-out 0.5s;
+          transform: translate(-100%);
+          opacity: 0;
+        }
+
+        &.r {
+          transition: transform 0.5s ease-in-out, opacity 0s ease-in-out 0.5s;
+          transform: translate(100%);
+          opacity: 0;
+        }
+
+        &:first-child {
+          position: relative;
+        }
+      }
+    }
+
+    .subtitle-wrapper {
+      position: relative;
+
+      .subtitle {
+        font-size: 0.8125rem;
+        color: $text-secondary;
+        line-height: 1.46;
+        transition: transform 0.5s ease-in-out;
+        position: absolute;
+        width: 100%;
+        top: 0;
+
+        &.l {
+          transform: translate(-100%);
+          opacity: 0;
+          transition: transform 0.5s ease-in-out, opacity 0s ease-in-out 0.5s;
+        }
+
+        &.r {
+          transform: translate(100%);
+          opacity: 0;
+          transition: transform 0.5s ease-in-out, opacity 0s ease-in-out 0.5s;
+        }
+
+        &:first-child {
+          position: relative;
+        }
+
+      }
+    }
+
+    .text {
+      color: $color-primary;
+      font-family: IBM Plex Mono;
+      font-size: 0.6875rem;
+      line-height: 1.54;
+      letter-spacing: 0.055rem;
+    }
+
+    .dots-wrapper {
+      position: relative;
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+
+      .dot-box {
+        flex: 1;
+
+        .dot-title {
+          font-size: 0.75rem;
+          color: $text-secondary;
+          line-height: 1.125;
+          padding-top: 8px;
+          display: none;
+          transition: all 0.3s ease-in-out;
+          font-weight: 400;
+
+          &.active {
+            color: $text-primary;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .dot {
+        height: 5px;
+        width: 100%;
+        flex: 1;
+        background-color: $color-disabled;
+        border-radius: 999px;
+        cursor: pointer;
+      }
+
+      .progress-line {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        height: 5px;
+        transition: clip-path 0.4s ease-in-out;
+        display: flex;
+        gap: 6px;
+        pointer-events: none;
+
+        .dot {
+          background-color: $color-primary;
+        }
+      }
+    }
+  }
+
+  .steps {
+    padding: 22px 0;
+    overflow: hidden;
+
+    .steps-box {
+      display: flex;
+      transition: transform 0.5s ease-in-out, height 0.5s ease-in-out;
+      align-items: flex-start;
+
+      .step {
+        flex: 1;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .btns {
+    display: flex;
+    gap: 10px;
+
+    .button-stepper {
+      flex: 1;
+    }
+  }
+}
+
+
+@container (min-width: 768px) {
+  .stepper-wrapper {
+    padding: 36px;
+    max-width: none;
+    width: 66%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    .stepper-count {
+      grid-template-columns: 1fr 1fr;
+
+      .title-wrapper {
+        grid-row: 2;
+        grid-column: 1/3;
+
+        .title {
+
+          &.r {
+            transform: translate(-100%);
+          }
+        }
+      }
+
+      .subtitle-wrapper {
+        grid-row: 1/3;
+        grid-column: 2;
+        width: 260px;
+        justify-self: flex-end;
+
+        .subtitle {
+          height: 40px;
+          text-align: end;
+
+          &.l {
+            transform: translate(100%);
+          }
+
+        }
+      }
+
+      .text {
+        padding-bottom: 6px;
+      }
+
+      .dots-wrapper {
+        gap: 10px;
+        margin-top: 14px;
+        margin-bottom: 28px;
+        grid-row: 3;
+        grid-column: 1 / 3;
+
+
+        .dot-box {
+          .dot-title {
+            display: block;
+          }
+        }
+
+        .progress-line {
+          gap: 10px;
+        }
+      }
+    }
+
+    .steps {
+      padding: 0;
+      padding-bottom: 28px;
+      flex: 1;
+    }
+
+    .btns {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: $border-primary;
+
+      .button-stepper {
+        flex: none;
+      }
+    }
+  }
+}

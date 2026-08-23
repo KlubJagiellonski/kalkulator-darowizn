@@ -1,5 +1,10 @@
 @use "./variables" as *;
 
+@font-face {
+  font-family: SchibstedGrotesk;
+  src: url("./assets/SchibstedGrotesk-Regular.ttf");
+}
+
 body {
   margin: 0;
 }
@@ -17,7 +22,15 @@ h1 {
   margin: 0;
 }
 
+h3 {
+  font-size: 1.125rem;
+  letter-spacing: -0.01125rem;
+  font-weight: 600;
+  line-height: 1.4375;
+}
+
 p,
+button,
 h1,
 h2,
 h3,
@@ -28,9 +41,40 @@ h6 {
   color: $text-primary;
 }
 
-p{
+p {
   font-size: 0.9375rem;
   line-height: 1.6;
+}
+
+.button {
+  padding: 14px 24px;
+  font-size: 0.9375rem;
+  font-family: SchibstedGrotesk;
+  border-radius: 16px;
+  cursor: pointer;
+
+  &:disabled{
+    cursor: default;
+  }
+
+  &--dark {
+    background-color: $color-dark;
+    border: none;
+    outline: none;
+    color: $white;
+    font-weight: 600;
+  }
+
+  &--ghost {
+    background-color: $color-ghost;
+    border: $border-secondary;
+    outline: none;
+    transition: opacity 0.3s ease-in-out;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
 }
 
 @container (min-width: 768px) {
@@ -38,6 +82,11 @@ p{
     font-size: 1.625rem;
     line-height: 1.269;
     letter-spacing: -0.0325rem;
+  }
 
+  h3 {
+    font-size: 1.375rem;
+    line-height: 1.269;
+    letter-spacing: -0.0275rem;
   }
 }
