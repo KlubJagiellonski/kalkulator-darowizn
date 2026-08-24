@@ -1,0 +1,58 @@
+@use "./../../../../variables.scss" as *;
+
+.pit {
+    .pit-content {
+        .text {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            padding-bottom: 14px;
+            display: none;
+            color: $text-muted;
+        }
+
+        .pit-btns {
+            display: flex;
+            gap: 8px;
+
+            .btn-pit {
+                padding-left: 5px;
+                padding-right: 5px;
+                flex: 1;
+
+                span {
+                    display: none;
+                }
+
+                &::first-letter {
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+}
+
+@include desktop {
+    .pit {
+        .pit-content {
+            padding: 0 32px;
+            
+            .text{
+                display: block;
+            }
+
+            .pit-btns {
+                gap: 10px;
+
+                .btn-pit {
+                    padding-left: 20px;
+                    padding-right: 20px;
+                    flex: none;
+
+                    span {
+                        display: inline;
+                    }
+                }
+            }
+        }
+    }
+}

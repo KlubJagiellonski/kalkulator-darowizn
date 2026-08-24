@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { dumpValues } from "../../test/dumpValues";
-import SecondStep from "./SecondStep";
+import { dumpValues } from "../../../../test/dumpValues";
+import PIT from "./PIT";
 
 describe("SecondStep", () => {
     it("render with flat 19 button active", () => {
@@ -11,7 +11,7 @@ describe("SecondStep", () => {
         data.pitType = "flat19"
 
         render(
-            <SecondStep
+            <PIT
                 values={data}
                 setValues={setValues}
             />
@@ -27,7 +27,7 @@ describe("SecondStep", () => {
         const setValues = vi.fn()
 
         render(
-            <SecondStep
+            <PIT
                 values={dumpValues}
                 setValues={setValues}
             />

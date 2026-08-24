@@ -2,17 +2,18 @@ import { useState } from 'react'
 import './App.scss'
 import Toggle from './components/UI/Toggle'
 import Stepper from './components/stepper/Stepper'
-import FirstStep from './components/stepper/FirstStep'
-import SecondStep from './components/stepper/SecondStep'
+import FirstStep from './components/stepper/firstStep/FirstStep'
+import SecondStep from './components/stepper/secondStep/SecondStep'
 import ThirdStep from './components/stepper/ThirdStep'
 import FourthStep from './components/stepper/FourthStep'
 import type { Values } from './types/type'
 
 function App() {
   const defaultValues: Values = {
-    pit: true, 
+    pit: true,
     cit: false,
-    pitType: "scale"
+    pitType: "scale",
+    citType: "cit19"
   }
 
   const [position, setPosition] = useState<"first" | "second">("first")

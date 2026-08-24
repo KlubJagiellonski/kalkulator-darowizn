@@ -1,12 +1,7 @@
-import type { Values } from "../../types/type"
+import type { ValuesProps } from "../../../types/type"
 import "./FirstStep.scss"
 
-interface FirstStepProps {
-    values: Values
-    setValues: (values: Values) => void
-}
-
-function FirstStep({ values, setValues }: FirstStepProps) {
+function FirstStep({ values, setValues }: ValuesProps) {
     const { cit, pit } = values
 
     const handleClick = () => {

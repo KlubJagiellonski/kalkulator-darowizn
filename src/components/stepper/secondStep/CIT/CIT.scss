@@ -1,7 +1,7 @@
-@use "./../../variables.scss" as *;
+@use "./../../../../variables.scss" as *;
 
-.pit {
-    .pit-content {
+.cit {
+    .cit-content {
         .text {
             font-size: 0.875rem;
             line-height: 1.5;
@@ -10,11 +10,11 @@
             color: $text-muted;
         }
 
-        .pit-btns {
+        .cit-btns {
             display: flex;
             gap: 8px;
 
-            .btn-pit {
+            .btn-cit {
                 padding-left: 5px;
                 padding-right: 5px;
                 flex: 1;
@@ -32,18 +32,18 @@
 }
 
 @include desktop {
-    .pit {
-        .pit-content {
+    .cit {
+        .cit-content {
             padding: 0 32px;
             
             .text{
                 display: block;
             }
 
-            .pit-btns {
+            .cit-btns {
                 gap: 10px;
 
-                .btn-pit {
+                .btn-cit {
                     padding-left: 20px;
                     padding-right: 20px;
                     flex: none;
