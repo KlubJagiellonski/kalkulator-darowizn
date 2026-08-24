@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import "./Stepper.scss"
+import { useElementHeight } from "../../hooks/useElementHeight"
 
 interface StepperProps {
     items: {
@@ -13,15 +14,8 @@ interface StepperProps {
 }
 
 function Stepper({ items, step, setStep }: StepperProps) {
-    const [height, setHeight] = useState(0)
     const [ready, setready] = useState(false)
-    const activeStepRef = useRef<HTMLDivElement>(null)
-
-    useEffect(() => {
-        if (activeStepRef.current) {
-            setHeight(activeStepRef.current.scrollHeight)
-        }
-    }, [step])
+    const {ref: activeStepRef, height} = useElementHeight<HTMLDivElement>()
 
     const changeStep = (step: number) => {
         setready(true)

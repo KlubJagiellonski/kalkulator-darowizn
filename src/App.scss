@@ -15,9 +15,6 @@
     padding: 20px;
 
     .header-box {
-      max-width: 350px;
-      margin: auto;
-
       .header-toggle {
         display: flex;
         flex-direction: column;
@@ -61,7 +58,7 @@
   }
 }
 
-@container (min-width: 768px) {
+@include desktop {
   .calculator-wrapper {
     max-width: 1240px;
     border-radius: 28px;

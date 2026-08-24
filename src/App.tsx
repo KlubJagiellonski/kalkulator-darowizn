@@ -6,24 +6,31 @@ import FirstStep from './components/stepper/FirstStep'
 import SecondStep from './components/stepper/SecondStep'
 import ThirdStep from './components/stepper/ThirdStep'
 import FourthStep from './components/stepper/FourthStep'
+import type { Values } from './types/type'
 
 function App() {
+  const defaultValues: Values = {
+    pit: true, 
+    cit: false,
+    pitType: "scale"
+  }
+
   const [position, setPosition] = useState<"first" | "second">("first")
   const [step, setStep] = useState(1)
-  const [values, setValues] = useState({pit: true, cit: false})
+  const [values, setValues] = useState(defaultValues)
 
   const steps = [
     {
       title: "Kto przekazuje darowiznę?",
       subtitle: "Osoba prywatna czy firma",
       name: "Kto",
-      children: <FirstStep values={values} setValues={setValues}/>
+      children: <FirstStep values={values} setValues={setValues} />
     },
     {
       title: "Forma rozliczenia PIT",
       subtitle: "Decyduje o stawce i o tym, czy odliczenie jest możliwe",
       name: "Rozliczenie",
-      children: <SecondStep />
+      children: <SecondStep values={values} setValues={setValues} />
     },
     {
       title: "Twój roczny dochód brutto",

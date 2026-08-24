@@ -15,4 +15,12 @@ $border-secondary: 1px solid #C9C6BF;
 
 $white: #ffffff;
 
-$min-w: 768px;
+$warning-text: #7A4F0E;
+$warning-bg: #FBF3E2;
+$warning-color: #C98A1E;
+
+@mixin desktop {
+    @container (min-width: 768px) {
+        @content;
+    }
+}

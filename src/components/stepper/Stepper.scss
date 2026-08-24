@@ -2,7 +2,6 @@
 
 .stepper-wrapper {
   padding: 20px;
-  max-width: 390px;
   margin: auto;
 
   .stepper-count {
@@ -148,7 +147,7 @@
         .step-content {
           .title-wrapper {
             display: flex;
-            gap: 5px;
+            gap: 10px;
             align-items: center;
             padding-bottom: 10px;
 
@@ -157,6 +156,7 @@
               line-height: 1.5;
               color: $text-secondary;
               display: none;
+              font-family: IBM Plex Mono;
             }
 
             .title {

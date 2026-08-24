@@ -31,7 +31,7 @@
     }
 }
 
-@container (min-width: 768px) {
+@include desktop {
     .who {
         .who-btns {
             gap: 10px;

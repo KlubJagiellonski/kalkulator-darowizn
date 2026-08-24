@@ -1,4 +1,7 @@
-export interface Values{
+export type PITType = "scale" | "flat19" | "lumpSum"
+
+export interface Values {
     cit: boolean,
-    pit: boolean
+    pit: boolean,
+    pitType: PITType
 }

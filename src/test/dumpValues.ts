@@ -1,4 +1,7 @@
-export const dumpValues = {
+import type { Values } from "../types/type";
+
+export const dumpValues: Values = {
     cit: false,
-    pit: true
+    pit: true,
+    pitType: "scale"
 }
