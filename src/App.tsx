@@ -7,7 +7,8 @@ import SecondStep from './components/stepper/secondStep/SecondStep'
 import ThirdStep from './components/stepper/thirdStep/ThirdStep'
 import FourthStep from './components/stepper/FourthStep'
 import type { Values } from './types/type'
-import StepperNav from './components/stepper/StepperNav'
+import StepperNav from './components/stepper/nav/StepperNav'
+import Result from './components/result/Result'
 
 function App() {
 
@@ -68,7 +69,7 @@ function App() {
             <Stepper step={step} items={steps} setStep={setStep} />
             <StepperNav values={values} step={step} setStep={setStep}/>
           </div>
-          <div className='left-panel'></div>
+          <Result/>
         </div>
       </div>
     </div>

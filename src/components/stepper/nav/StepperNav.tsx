@@ -1,4 +1,4 @@
-import type { Values } from "../../types/type"
+import type { Values } from "../../../types/type"
 import "./StepperNav.scss"
 
 interface StepperNavProps {

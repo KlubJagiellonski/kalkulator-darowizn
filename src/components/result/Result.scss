@@ -1,0 +1,56 @@
+@use "./../../variables.scss" as *;
+
+.result {
+    background-color: $bg-primary;
+    flex: 1;
+    overflow: hidden;
+    padding: 36px;
+    display: flex;
+
+
+    .first-result-who {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        flex: 1;
+
+        .text-1 {
+            font-size: 1.0625rem;
+            line-height: 1.58;
+        }
+
+        .text-2 {
+            font-size: 0.8125rem;
+            line-height: 1.53;
+            color: $text-muted;
+        }
+    }
+
+    .icon {
+        width: 76px;
+        height: 76px;
+        border-radius: 22px;
+        background: $icon-gradient;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Schibsted Grotesk;
+        font-weight: 600;
+        font-size: 2.125rem;
+        color: $color-primary;
+
+        &::after {
+            content: "";
+            border: 1px solid $color-primary;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 999px;
+            opacity: 0.18;
+        }
+    }
+}
