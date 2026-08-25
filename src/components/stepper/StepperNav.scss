@@ -1,0 +1,41 @@
+@use "./../../variables.scss" as *;
+
+.stepper-wrapper {
+    .btns {
+        display: none;
+        align-items: center;
+        padding-top: 24px;
+        border-top: $border-primary;
+
+        .btn-box {
+            flex: 1;
+            max-width: 100%;
+            overflow: hidden;
+            transition: max-width 0.5s ease-in-out;
+
+            .button-stepper {
+                width: 116px;
+            }
+
+            &.hide {
+                max-width: 0;
+            }
+        }
+
+        .text {
+            font-size: 0.8125rem;
+            line-height: 1.53rem;
+            text-align: right;
+            color: $text-secondary;
+            width: 340px;
+        }
+    }
+}
+
+@include desktop {
+    .stepper-wrapper {
+        .btns{
+            display: flex;
+        }
+    }
+}

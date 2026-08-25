@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { Children, useState } from "react"
 import "./Stepper.scss"
 import { useElementHeight } from "../../hooks/useElementHeight"
 
@@ -8,6 +8,7 @@ interface StepperProps {
         title: string
         subtitle: string
         name: string
+        isValid?: boolean
     }[],
     step: number,
     setStep: (step: number) => void
@@ -15,15 +16,19 @@ interface StepperProps {
 
 function Stepper({ items, step, setStep }: StepperProps) {
     const [ready, setready] = useState(false)
-    const {ref: activeStepRef, height} = useElementHeight<HTMLDivElement>()
+    const { ref: activeStepRef, height } = useElementHeight<HTMLDivElement>()
 
     const changeStep = (step: number) => {
         setready(true)
         setStep(step)
     }
 
+    const rightMarg = items[step - 1].isValid ?
+        (items.length - step) / items.length * 100 :
+        (items.length - step + 1) / items.length * 100 - 5
+
     return (
-        <div className={`stepper-wrapper`}>
+        <>
             <div className="stepper-count">
                 <div className="text">
                     KROK {step} Z {items.length}
@@ -37,7 +42,7 @@ function Stepper({ items, step, setStep }: StepperProps) {
                     <div
                         className="progress-line"
                         style={{
-                            clipPath: `inset(0 ${(items.length - step) / items.length * 100}% 0 0 round 999px)`
+                            clipPath: `inset(0 ${rightMarg}% 0 0 round 999px)`
                         }}
                     >
                         {items.map((_, id) => (
@@ -48,11 +53,19 @@ function Stepper({ items, step, setStep }: StepperProps) {
                         ))}
                     </div>
                     {items.map((el, id) => (
-                        <div className="dot-box" data-testid={`step-${id + 1}`} key={id} onClick={() => changeStep(id + 1)}
+                        <button
+                            className="dot-box"
+                            data-testid={`step-${id + 1}`}
+                            key={id}
+                            onClick={() => changeStep(id + 1)}
+                            disabled={!(items[id - 1]?.isValid || step > id + 1) || step === id+1}
                         >
-                            <div className={`dot`} />
-                            <p className={`dot-title ${step === id + 1 ? "active" : ""}`}>{id + 1} · {el.name}</p>
-                        </div>
+                            <span className={`dot`} />
+                            <span className={`dot-title ${id + 1 < step || (id + 1 === step && items[step - 1].isValid) ? "checked" : id + 1 === step ? "active" : ""}`}>
+                                <span>{id + 1}</span>
+                                <span className="title-extend"> · {el.name}</span>
+                            </span>
+                        </button>
                     ))}
                 </div>
                 <div className="title-wrapper">
@@ -79,11 +92,7 @@ function Stepper({ items, step, setStep }: StepperProps) {
                     )}
                 </div>
             </div>
-            <div className="btns">
-                <button disabled={step == 1} className="button button--ghost button-stepper" onClick={() => changeStep(step - 1)}>← Wstecz</button>
-                <button disabled={step == items.length} className="button button--dark button-stepper" onClick={() => changeStep(step + 1)}>Dalej →</button>
-            </div>
-        </div>
+        </>
     )
 }
 

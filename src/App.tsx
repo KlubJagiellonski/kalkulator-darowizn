@@ -7,11 +7,12 @@ import SecondStep from './components/stepper/secondStep/SecondStep'
 import ThirdStep from './components/stepper/thirdStep/ThirdStep'
 import FourthStep from './components/stepper/FourthStep'
 import type { Values } from './types/type'
+import StepperNav from './components/stepper/StepperNav'
 
 function App() {
 
   const defaultValues: Values = {
-    pit: true,
+    pit: false,
     cit: false,
     pitType: "scale",
     citType: "cit19",
@@ -27,6 +28,7 @@ function App() {
       title: "Kto przekazuje darowiznę?",
       subtitle: "Osoba prywatna czy firma",
       name: "Kto",
+      isValid: values.cit || values.pit,
       children: <FirstStep values={values} setValues={setValues} />
     },
     {
@@ -39,7 +41,7 @@ function App() {
       title: "Twój roczny dochód brutto",
       subtitle: "Wyznacza limit odliczenia",
       name: "Dochód",
-      children: <ThirdStep values={values} setValues={setValues}/>
+      children: <ThirdStep values={values} setValues={setValues} />
     },
     {
       title: "Kwota darowizny",
@@ -66,7 +68,10 @@ function App() {
           </div>
         </div>
         <div className='content-wrapper'>
-          <Stepper step={step} items={steps} setStep={setStep} />
+          <div className='stepper-wrapper'>
+            <Stepper step={step} items={steps} setStep={setStep} />
+            <StepperNav step={step} setStep={setStep}/>
+          </div>
           <div className='left-panel'></div>
         </div>
       </div>

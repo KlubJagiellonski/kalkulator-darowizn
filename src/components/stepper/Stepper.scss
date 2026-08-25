@@ -83,19 +83,67 @@
 
       .dot-box {
         flex: 1;
+        border: none;
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+        cursor: pointer;
+
+        &:disabled {
+          cursor: default;
+        }
 
         .dot-title {
-          font-size: 0.75rem;
+          font-size: 0.6875rem;
+          // font-size: 0.75rem;
           color: $text-secondary;
-          line-height: 1.125;
+          line-height: 1.45;
+          // line-height: 1.125;
           padding-top: 8px;
-          display: none;
-          transition: all 0.3s ease-in-out;
+          transition: all 0.4s ease-in-out;
           font-weight: 400;
+          text-align: center;
+          width: 100%;
+          position: relative;
+          display: block;
+
+          span {
+            display: block;
+            transition: transform 0.4s ease-in-out;
+          }
+
+          .title-extend {
+            display: none;
+          }
+
+          &::before {
+            display: inline-block;
+            content: "✓ ";
+            transform: scale(0);
+            width: 0;
+            transition: width 0.4s ease-in-out, transform 0.4s ease-in-out;
+            margin-right: 0.2rem;
+            position: absolute;
+          }
 
           &.active {
             color: $text-primary;
             font-weight: 600;
+          }
+
+          &.checked {
+            color: $text-primary;
+            font-weight: 600;
+
+            span {
+              transform: scale(0);
+            }
+
+            &::before {
+              transform: scale(1);
+              width: 0.5625rem;
+            }
           }
         }
       }
@@ -106,7 +154,7 @@
         flex: 1;
         background-color: $color-disabled;
         border-radius: 999px;
-        cursor: pointer;
+        display: block;
       }
 
       .progress-line {
@@ -168,15 +216,6 @@
       }
     }
   }
-
-  .btns {
-    display: flex;
-    gap: 10px;
-
-    .button-stepper {
-      flex: 1;
-    }
-  }
 }
 
 
@@ -235,7 +274,47 @@
 
         .dot-box {
           .dot-title {
-            display: block;
+            font-size: 0.75rem;
+            line-height: 1.125;
+            text-align: left;
+
+            span {
+              display: inline;
+              // transition: transform 0.4s ease-in-out;
+            }
+
+            .title-extend {
+              display: inline;
+            }
+
+            &::before {
+              // display: inline-block;
+              // content: "✓ ";
+              // transform: scale(0);
+              // width: 0;
+              // transition: width 0.4s ease-in-out, transform 0.4s ease-in-out;
+              // margin-right: 0.2rem;
+              position: relative;
+            }
+
+            // &.active {
+            //   color: $text-primary;
+            //   font-weight: 600;
+            // }
+
+            &.checked {
+              // color: $text-primary;
+              // font-weight: 600;
+
+              span {
+                transform: scale(1);
+              }
+
+              &::before {
+                transform: scale(1);
+                width: 0.5625rem;
+              }
+            }
           }
         }
 
@@ -261,18 +340,6 @@
             }
           }
         }
-      }
-    }
-
-    .btns {
-      display: flex;
-      gap: 10px;
-      justify-content: space-between;
-      padding-top: 24px;
-      border-top: $border-primary;
-
-      .button-stepper {
-        flex: none;
       }
     }
   }

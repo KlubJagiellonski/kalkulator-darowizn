@@ -10,6 +10,7 @@ describe("Stepper", () => {
       title: "Pierwszy krok",
       subtitle: "Opis pierwszego kroku",
       name: "Pierwszy",
+      isValid: true
     },
     {
       children: <div>Content 2</div>,
@@ -42,67 +43,8 @@ describe("Stepper", () => {
     expect(screen.getByText("Opis drugiego kroku")).not.toHaveClass("l")
     expect(screen.getByText("Opis drugiego kroku")).not.toHaveClass("r")
 
+    expect(screen.getByText("1 · Pierwszy")).toHaveClass("checked")
     expect(screen.getByText("2 · Drugi")).toHaveClass("active")
-  })
-
-  it("calls setStep with next step", async () => {
-    const setStep = vi.fn()
-
-    render(
-      <Stepper
-        items={items}
-        step={1}
-        setStep={setStep}
-      />
-    )
-
-    await userEvent.click(screen.getByRole("button", { name: /Dalej/i }))
-
-    expect(setStep).toHaveBeenCalledWith(2)
-  })
-
-  it("calls setStep with previous step", async () => {
-    const setStep = vi.fn()
-
-    render(
-      <Stepper
-        items={items}
-        step={2}
-        setStep={setStep}
-      />
-    )
-
-    await userEvent.click(screen.getByRole("button", { name: /Wstecz/i }))
-
-    expect(setStep).toHaveBeenCalledWith(1)
-  })
-
-  it("disables back button on first step", () => {
-    render(
-      <Stepper
-        items={items}
-        step={1}
-        setStep={vi.fn()}
-      />
-    )
-
-    expect(
-      screen.getByRole("button", { name: /Wstecz/i })
-    ).toBeDisabled()
-  })
-
-  it("disables next button on last step", () => {
-    render(
-      <Stepper
-        items={items}
-        step={3}
-        setStep={vi.fn()}
-      />
-    )
-
-    expect(
-      screen.getByRole("button", { name: /Dalej/i })
-    ).toBeDisabled()
   })
 
   it("changes step when clicking a dot", async () => {
@@ -116,8 +58,24 @@ describe("Stepper", () => {
       />
     )
 
-    await userEvent.click(screen.getByTestId("step-3"))
+    await userEvent.click(screen.getByTestId("step-2"))
 
-    expect(setStep).toHaveBeenCalledWith(3)
+    expect(setStep).toHaveBeenCalledWith(2)
+  })
+
+  it("disables the second and third dot", async () => {
+    const setStep = vi.fn()
+
+    render(
+      <Stepper
+        items={items}
+        step={2}
+        setStep={setStep}
+      />
+    )
+
+    expect(screen.getByTestId("step-1")).not.toBeDisabled()
+    expect(screen.getByTestId("step-2")).toBeDisabled()
+    expect(screen.getByTestId("step-3")).toBeDisabled()
   })
 })
