@@ -27,12 +27,27 @@
             }
         }
 
-        .text {
-            font-size: 0.8125rem;
-            line-height: 1.53rem;
-            text-align: right;
-            color: $text-secondary;
+        .texts {
+            position: relative;
             width: 340px;
+
+            .text {
+                position: absolute;
+                font-size: 0.8125rem;
+                line-height: 1.2rem;
+                text-align: right;
+                color: $text-secondary;
+                right: 0;
+                top: 50%;
+                transform: translate(20%, -50%);
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+                &.active {
+                    opacity: 1;
+                    transform: translate(0%, -50%);
+                }
+            }
         }
     }
 }

@@ -8,16 +8,16 @@ interface StepperNavProps {
 }
 
 function StepperNav({ step, setStep, values }: StepperNavProps) {
-    const text = () =>{
-        if(step === 1){
-            return "Dalej przejdziesz przyciskiem w panelu obok ↗"
-        } else if(step == 2 && !values.pitType){
-            return "Wybierz formę rozliczenia, żeby przejść dalej"
-        } else if(step == 2 && values.pitType === "scale"){
-            return "Wybierz formę rozliczenia, żeby przejść dalej"
+    const text = () => {
+        if (step == 2 && !values.pitType) {
+            return 1
+        } else if (step == 2 && values.pitType === "lumpSum") {
+            return 2
+        } else if (step == 2 && values.pitType === "flat19") {
+            return 3
         }
 
-        return ""
+        return 0
     }
 
     return (
@@ -25,7 +25,12 @@ function StepperNav({ step, setStep, values }: StepperNavProps) {
             <div className={`btn-box ${step == 1 ? "hide" : ""}`}>
                 <button disabled={step == 1} className={`button button--ghost button-stepper`} onClick={() => setStep(step - 1)}>← Wstecz</button>
             </div>
-            <p className="text">{text()}</p>
+            <div className="texts">
+                <p className={`text text-1 ${text() == 0 ? "active" : ""}`}>Dalej przejdziesz przyciskiem w panelu obok ↗</p>
+                <p className={`text text-2 ${text() == 1 ? "active" : ""}`}>Wybierz formę rozliczenia, żeby przejść dalej</p>
+                <p className={`text text-3 ${text() == 2 ? "active" : ""}`}>Wybierz stawkę ryczałtu, żeby przejść dalej</p>
+                <p className={`text text-3 ${text() == 3 ? "active" : ""}`}>Odliczenie niedostępne — sprawdź opcje w panelu obok ↗</p>
+            </div>
         </div>
     )
 }
