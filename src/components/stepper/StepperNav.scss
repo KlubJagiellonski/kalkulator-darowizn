@@ -15,10 +15,15 @@
 
             .button-stepper {
                 width: 116px;
+                transition: opacity 0.4s ease-in-out;
             }
 
             &.hide {
                 max-width: 0;
+
+                .button-stepper {
+                    opacity: 0;
+                }
             }
         }
 
@@ -34,7 +39,7 @@
 
 @include desktop {
     .stepper-wrapper {
-        .btns{
+        .btns {
             display: flex;
         }
     }

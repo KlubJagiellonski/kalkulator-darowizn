@@ -4,11 +4,19 @@ import "./FirstStep.scss"
 function FirstStep({ values, setValues }: ValuesProps) {
     const { cit, pit } = values
 
-    const handleClick = () => {
+    const handlePit = () => {
         setValues({
             ...values,
-            pit: !pit,
-            cit: !cit
+            pit: true,
+            cit: false
+        })
+    }
+
+    const handleCit = () => {
+        setValues({
+            ...values,
+            pit: false,
+            cit: true
         })
     }
 
@@ -16,11 +24,11 @@ function FirstStep({ values, setValues }: ValuesProps) {
         <div className="who step-content">
             <div className="title-wrapper">
                 <p className="number">01</p>
-                <p className="title">Kto przekazuje darowiznę?</p>
+                <p className="title">Kto przekazuje<span> darowiznę</span>?</p>
             </div>
             <div className="who-btns">
-                <button className={`button button--chip btn-who ${pit ? "active" : ""}`} onClick={handleClick}>Osoba Prywatna<span>PIT · limit 6% dochodu</span></button>
-                <button className={`button button--chip btn-who ${cit ? "active" : ""}`} onClick={handleClick}>Firma<span>CIT · limit 10% dochodu</span></button>
+                <button className={`button button--chip btn-who ${pit ? "active" : ""}`} onClick={handlePit}>Osoba Prywatna<span>rozliczam PIT</span></button>
+                <button className={`button button--chip btn-who ${cit ? "active" : ""}`} onClick={handleCit}>Firma<span>rozliczam CIT</span></button>
             </div>
         </div>
     )
