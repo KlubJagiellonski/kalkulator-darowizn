@@ -14,12 +14,9 @@ function App() {
   const defaultValues: Values = {
     pit: false,
     cit: false,
-    pitType: "scale",
-    citType: "cit19",
     income: 96000
   }
 
-  const [position, setPosition] = useState<"first" | "second">("first")
   const [step, setStep] = useState(1)
   const [values, setValues] = useState(defaultValues)
 
@@ -33,7 +30,7 @@ function App() {
     },
     {
       title: "Forma rozliczenia PIT",
-      subtitle: "Decyduje o stawce i o tym, czy odliczenie jest możliwe",
+      subtitle: "Decyduje o tym, czy odliczenie jest możliwe",
       name: "Rozliczenie",
       children: <SecondStep values={values} setValues={setValues} />
     },
@@ -69,7 +66,7 @@ function App() {
         <div className='content-wrapper'>
           <div className='stepper-wrapper'>
             <Stepper step={step} items={steps} setStep={setStep} />
-            <StepperNav step={step} setStep={setStep}/>
+            <StepperNav values={values} step={step} setStep={setStep}/>
           </div>
           <div className='left-panel'></div>
         </div>

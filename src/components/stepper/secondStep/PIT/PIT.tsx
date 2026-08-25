@@ -1,5 +1,4 @@
 import type { PITType, ValuesProps } from "../../../../types/type"
-import Alert from "../../../UI/alert/Alert"
 import "./PIT.scss"
 
 function PIT({ values, setValues }: ValuesProps) {
@@ -12,12 +11,6 @@ function PIT({ values, setValues }: ValuesProps) {
         })
     }
 
-    const alert = {
-        shortText: "PIT liniowy nie pozwala odliczyć tej darowizny. Pokazujemy pełny koszt.",
-        text: "Ustawa nie przewiduje tego odliczenia dla stawki 19%. Kalkulator pokazuje więc pełny koszt — wsparcie nadal ma sens, tylko bez korzyści podatkowej.",
-        title: "Przy PIT liniowym nie odliczysz darowizny na cele pożytku publicznego"
-    }
-
     return (
         <div className="pit">
             <div className="title-wrapper">
@@ -25,14 +18,12 @@ function PIT({ values, setValues }: ValuesProps) {
                 <p className="title">Jak rozliczasz PIT?</p>
             </div>
             <div className="pit-content">
-                <p className="text">Nie wiesz? Umowa o pracę i większość zleceń to skala podatkowa.</p>
                 <div className="pit-btns">
                     <button className={`button button--chip btn-pit ${pitType === "scale" ? "active" : ""}`} onClick={() => handleClick("scale")}>skala<span> podatkowa</span></button>
-                    {/* TODO add lump sum in the future */}
-                    <button className={`button button--chip btn-pit ${pitType === "lumpSum" ? "active" : ""}`}>ryczałt</button>
+                    <button className={`button button--chip btn-pit ${pitType === "lumpSum" ? "active" : ""}`} onClick={() => handleClick("lumpSum")}>ryczałt</button>
                     <button className={`button button--chip btn-pit ${pitType === "flat19" ? "active" : ""}`} onClick={() => handleClick("flat19")}><span>podatek </span>liniowy 19%</button>
                 </div>
-                <Alert {...alert} show={pitType === "flat19"} />
+                <p className="text">Nie wiesz? Umowa o pracę i większość zleceń to skala podatkowa.</p>
             </div>
         </div>
     )

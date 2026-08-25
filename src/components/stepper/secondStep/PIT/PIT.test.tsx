@@ -20,7 +20,6 @@ describe("SecondStep", () => {
         expect(screen.getByRole("button", { name: /skala/i })).not.toHaveClass("active")
         expect(screen.getByRole("button", { name: /ryczałt/i })).not.toHaveClass("active")
         expect(screen.getByRole("button", { name: /liniowy/i })).toHaveClass("active")
-        expect(screen.getByTestId("alert")).toHaveClass("open")
     })
 
     it("calls setValues when click company button", async () => {

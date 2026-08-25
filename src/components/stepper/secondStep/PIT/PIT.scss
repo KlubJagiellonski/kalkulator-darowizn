@@ -2,11 +2,14 @@
 
 .pit {
     .pit-content {
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+
         .text {
-            font-size: 0.875rem;
+            font-size: 0.8125rem;
             line-height: 1.5;
             padding-bottom: 14px;
-            display: none;
             color: $text-muted;
         }
 
@@ -33,11 +36,13 @@
 
 @include desktop {
     .pit {
-        .pit-content {
-            padding: 0 32px;
-            
+        .pit-content {  
+            flex-direction: column-reverse;  
+            gap: 14px;
+
             .text{
                 display: block;
+                padding-bottom: 0;
             }
 
             .pit-btns {
