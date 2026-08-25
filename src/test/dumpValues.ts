@@ -4,5 +4,6 @@ export const dumpValues: Values = {
     cit: false,
     pit: true,
     pitType: "scale",
-    citType: "cit19"
+    citType: "cit19",
+    income: 96000,
 }

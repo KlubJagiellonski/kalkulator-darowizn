@@ -1,0 +1,89 @@
+@use "./../../../../variables.scss" as *;
+
+.stepper-wrapper .steps .steps-box .step .step-content .scale {
+    .title-wrapper {
+        padding-bottom: 4px;
+
+        .title {
+            line-height: 1.53;
+        }
+    }
+
+    .info {
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: $text-muted;
+        padding-bottom: 14px;
+        padding-left: 32px;
+        padding-right: 32px;
+        display: none;
+    }
+
+    .scale-content {
+        .hint-prec {
+            display: none;
+        }
+
+        .hint {
+            font-size: 0.8125rem;
+            line-height: 1.53;
+            color: $text-secondary;
+
+            .des {
+                display: none;
+            }
+        }
+
+        .scale-input {
+            padding-top: 14px;
+        }
+    }
+}
+
+@include desktop {
+    .stepper-wrapper .steps .steps-box .step .step-content .scale {
+        .title-wrapper {
+            padding-bottom: 6px;
+        }
+
+        .info{
+            display: block;
+        }
+
+        .scale-content {
+            padding-top: 14px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            flex-direction: row-reverse;
+            gap: 14px;
+            padding: 0 32px;
+
+            .hint-prec {
+                display: block;
+            }
+
+            .hint-wrapper {
+                flex: 1;
+            }
+
+            .hint {
+                font-size: 0.875rem;
+                line-height: 1.5;
+
+                .bold {
+                    font-weight: 600;
+                }
+
+                .des {
+                    display: inline;
+                }
+            }
+
+            .scale-input {
+                width: 260px;
+                padding-top: 0;
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import "./Stepper.scss"
 import { useElementHeight } from "../../hooks/useElementHeight"
 

@@ -1,19 +1,21 @@
 import { useState } from 'react'
 import './App.scss'
-import Toggle from './components/UI/Toggle'
+import Toggle from './components/UI/toggle/Toggle'
 import Stepper from './components/stepper/Stepper'
 import FirstStep from './components/stepper/firstStep/FirstStep'
 import SecondStep from './components/stepper/secondStep/SecondStep'
-import ThirdStep from './components/stepper/ThirdStep'
+import ThirdStep from './components/stepper/thirdStep/ThirdStep'
 import FourthStep from './components/stepper/FourthStep'
 import type { Values } from './types/type'
 
 function App() {
+
   const defaultValues: Values = {
     pit: true,
     cit: false,
     pitType: "scale",
-    citType: "cit19"
+    citType: "cit19",
+    income: 96000
   }
 
   const [position, setPosition] = useState<"first" | "second">("first")
@@ -37,7 +39,7 @@ function App() {
       title: "Twój roczny dochód brutto",
       subtitle: "Wyznacza limit odliczenia",
       name: "Dochód",
-      children: <ThirdStep />
+      children: <ThirdStep values={values} setValues={setValues}/>
     },
     {
       title: "Kwota darowizny",

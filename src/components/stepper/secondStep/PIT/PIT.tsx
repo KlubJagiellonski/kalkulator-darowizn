@@ -1,5 +1,5 @@
 import type { PITType, ValuesProps } from "../../../../types/type"
-import Alert from "../../../UI/Alert"
+import Alert from "../../../UI/alert/Alert"
 import "./PIT.scss"
 
 function PIT({ values, setValues }: ValuesProps) {
@@ -28,7 +28,7 @@ function PIT({ values, setValues }: ValuesProps) {
                 <p className="text">Nie wiesz? Umowa o pracę i większość zleceń to skala podatkowa.</p>
                 <div className="pit-btns">
                     <button className={`button button--chip btn-pit ${pitType === "scale" ? "active" : ""}`} onClick={() => handleClick("scale")}>skala<span> podatkowa</span></button>
-                    {/* TODO in the future add lump sum */}
+                    {/* TODO add lump sum in the future */}
                     <button className={`button button--chip btn-pit ${pitType === "lumpSum" ? "active" : ""}`}>ryczałt</button>
                     <button className={`button button--chip btn-pit ${pitType === "flat19" ? "active" : ""}`} onClick={() => handleClick("flat19")}><span>podatek </span>liniowy 19%</button>
                 </div>
