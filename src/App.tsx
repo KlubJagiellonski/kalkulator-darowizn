@@ -59,12 +59,11 @@ function App() {
             <div className='header-text'>
               <h5 className='company-name'>Klub Jagielloński</h5>
               <h1 className='title'>Ile naprawdę kosztuje Cię darowizna?</h1>
-              <p className='text'>Cztery pytania. Policzymy odliczenie zgodnie z Twoją formą rozliczenia i pokażemy, ile z tej kwoty pokrywa podatek.</p>
+              <p className='text'>Cztery pytania. Policzymy Twój limit odliczenia i pokażemy, ile z darowizny pokrywa niższy podatek.</p>
             </div>
-            <div className='header-toggle'>
-              <Toggle position={position} setPosition={setPosition} firstItem='Tryb prosty' secondItem='Tryb rozszerzony' />
-              <p className='text'>Jedno pytanie na ekran, cztery kroki. Wynik liczy się od razu.</p>
-            </div>
+            <p className='header-year'>
+              ROK PODATKOWY 2026
+            </p>
           </div>
         </div>
         <div className='content-wrapper'>

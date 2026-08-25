@@ -15,22 +15,20 @@
     padding: 20px;
 
     .header-box {
-      .header-toggle {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        flex-shrink: 0;
-
-        .text {
-          text-align: right;
-          color: $text-secondary;
-          display: none;
-          font-size: 0.8125rem;
-        }
+      .header-year {
+        font-family: IBM Plex Mono;
+        font-size: 0.6875rem;
+        line-height: 1.54;
+        letter-spacing: 0.055rem;
+        color: $text-muted;
+        background-color: $bg-secondary;
+        padding: 8px 14px;
+        border-radius: 999px;
+        display: none;
       }
 
       .header-text {
-        padding-bottom: 20px;
+        padding-bottom: 0;
         display: flex;
         flex-direction: column;
         gap: 6px;
@@ -71,13 +69,11 @@
         display: flex;
         max-width: none;
         justify-content: space-between;
+        align-items: center;
 
-        .header-toggle {
-          width: 275px;
+        .header-year {
+          display: block;
 
-          .text {
-            display: block;
-          }
         }
 
         .header-text {

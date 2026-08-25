@@ -43,8 +43,8 @@ describe("Stepper", () => {
     expect(screen.getByText("Opis drugiego kroku")).not.toHaveClass("l")
     expect(screen.getByText("Opis drugiego kroku")).not.toHaveClass("r")
 
-    expect(screen.getByText("1 · Pierwszy")).toHaveClass("checked")
-    expect(screen.getByText("2 · Drugi")).toHaveClass("active")
+    expect(screen.getByText(/· Pierwszy/i).parentElement).toHaveClass("checked")
+    expect(screen.getByText("· Drugi").parentElement).toHaveClass("active")
   })
 
   it("changes step when clicking a dot", async () => {
