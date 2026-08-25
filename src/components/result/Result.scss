@@ -2,28 +2,38 @@
 
 .result {
     background-color: $bg-primary;
-    flex: 1;
+    // flex: 1;
     overflow: hidden;
-    padding: 36px;
+    // padding: 36px;
+    padding: 24px 20px 28px 20px;
     display: flex;
 
 
     .first-result-who {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        // gap: 20px;
+        gap: 16px;
         justify-content: center;
         flex: 1;
 
         .text-1 {
-            font-size: 1.0625rem;
-            line-height: 1.58;
+            // font-size: 1.0625rem;
+            // line-height: 1.58;
+            font-size: 1rem;
+            line-height: 1.56;
         }
 
         .text-2 {
-            font-size: 0.8125rem;
-            line-height: 1.53;
+            // font-size: 0.8125rem;
+            // line-height: 1.53;
+            font-size: 0.75rem;
+            line-height: 1.5;
             color: $text-muted;
+
+            span {
+                display: none;
+            }
         }
     }
 
@@ -51,6 +61,30 @@
             bottom: 0;
             border-radius: 999px;
             opacity: 0.18;
+        }
+    }
+}
+
+@include desktop {
+    .result {
+        padding: 36px;
+
+        .first-result-who {
+            gap: 20px;
+
+            .text-1 {
+                font-size: 1.0625rem;
+                line-height: 1.58;
+            }
+
+            .text-2 {
+                font-size: 0.8125rem;
+                line-height: 1.53;
+
+                span {
+                    display: inline;
+                }
+            }
         }
     }
 }
