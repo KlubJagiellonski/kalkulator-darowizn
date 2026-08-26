@@ -26,7 +26,7 @@ function Stepper({ items, step, setStep }: StepperProps) {
         (items.length - step + 1) / items.length * 100 - 5
 
     return (
-        <>
+        <div className="stepper-box">
             <div className="stepper-count">
                 <div className="text">
                     KROK {step} Z {items.length}
@@ -90,7 +90,7 @@ function Stepper({ items, step, setStep }: StepperProps) {
                     )}
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

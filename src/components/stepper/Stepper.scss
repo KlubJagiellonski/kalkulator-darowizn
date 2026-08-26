@@ -3,6 +3,8 @@
 .stepper-wrapper {
   padding: 20px;
   flex: 1;
+  display: flex;
+  flex-direction: column-reverse;
 
   .stepper-count {
     display: grid;
@@ -215,7 +217,7 @@
 }
 
 
-@container (min-width: 768px) {
+@include desktop {
   .stepper-wrapper {
     padding: 36px;
     max-width: none;
@@ -223,6 +225,10 @@
     margin: 0;
     display: flex;
     flex-direction: column;
+
+    .stepper-box {
+      flex: 1;
+    }
 
     .stepper-count {
       grid-template-columns: 1fr 1fr;
