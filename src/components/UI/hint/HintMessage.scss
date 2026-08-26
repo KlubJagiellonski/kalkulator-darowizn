@@ -1,0 +1,55 @@
+@use "./../../../variables.scss" as *;
+
+.hint-message-wrapper {
+    transform: translateY(80%);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+
+    .hint-message {
+        background-color: $color-dark;
+        padding: 14px 16px;
+        border-radius: 14px;
+        box-shadow: $shadow;
+
+        .title {
+            padding-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            line-height: 1.53;
+            color: $white;
+        }
+
+        .text-hint {
+            color: $text-light;
+            font-size: 0.8125rem;
+            line-height: 1.46;
+        }
+    }
+
+    &.open {
+        transform: translateY(100%);
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+@include desktop {
+    .hint-message-wrapper {
+        left: anchor(right);
+        top: anchor(top);
+        transform: translateX(-5%);
+        margin-left: 10px;
+        max-width: 320px;
+        position: absolute;
+
+        &.open {
+            transform: translate(0);
+        }
+    }
+}

@@ -15,11 +15,9 @@ interface StepperProps {
 }
 
 function Stepper({ items, step, setStep }: StepperProps) {
-    const [ready, setready] = useState(false)
     const { ref: activeStepRef, height } = useElementHeight<HTMLDivElement>()
 
     const changeStep = (step: number) => {
-        setready(true)
         setStep(step)
     }
 
@@ -84,7 +82,7 @@ function Stepper({ items, step, setStep }: StepperProps) {
                 </div>
             </div>
             <div className="steps">
-                <div className={`steps-box ${ready ? "ready" : ""}`} style={{ height, width: `${100 * items.length}%`, transform: `translateX(${-(step - 1) * 100 / items.length}%)` }}>
+                <div className={`steps-box`} style={{ height, width: `${100 * items.length}%`, transform: `translateX(${-(step - 1) * 100 / items.length}%)` }}>
                     {items.map((item, id) =>
                         <div key={id} className={`step`} ref={step === id + 1 ? activeStepRef : undefined}>
                             {item.children}

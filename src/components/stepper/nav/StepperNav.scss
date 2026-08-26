@@ -39,14 +39,13 @@
                 color: $text-secondary;
                 right: 0;
                 top: 50%;
-                transform: translate(20%, -50%);
+                transform: translate(0, -50%);
                 opacity: 0;
                 transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
                 pointer-events: none;
 
                 &.active {
                     opacity: 1;
-                    transform: translate(0%, -50%);
                     pointer-events: auto;
                 }
             }

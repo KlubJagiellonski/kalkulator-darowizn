@@ -1,6 +1,7 @@
 $text-primary: #1A1B22;
 $text-secondary: #6E7180;
 $text-muted: #5A5D6B;
+$text-light: #C9C6BF;
 
 $color-primary: #C62D1F;
 $color-dark: #1A1B22;
@@ -19,7 +20,10 @@ $warning-text: #7A4F0E;
 $warning-bg: #FBF3E2;
 $warning-color: #C98A1E;
 
+$bg-hint: #EFEDE8;
+
 $icon-gradient: linear-gradient(120.17deg, #FFE4DE 0%, #FDF1DC 73.53%);
+$shadow: 0px 8px 24px 0px #1A1A212E;
 
 @mixin desktop {
     @container (min-width: 768px) {
