@@ -3,6 +3,7 @@ import type { Values } from "../../types/type"
 import CheckedResultWho from "./result-who/pit-result/CheckedResultWho"
 import EmptyResult from "./empty-result/EmptyResult"
 import "./Result.scss"
+import GreenResult from "./green-result/GreenResult"
 
 interface ResultProps {
     step: number,
@@ -38,8 +39,11 @@ function Result({ step, values, setStep }: ResultProps) {
             <div ref={step == 1 && values.cit ? ref : undefined} className={`result-card result-card-3 ${step == 1 && values.cit ? "active" : ""}`}>
                 <CheckedResultWho setStep={setStep} btn="stawka CIT" prec={10} />
             </div>
-            <div ref={step == 2 && !values.pitType ? ref : undefined} className={`result-card result-card-3 ${step == 2 && !values.pitType ? "active" : ""}`}>
+            <div ref={step == 2 && !values.pitType ? ref : undefined} className={`result-card result-card-4 ${step == 2 && !values.pitType ? "active" : ""}`}>
                 <EmptyResult {...emptyResults[1]} />
+            </div>
+            <div ref={step == 2 && values.pitType=="scale" ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pitType=="scale" ? "active" : ""}`}>
+                <GreenResult setStep={setStep} text="Rozliczając się na skali podatkowej możesz skorzystać z odliczenia. Przejdź dalej, by podać swoje dochody i policzyć Twój limit darowizn na 2026 rok."/>
             </div>
         </div>
     )

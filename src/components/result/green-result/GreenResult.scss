@@ -1,29 +1,36 @@
-@use "./../../../../variables.scss" as *;
+@use "./../../../variables.scss" as *;
 
 .result {
-    .checked-result-who {
+    .green-result {
         flex: 1;
         padding: 24px 20px 28px 20px;
+        border-top: 1px solid $color-green;
+        background-color: $bg-green;
 
         .tag {
             font-size: 0.6875rem;
             line-height: 1.54;
-            padding-bottom: 8px;
             font-family: IBM Plex Mono;
             color: $text-muted;
             letter-spacing: 0.055rem;
-
+            background-color: $white;
+            border: 1px solid $color-green;
+            padding: 6px 11px;
+            width: fit-content;
+            border-radius: 999px;
         }
 
-        .prec {
-            color: $color-primary;
-            font-size: 3.75rem;
+        .info {
+            color: $text-green-primary;
+            font-size: 1.75rem;
             font-weight: 600;
-            line-height: 1.03;
-            letter-spacing: -0.15rem;
+            line-height: 1.21;
+            letter-spacing: -0.035rem;
+            padding-top: 14px;
         }
 
         .text-1 {
+            color: $text-green-secondary;
             font-size: 0.9375rem;
             line-height: 1.53;
             padding-top: 10px;
@@ -34,7 +41,7 @@
 
 @include desktop {
     .result {
-        .checked-result-who {
+        .green-result {
             padding: 36px;
             display: flex;
             flex-direction: column;

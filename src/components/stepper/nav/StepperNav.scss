@@ -33,7 +33,6 @@
             position: relative;
             width: 340px;
             display: none;
-            // display: block;
 
             .text {
                 position: absolute;
@@ -68,7 +67,7 @@
                 max-width: 100%;
          
                 .button-stepper {
-                    padding-bottom: 0;
+                    padding-bottom: 24px;
                 }
 
                 &.hide {
