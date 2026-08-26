@@ -1,7 +1,7 @@
-@use "./../../../../variables.scss" as *;
+@use "./../../../variables.scss" as *;
 
 .result {
-    .empty-result-who {
+    .empty-result {
         display: flex;
         flex-direction: column;
         gap: 16px;
@@ -27,7 +27,7 @@
 
 @include desktop {
     .result {
-        .empty-result-who {
+        .empty-result {
             gap: 20px;
 
             .text-1 {
