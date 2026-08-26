@@ -71,6 +71,14 @@ p {
     }
   }
 
+  &--primary {
+    background-color: $color-primary;
+    border: none;
+    outline: none;
+    color: $white;
+    font-weight: 600;
+  }
+
   &--dark {
     background-color: $color-dark;
     border: none;

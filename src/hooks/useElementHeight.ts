@@ -11,7 +11,7 @@ export function useElementHeight<T extends HTMLElement>() {
         if (!element) return
 
         const observer = new ResizeObserver(([entry]) => {
-            setHeight(entry.contentRect.height)
+            setHeight(entry.target.getBoundingClientRect().height)
         })
 
         observer.observe(element)

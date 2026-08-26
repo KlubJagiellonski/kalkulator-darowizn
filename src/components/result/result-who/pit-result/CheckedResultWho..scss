@@ -1,0 +1,59 @@
+@use "./../../../../variables.scss" as *;
+
+.result {
+    .checked-result-who {
+        flex: 1;
+
+        .tag {
+            font-size: 0.6875rem;
+            line-height: 1.54;
+            padding-bottom: 8px;
+            font-family: IBM Plex Mono;
+            color: $text-muted;
+            letter-spacing: 0.055rem;
+
+        }
+
+        .prec {
+            color: $color-primary;
+            font-size: 3.75rem;
+            font-weight: 600;
+            line-height: 1.03;
+            letter-spacing: -0.15rem;
+        }
+
+        .text-1 {
+            font-size: 0.9375rem;
+            line-height: 1.53;
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+    }
+}
+
+@include desktop {
+    .result {
+        .checked-result-who {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .text-1 {
+                font-size: 1rem;
+                line-height: 1.56;
+                padding-top: 14px;
+                padding-bottom: 24px;
+            }
+
+            .prec {
+                font-size: 6rem;
+                line-height: 1;
+                letter-spacing: -0.2375rem;
+            }
+
+            .tag{
+                padding-bottom: 12px;
+            }
+        }
+    }
+}

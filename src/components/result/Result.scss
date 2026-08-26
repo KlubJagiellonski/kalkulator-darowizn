@@ -2,39 +2,39 @@
 
 .result {
     background-color: $bg-primary;
-    // flex: 1;
-    overflow: hidden;
-    // padding: 36px;
-    padding: 24px 20px 28px 20px;
     display: flex;
+    position: relative;
+    overflow: hidden;
+    transition: height 0.3s ease-in-out;
 
+    .result-inner {
+        position: relative;
+    }
 
-    .first-result-who {
+    .result-card {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        padding: 24px 20px 28px 20px;
         display: flex;
-        flex-direction: column;
-        // gap: 20px;
-        gap: 16px;
-        justify-content: center;
-        flex: 1;
+        transition: opacity 0.3s ease-in-out;
+        opacity: 0;
+        pointer-events: none;
+        height: fit-content;
 
-        .text-1 {
-            // font-size: 1.0625rem;
-            // line-height: 1.58;
-            font-size: 1rem;
-            line-height: 1.56;
+        &.active {
+            opacity: 1;
+            pointer-events: auto;
+            position: relative;
         }
+    }
 
-        .text-2 {
-            // font-size: 0.8125rem;
-            // line-height: 1.53;
-            font-size: 0.75rem;
-            line-height: 1.5;
-            color: $text-muted;
-
-            span {
-                display: none;
-            }
-        }
+    .button-next {
+        width: 100%;
+        font-size: 1rem;
+        padding: 18px 24px;
     }
 
     .icon {
@@ -50,6 +50,7 @@
         font-weight: 600;
         font-size: 2.125rem;
         color: $color-primary;
+        flex-shrink: 0;
 
         &::after {
             content: "";
@@ -67,24 +68,13 @@
 
 @include desktop {
     .result {
-        padding: 36px;
+        position: relative;
+        flex: 1;
+        height: auto !important;
 
-        .first-result-who {
-            gap: 20px;
-
-            .text-1 {
-                font-size: 1.0625rem;
-                line-height: 1.58;
-            }
-
-            .text-2 {
-                font-size: 0.8125rem;
-                line-height: 1.53;
-
-                span {
-                    display: inline;
-                }
-            }
+        .result-card {
+            padding: 36px;
+            height: auto;
         }
     }
 }

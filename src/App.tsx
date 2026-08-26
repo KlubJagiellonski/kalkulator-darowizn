@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import './App.scss'
-import Toggle from './components/UI/toggle/Toggle'
 import Stepper from './components/stepper/Stepper'
 import FirstStep from './components/stepper/firstStep/FirstStep'
 import SecondStep from './components/stepper/secondStep/SecondStep'
@@ -69,7 +68,7 @@ function App() {
             <Stepper step={step} items={steps} setStep={setStep} />
             <StepperNav values={values} step={step} setStep={setStep}/>
           </div>
-          <Result/>
+          <Result values={values} step={step} setStep={setStep}/>
         </div>
       </div>
     </div>
