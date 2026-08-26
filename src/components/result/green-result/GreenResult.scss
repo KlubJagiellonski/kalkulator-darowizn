@@ -18,6 +18,7 @@
             padding: 6px 11px;
             width: fit-content;
             border-radius: 999px;
+            color: $text-green-primary;
         }
 
         .info {
@@ -46,6 +47,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            background-color: transparent;
 
             .text-1 {
                 font-size: 1rem;
@@ -54,14 +56,15 @@
                 padding-bottom: 24px;
             }
 
-            .prec {
-                font-size: 6rem;
-                line-height: 1;
-                letter-spacing: -0.2375rem;
+            .info {
+                font-size: 2.125rem;
+                line-height: 1.17;
+                letter-spacing: -0.0425rem;
+                padding-top: 18px;
             }
 
             .tag {
-                padding-bottom: 12px;
+                background-color: $bg-green;
             }
         }
     }
