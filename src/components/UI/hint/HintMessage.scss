@@ -17,7 +17,6 @@
         background-color: $color-dark;
         padding: 14px 16px;
         border-radius: 14px;
-        box-shadow: $shadow;
 
         .title {
             padding-bottom: 6px;
@@ -57,7 +56,7 @@
         position: absolute;
         left: auto;
         bottom: auto;
-        right: -10px;
+        right: 0;
 
         &.open {
             transform: translate(100%);

@@ -4,7 +4,9 @@ import CheckedResultWho from "./result-who/pit-result/CheckedResultWho"
 import EmptyResult from "./empty-result/EmptyResult"
 import "./Result.scss"
 import GreenResult from "./green-result/GreenResult"
-import YellowResult from "./yellow-result/yellowResult"
+import YellowResult from "./yellow-result/YellowResult"
+import CountResult from "./count-result/CountResult"
+import { calculateForPIT2022 } from "../../alghorytm/2022/pit-calculations-2022"
 
 interface ResultProps {
     step: number,
@@ -91,6 +93,9 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
             <div ref={step == 2 && values.pit && values.pitType == "lumpSum" && values.lumpSum ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "lumpSum" && values.lumpSum ? "active" : ""}`}>
                 <GreenResult setStep={setStep} {...greenResults[1]} />
             </div>
+            <div ref={step == 2 && values.pit && values.pitType == "flat19" && values.lumpSum ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "flat19" && values.lumpSum ? "active" : ""}`}>
+                <YellowResult setValues={setValues} values={values} setStep={setStep} />
+            </div>
             <div ref={step == 2 && values.cit && !values.citType ? ref : undefined} className={`result-card result-card-6 ${step == 2 && values.cit && !values.citType ? "active" : ""}`}>
                 <EmptyResult {...emptyResults[3]} />
             </div>
@@ -100,8 +105,20 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
             <div ref={step == 2 && values.cit && values.citType == "cit9" ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.cit && values.citType == "cit9" ? "active" : ""}`}>
                 <GreenResult setStep={setStep} {...greenResults[3]} />
             </div>
-            <div ref={step == 3 && values.pit && values.pitType === "scale" ? ref : undefined} className={`result-card result-card-6 ${step == 3 && values.pit && values.pitType === "scale" ? "active" : ""}`}>
+            <div ref={step == 3 && values.pit && values.pitType === "scale" && !values.income ? ref : undefined} className={`result-card result-card-6 ${step == 3 && values.pit && values.pitType === "scale" && !values.income ? "active" : ""}`}>
                 <EmptyResult {...emptyResults[4]} />
+            </div>
+            <div ref={step == 3 && values.pit && values.pitType === "scale" && values.income ? ref : undefined} className={`result-card result-card-6 ${step == 3 && values.pit && values.pitType === "scale" && values.income ? "active" : ""}`}>
+                <CountResult
+                    setStep={setStep}
+                    count={
+                        calculateForPIT2022(
+                            values.incomePeriod === "monthly"
+                                ? values.income! * 12
+                                : values.income!
+                        ).donationSum
+                    }
+                />
             </div>
         </div>
     )

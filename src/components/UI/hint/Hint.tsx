@@ -3,14 +3,11 @@ import "./Hint.scss"
 interface HintProps {
     active: boolean
     setActive: (active: boolean) => void
-    id: string
 }
 
-function Hint({ active, setActive, id }: HintProps) {
+function Hint({ active, setActive }: HintProps) {
     return (
         <button
-            id={id}
-            style={{ anchorName: `--${id}` }}
             onPointerDown={() => setActive(true)}
             onPointerUp={() => setActive(false)}
             onPointerCancel={() => setActive(false)}

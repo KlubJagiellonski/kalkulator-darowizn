@@ -1,4 +1,4 @@
-import "./CheckedResultWho..scss"
+import "./CheckedResultWho.scss"
 
 interface PitResultWhoProps {
     setStep: (step: number) => void

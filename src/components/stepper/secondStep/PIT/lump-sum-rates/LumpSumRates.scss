@@ -13,6 +13,12 @@
     background-color: $bg-primary;
     border-radius: 16px;
 
+    .lump-sum-title-wrapper{
+        display: flex;
+        gap: 8px;
+        width: fit-content;
+    }
+
     .lump-sum-box {
         padding: 16px;
         border: $border-primary;

@@ -13,10 +13,17 @@ function Scale({ values, setValues }: ValuesProps) {
     const [showHint, setShowHint] = useState(false)
 
     const handleToggle = () => {
+        const come = incomePeriod === "monthly"
+                ? (income ?? 0) * 12
+                : (income ?? 0)/12
+
         setValues({
             ...values,
-            incomePeriod: incomePeriod === "monthly" ? "yearly" : "monthly"
+            incomePeriod: incomePeriod === "monthly" ? "yearly" : "monthly",
+            income: come
         })
+
+        setValue(formatInputValue(`${come.toFixed(2) ?? ""}`))
     }
 
     const handleChange = (value: string | number) => {
@@ -42,6 +49,10 @@ function Scale({ values, setValues }: ValuesProps) {
             sanitized = `${integer}.${decimal.slice(0, 2)}`
         }
 
+        if ((Number(sanitized) >= 100000000 && incomePeriod === "yearly") || (Number(sanitized) >= 100000000/12 && incomePeriod === "monthly")) {
+            return
+        }
+
         setValue(formatInputValue(sanitized))
 
         setValues({
@@ -61,7 +72,7 @@ function Scale({ values, setValues }: ValuesProps) {
             <div className="title-wrapper">
                 <p className="number">03</p>
                 <p className="title">Twój roczny dochód brutto</p>
-                <Hint active={showHint} setActive={setShowHint} id="income-hint" />
+                <Hint active={showHint} setActive={setShowHint} />
                 <div className="hint-message-1">
                     <HintMessage title="Dochód" text="Przychód pomniejszony o koszty jego uzyskania. To od dochodu liczy się podatek — i to on wyznacza limit odliczenia darowizn (6% dla osób prywatnych)." open={showHint} />
                 </div>
@@ -72,7 +83,8 @@ function Scale({ values, setValues }: ValuesProps) {
                 <div className="scale-input">
                     <Input value={value} placeholder="np. 96 000" onChange={handleChange} prefix="zł" />
                     <div className="hint-message-2">
-                        <HintMessage title="Dochód" text="Przychód pomniejszony o koszty jego uzyskania. To od dochodu liczy się podatek — i to on wyznacza limit odliczenia darowizn (6%)." open={showHint} />                    </div>
+                        <HintMessage title="Dochód" text="Przychód pomniejszony o koszty jego uzyskania. To od dochodu liczy się podatek — i to on wyznacza limit odliczenia darowizn (6%)." open={showHint} />
+                    </div>
                 </div>
                 <div className="scale-texts">
                     <p className={`brutto-text ${value === "" ? "active" : ""}`}>Kwota brutto, przed odliczeniem składek.</p>

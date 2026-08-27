@@ -1,7 +1,15 @@
 @use "./../../../../variables.scss" as *;
 
 .cit {
+    .title-wrapper {
+        position: relative;
+        width: fit-content;
+
+    }
+
     .cit-content {
+        padding-bottom: 100px;
+
         .text {
             font-size: 0.875rem;
             line-height: 1.5;
@@ -34,9 +42,7 @@
 @include tablet {
     .cit {
         .cit-content {
-            padding: 0 32px;
-            
-            .text{
+            .text {
                 display: block;
             }
 

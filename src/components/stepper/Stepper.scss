@@ -1,7 +1,7 @@
 @use "./../../variables.scss" as *;
 
 .stepper-wrapper {
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   flex: 1;
   display: flex;
   flex-direction: column-reverse;
@@ -179,7 +179,7 @@
   }
 
   .steps {
-    padding: 22px 0;
+    padding: 22px 0 0 0;
     overflow: hidden;
 
     .steps-box {

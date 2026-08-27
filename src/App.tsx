@@ -4,7 +4,7 @@ import Stepper from './components/stepper/Stepper'
 import FirstStep from './components/stepper/firstStep/FirstStep'
 import SecondStep from './components/stepper/secondStep/SecondStep'
 import ThirdStep from './components/stepper/thirdStep/ThirdStep'
-import FourthStep from './components/stepper/FourthStep'
+import FourthStep from './components/stepper/fourthStep/FourthStep'
 import type { Values } from './types/type'
 import StepperNav from './components/stepper/nav/StepperNav'
 import Result from './components/result/Result'
@@ -30,8 +30,9 @@ function App() {
     },
     {
       title: "Forma rozliczenia PIT",
-      subtitle: "Decyduje o tym, czy odliczenie jest możliwe",
+      subtitle: values.pit ? "Decyduje o tym, czy odliczenie jest możliwe" : "Decyduje o wysokości korzyści podatkowej",
       name: "Rozliczenie",
+      isValid: (!!values.cit && !!values.citType) || (!!values.pit && !!values.pitType),
       children: <SecondStep values={values} setValues={setValues} />
     },
     {
@@ -44,7 +45,7 @@ function App() {
       title: "Kwota darowizny",
       subtitle: "Jednorazowo albo co miesiąc",
       name: "Kwota",
-      children: <FourthStep />
+      children: <FourthStep values={values} setValues={setValues}/>
     },
   ]
 
@@ -66,9 +67,9 @@ function App() {
         <div className='content-wrapper'>
           <div className='stepper-wrapper'>
             <Stepper step={step} items={steps} setStep={setStep} />
-            <StepperNav values={values} step={step} setStep={setStep}/>
+            <StepperNav values={values} step={step} setStep={setStep} />
           </div>
-          <Result setValues={setValues} values={values} step={step} setStep={setStep}/>
+          <Result setValues={setValues} values={values} step={step} setStep={setStep} />
         </div>
       </div>
     </div>

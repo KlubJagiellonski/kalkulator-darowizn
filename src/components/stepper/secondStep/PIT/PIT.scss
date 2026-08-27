@@ -3,10 +3,23 @@
 .pit {
     padding-bottom: 0;
 
+    .hint-lumpsum {
+        bottom: -55px;
+    }
+
+    .hint-message-1 {
+        display: none;
+    }
+
+    .title-wrapper {
+        position: relative;
+    }
+
     .pit-content {
         display: flex;
         gap: 10px;
         flex-direction: column;
+        min-height: 250px;
 
         .pit-text {
             font-size: 0.8125rem;
@@ -52,15 +65,35 @@
     .pit {
         padding-bottom: calc(var(--pit-height) + 14px);
 
+        .hint-lumpsum {
+            left: 30px;
+            // top: 150px;
+        }
+
+
+        .title-wrapper {
+            width: fit-content;
+        }
+
+        .hint-message-1 {
+            display: block;
+        }
+
+        .hint-massage-2 {
+            display: none;
+        }
+
         .pit-content {
             flex-direction: column-reverse;
             gap: 14px;
             padding-bottom: 0;
+            justify-content: flex-end;
 
             .pit-text {
                 display: block;
                 padding-bottom: 0;
                 height: fit-content !important;
+                opacity: 1;
             }
 
             .pit-btns {
@@ -76,6 +109,15 @@
                     }
                 }
             }
+        }
+    }
+}
+
+@include desktop {
+    .pit {
+        .hint-lumpsum {
+            left: -90px;
+            top: 80px;
         }
     }
 }

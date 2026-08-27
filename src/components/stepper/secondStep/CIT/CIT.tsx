@@ -1,7 +1,11 @@
+import { useState } from "react"
 import type { CITType, ValuesProps } from "../../../../types/type"
+import Hint from "../../../UI/hint/Hint"
 import "./CIT.scss"
+import HintMessage from "../../../UI/hint/HintMessage"
 
 function CIT({ values, setValues }: ValuesProps) {
+    const [showHint, setShowHint] = useState(false)
 
     const { citType } = values
 
@@ -17,6 +21,13 @@ function CIT({ values, setValues }: ValuesProps) {
             <div className="title-wrapper">
                 <p className="number">02</p>
                 <p className="title">Jaką stawką CIT się rozliczasz?</p>
+                <Hint active={showHint} setActive={setShowHint} />
+                <div className="hint-message-1">
+                    <HintMessage open={showHint} text="Podatek dochodowy od osób prawnych. 9% dla małych podatników i firm rozpoczynających działalność, 19% dla pozostałych spółek." title="Stawka CIT" />
+                </div>
+                <div className="hint-message-2">
+                    <HintMessage open={showHint} text="Podatek dochodowy od osób prawnych. 9% dla małych podatników i firm rozpoczynających działalność, 19% dla pozostałych spółek." title="Stawka CIT" />
+                </div>
             </div>
             <div className="cit-content">
                 <p className="text">Mały podatnik i firma rozpoczynająca działalność płacą 9%. Pozostałe spółki — 19%.</p>

@@ -68,7 +68,7 @@
 @include tablet {
     .result {
         position: relative;
-        flex: 1;
+        width: 34%;
         height: auto !important;
 
         .result-card {

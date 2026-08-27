@@ -10,12 +10,12 @@
     .scale-texts {
         position: relative;
 
-        .brutto-text{
+        .brutto-text {
             position: relative;
             opacity: 0;
             transition: opacity 0.3s ease-in-out;
 
-            &.active{
+            &.active {
                 opacity: 1;
             }
         }
@@ -63,7 +63,9 @@
 }
 
 @include mobile {
-    padding-bottom: 90px;
+    .stepper-wrapper .steps .steps-box .step .step-content .scale {
+        padding-bottom: 90px;
+    }
 }
 
 @include tablet {
