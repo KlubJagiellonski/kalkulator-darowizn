@@ -4,14 +4,16 @@ import CheckedResultWho from "./result-who/pit-result/CheckedResultWho"
 import EmptyResult from "./empty-result/EmptyResult"
 import "./Result.scss"
 import GreenResult from "./green-result/GreenResult"
+import YellowResult from "./yellow-result/yellowResult"
 
 interface ResultProps {
     step: number,
     values: Values,
+    setValues: (values: Values)=>void
     setStep: (step: number) => void
 }
 
-function Result({ step, values, setStep }: ResultProps) {
+function Result({ step, values, setStep, setValues }: ResultProps) {
     const { ref, height } = useElementHeight()
 
     const emptyResults = [
@@ -55,6 +57,9 @@ function Result({ step, values, setStep }: ResultProps) {
             </div>
             <div ref={step == 2 && values.pitType == "lumpSum" && values.lumpSum ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pitType == "lumpSum" && values.lumpSum ? "active" : ""}`}>
                 <GreenResult setStep={setStep} text='Ryczałt też pozwala odliczyć darowiznę — od przychodu, z limitem 6%. Przy stawce 12% każde odliczone 100 zł to 12 zł niższego podatku. Przejdź dalej, by podać swój przychód.' />
+            </div>
+            <div ref={step == 2 && values.pitType == "flat19" ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pitType == "flat19" ? "active" : ""}`}>
+                <YellowResult setValues={setValues} values={values} setStep={setStep} />
             </div>
         </div>
     )

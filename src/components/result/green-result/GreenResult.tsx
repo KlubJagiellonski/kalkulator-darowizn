@@ -1,11 +1,11 @@
 import "./GreenResult.scss"
 
-interface PitResultWhoProps {
+interface GreenResultProps {
     setStep: (step: number) => void
     text: string
 }
 
-function GreenResult({ setStep, text }: PitResultWhoProps) {
+function GreenResult({ setStep, text }: GreenResultProps) {
     return (
         <div className="green-result">
             <p className="tag">MOŻESZ ODLICZYĆ</p>

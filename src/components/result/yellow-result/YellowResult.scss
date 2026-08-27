@@ -1,11 +1,11 @@
 @use "./../../../variables.scss" as *;
 
 .result {
-    .green-result {
+    .yellow-result {
         flex: 1;
         padding: 24px 20px 28px 20px;
-        border-top: 1px solid $color-green;
-        background-color: $bg-green;
+        border-top: 1px solid $warning-color;
+        background-color: $warning-bg;
 
         .tag {
             font-size: 0.6875rem;
@@ -14,20 +14,26 @@
             color: $text-muted;
             letter-spacing: 0.055rem;
             background-color: $white;
-            border: 1px solid $color-green;
+            border: 1px solid $warning-color;
             padding: 6px 11px;
             width: fit-content;
             border-radius: 999px;
-            color: $text-green-primary;
+            color: $warning-text;
         }
 
         .info {
-            color: $text-green-primary;
+            color: $warning-text;
             font-size: 1.75rem;
             font-weight: 600;
             line-height: 1.21;
             letter-spacing: -0.035rem;
             padding-top: 14px;
+        }
+
+        .btns{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .text-1 {
@@ -36,13 +42,17 @@
             line-height: 1.53;
             padding-top: 10px;
             padding-bottom: 20px;
+
+            span{
+                display: none;
+            }
         }
     }
 }
 
 @include desktop {
     .result {
-        .green-result {
+        .yellow-result {
             border-top: none;
             padding: 36px;
             display: flex;
@@ -55,6 +65,10 @@
                 line-height: 1.56;
                 padding-top: 14px;
                 padding-bottom: 24px;
+
+                span{
+                    display: block;
+                }
             }
 
             .info {

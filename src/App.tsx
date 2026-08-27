@@ -68,7 +68,7 @@ function App() {
             <Stepper step={step} items={steps} setStep={setStep} />
             <StepperNav values={values} step={step} setStep={setStep}/>
           </div>
-          <Result values={values} step={step} setStep={setStep}/>
+          <Result setValues={setValues} values={values} step={step} setStep={setStep}/>
         </div>
       </div>
     </div>
