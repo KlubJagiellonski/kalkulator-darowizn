@@ -1,8 +1,34 @@
 @use "./../../../../variables.scss" as *;
 
 .stepper-wrapper .steps .steps-box .step .step-content .scale {
+    padding-bottom: 120px;
+
+    .hint-message-1 {
+        display: none;
+    }
+
+    .scale-texts {
+        position: relative;
+
+        .brutto-text{
+            position: relative;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+
+            &.active{
+                opacity: 1;
+            }
+        }
+
+        .brutto-text-2 {
+            position: absolute;
+            top: 0;
+        }
+    }
+
     .title-wrapper {
-        padding-bottom: 4px;
+        position: relative;
+        width: fit-content;
 
         .title {
             line-height: 1.53;
@@ -14,20 +40,15 @@
         line-height: 1.5;
         color: $text-muted;
         padding-bottom: 14px;
-        padding-left: 32px;
-        padding-right: 32px;
         display: none;
     }
 
     .scale-content {
-        .hint-prec {
-            display: none;
-        }
-
-        .hint {
+        .brutto-text {
             font-size: 0.8125rem;
             line-height: 1.53;
             color: $text-secondary;
+            padding-top: 10px;
 
             .des {
                 display: none;
@@ -36,49 +57,41 @@
 
         .scale-input {
             padding-top: 14px;
+            position: relative;
         }
     }
 }
 
-@include desktop {
+@include mobile {
+    padding-bottom: 90px;
+}
+
+@include tablet {
     .stepper-wrapper .steps .steps-box .step .step-content .scale {
+        padding-left: 1px;
+
+        .hint-message-2 {
+            display: none;
+        }
+
+        .hint-message-1 {
+            display: block;
+        }
+
         .title-wrapper {
             padding-bottom: 6px;
         }
 
-        .info{
+        .info {
             display: block;
         }
 
         .scale-content {
             padding-top: 14px;
             display: flex;
-            justify-content: flex-end;
             align-items: center;
-            flex-direction: row-reverse;
             gap: 14px;
-            padding: 0 32px;
 
-            .hint-prec {
-                display: block;
-            }
-
-            .hint-wrapper {
-                flex: 1;
-            }
-
-            .hint {
-                font-size: 0.875rem;
-                line-height: 1.5;
-
-                .bold {
-                    font-weight: 600;
-                }
-
-                .des {
-                    display: inline;
-                }
-            }
 
             .scale-input {
                 width: 260px;

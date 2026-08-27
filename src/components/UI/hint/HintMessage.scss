@@ -4,12 +4,14 @@
     transform: translateY(80%);
     opacity: 0;
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-    overflow: hidden;
+    // overflow: hidden;
     pointer-events: none;
     position: absolute;
     left: 0;
     right: 0;
     bottom: -4px;
+    max-width: 330px;
+    z-index: 100;
 
     .hint-message {
         background-color: $color-dark;
@@ -35,21 +37,30 @@
     &.open {
         transform: translateY(100%);
         opacity: 1;
-        pointer-events: auto;
+    }
+}
+
+@include tablet {
+    .hint-message-wrapper {
+        top: 0;
+        width: 300px;
+        bottom: -10px;
+        left: 50%;
     }
 }
 
 @include desktop {
     .hint-message-wrapper {
-        left: anchor(right);
-        top: anchor(top);
-        transform: translateX(-5%);
-        margin-left: 10px;
+        top: 0;
+        transform: translateX(95%);
         max-width: 320px;
         position: absolute;
+        left: auto;
+        bottom: auto;
+        right: -10px;
 
         &.open {
-            transform: translate(0);
+            transform: translate(100%);
         }
     }
 }

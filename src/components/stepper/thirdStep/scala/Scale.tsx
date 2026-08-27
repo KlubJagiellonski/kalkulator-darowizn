@@ -3,10 +3,21 @@ import type { ValuesProps } from "../../../../types/type"
 import Input from "../../../UI/input/Input"
 import "./Scale.scss"
 import { formatInputValue } from "../../../../utils/formatInputValues"
+import Toggle from "../../../UI/toggle/Toggle"
+import Hint from "../../../UI/hint/Hint"
+import HintMessage from "../../../UI/hint/HintMessage"
 
 function Scale({ values, setValues }: ValuesProps) {
-    const { income } = values
-    const [value, setValue] = useState(formatInputValue(`${income}`))
+    const { income, incomePeriod } = values
+    const [value, setValue] = useState(formatInputValue(`${income ?? ""}`))
+    const [showHint, setShowHint] = useState(false)
+
+    const handleToggle = () => {
+        setValues({
+            ...values,
+            incomePeriod: incomePeriod === "monthly" ? "yearly" : "monthly"
+        })
+    }
 
     const handleChange = (value: string | number) => {
         let sanitized = `${value}`
@@ -39,24 +50,33 @@ function Scale({ values, setValues }: ValuesProps) {
         })
     }
 
+    const yearlyIncome = incomePeriod === "monthly"
+        ? income && income * 12
+        : income
+
+    const taxRate = (yearlyIncome ?? 0) > 120000 ? 32 : 12
+
     return (
         <div className="scale">
             <div className="title-wrapper">
                 <p className="number">03</p>
                 <p className="title">Twój roczny dochód brutto</p>
-            </div>
-            <p className="info">Potrzebny wyłącznie do wyliczenia stawki i limitu 6%. Nigdzie go nie zapisujemy.</p>
-            <div className="scale-content">
-                <div className="hint-wrapper">
-                    <p className="hint hint-prec">Twoja stawka: <span className="bold">12%</span></p>
-                    <p className="hint">Limit odliczenia: <span className="bold">{(income * 0.06).toLocaleString("pl-PL", {
-                        useGrouping: "always",
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 2
-                    })} zł</span> (6%<span className="des"> dochodu</span>)</p>
+                <Hint active={showHint} setActive={setShowHint} id="income-hint" />
+                <div className="hint-message-1">
+                    <HintMessage title="Dochód" text="Przychód pomniejszony o koszty jego uzyskania. To od dochodu liczy się podatek — i to on wyznacza limit odliczenia darowizn (6% dla osób prywatnych)." open={showHint} />
                 </div>
+            </div>
+            <div className="info">Potrzebny wyłącznie do wyliczenia stawki i limitu 6%.</div>
+            <Toggle firstItem="Rocznie" secondItem="Miesięcznie" position={incomePeriod === "yearly" ? "first" : "second"} setPosition={handleToggle} />
+            <div className="scale-content">
                 <div className="scale-input">
-                    <Input value={value} onChange={handleChange} prefix="zł" />
+                    <Input value={value} placeholder="np. 96 000" onChange={handleChange} prefix="zł" />
+                    <div className="hint-message-2">
+                        <HintMessage title="Dochód" text="Przychód pomniejszony o koszty jego uzyskania. To od dochodu liczy się podatek — i to on wyznacza limit odliczenia darowizn (6%)." open={showHint} />                    </div>
+                </div>
+                <div className="scale-texts">
+                    <p className={`brutto-text ${value === "" ? "active" : ""}`}>Kwota brutto, przed odliczeniem składek.</p>
+                    <p className={`brutto-text brutto-text-2  ${value !== "" ? "active" : ""}`}>Twoja stawka podatku: {taxRate}%</p>
                 </div>
             </div>
         </div>

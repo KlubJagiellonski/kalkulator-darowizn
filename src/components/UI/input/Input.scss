@@ -17,6 +17,10 @@
         line-height: 1.5;
         flex: 1;
         width: 0;
+
+        &::placeholder {
+            font-weight: 400;
+        }
     }
 
     .prefix {

@@ -37,6 +37,12 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
             char: "%",
             text: 'Wybierz stawkę CIT, którą stosuje Twoja firma. Od niej zależy, ile realnie zyskacie na darowiźnie.',
             smallTextLonger: 'Stawkę znajdziesz w zeznaniu CIT-8 za zeszły rok.'
+        },
+        {
+            char: "zł",
+            text: 'Podaj swój dochód, a policzymy dokładną kwotę darowizn, którą możesz odliczyć w 2026 roku.',
+            smallTextLonger: 'Wyliczenie zostaje na Twoim ekranie.',
+            smallText: "Nigdzie nie zapisujemy tej liczby. "
         }
     ]
 
@@ -93,6 +99,9 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
             </div>
             <div ref={step == 2 && values.cit && values.citType == "cit9" ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.cit && values.citType == "cit9" ? "active" : ""}`}>
                 <GreenResult setStep={setStep} {...greenResults[3]} />
+            </div>
+            <div ref={step == 3 && values.pit && values.pitType === "scale" ? ref : undefined} className={`result-card result-card-6 ${step == 3 && values.pit && values.pitType === "scale" ? "active" : ""}`}>
+                <EmptyResult {...emptyResults[4]} />
             </div>
         </div>
     )

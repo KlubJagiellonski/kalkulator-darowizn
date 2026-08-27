@@ -23,8 +23,8 @@ function StepperNav({ step, setStep, values }: StepperNavProps) {
     }
 
     return (
-        <div className="btns">
-            <div className={`btn-box ${step == 1 ? "hide" : ""}`}>
+        <div className={`btns ${step == 1 ? "hide" : ""}`}>
+            <div className={`btn-box`}>
                 <button disabled={step == 1} className={`button button--ghost button-stepper`} onClick={() => setStep(step - 1)}>← Wstecz</button>
             </div>
             <div className="texts">

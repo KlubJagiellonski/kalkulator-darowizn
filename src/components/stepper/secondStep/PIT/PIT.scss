@@ -48,7 +48,7 @@
     }
 }
 
-@include desktop {
+@include tablet {
     .pit {
         padding-bottom: calc(var(--pit-height) + 14px);
 

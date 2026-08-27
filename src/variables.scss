@@ -30,15 +30,20 @@ $color-green: #2F8F57;
 $text-green-primary: #1B6B3D;
 $text-green-secondary: #3E4150;
 
-
 @mixin desktop {
+    @container (min-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin tablet {
     @container (min-width: 768px) {
         @content;
     }
 }
 
 @mixin mobile {
-    @container (max-width: 768px) {
+    @container (min-width: 375px) {
         @content;
     }
 }

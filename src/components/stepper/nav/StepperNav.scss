@@ -5,6 +5,22 @@
         align-items: center;
         padding-top: 0;
 
+        &.hide {
+            .btn-box {
+                max-height: 0;
+
+                .button-stepper {
+                    opacity: 0;
+                }
+            }
+
+            .texts {
+                .text {
+                    transform: translateY(calc(-50% + 24px));
+                }
+            }
+        }
+
         .btn-box {
             flex: 1;
             max-height: 70px;
@@ -17,13 +33,7 @@
                 margin-bottom: 20px;
             }
 
-            &.hide {
-                max-height: 0;
 
-                .button-stepper {
-                    opacity: 0;
-                }
-            }
         }
 
         .texts {
@@ -59,7 +69,7 @@
     }
 }
 
-@include desktop {
+@include tablet {
     .stepper-wrapper {
         .btns {
             display: flex;
@@ -74,7 +84,7 @@
                 }
             }
 
-            .texts{
+            .texts {
                 display: block;
             }
         }
