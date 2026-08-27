@@ -65,6 +65,7 @@
     border-radius: 28px;
     height: auto;
     overflow: hidden;
+    min-height: 645px;
 
     .header-wrapper {
       padding: 32px 36px;
@@ -92,8 +93,9 @@
     }
 
     .content-wrapper {
-      min-height: 620px;
+      flex: none;
       flex-direction: row;
+      min-height: 645px;
     }
   }
 }

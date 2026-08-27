@@ -7,16 +7,8 @@
 
         &.hide {
             .btn-box {
-                max-height: 0;
-
                 .button-stepper {
                     opacity: 0;
-                }
-            }
-
-            .texts {
-                .text {
-                    transform: translateY(calc(-50% + 24px));
                 }
             }
         }
@@ -78,8 +70,10 @@
 
             .btn-box {
                 max-width: 100%;
+            }
 
-                &.hide {
+            &.hide {
+                .btn-box {
                     max-width: 0;
                 }
             }
