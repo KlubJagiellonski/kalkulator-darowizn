@@ -11,7 +11,7 @@ function StepperNav({ step, setStep, values }: StepperNavProps) {
     const text = () => {
         if (step == 2 && !values.pitType) {
             return 1
-        } else if (step == 2 && values.pitType === "lumpSum") {
+        } else if (step == 2 && values.pitType === "lumpSum" && !values.lumpSum) {
             return 2
         } else if (step == 2 && values.pitType === "flat19") {
             return 3

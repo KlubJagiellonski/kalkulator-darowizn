@@ -7,7 +7,6 @@
 
         .btn-box {
             flex: 1;
-            // max-width: 100%;
             max-height: 70px;
             overflow: hidden;
             transition: max-width 0.5s ease-in-out, max-height 0.5s ease-in-out;
@@ -16,11 +15,9 @@
                 width: 116px;
                 transition: opacity 0.4s ease-in-out;
                 margin-bottom: 20px;
-                // padding-bottom: 0;
             }
 
             &.hide {
-                // max-width: 0;
                 max-height: 0;
 
                 .button-stepper {
@@ -31,8 +28,11 @@
 
         .texts {
             position: relative;
-            width: 340px;
+            max-width: 340px;
+            flex: 1;
             display: none;
+            height: 100%;
+            margin-top: -20px;
 
             .text {
                 position: absolute;
@@ -42,10 +42,13 @@
                 color: $text-secondary;
                 right: 0;
                 top: 50%;
-                transform: translate(0, -50%);
+                transform: translateY(-50%);
                 opacity: 0;
                 transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
                 pointer-events: none;
+                display: flex;
+                justify-self: center;
+                align-self: center;
 
                 &.active {
                     opacity: 1;
@@ -65,10 +68,6 @@
 
             .btn-box {
                 max-width: 100%;
-         
-                .button-stepper {
-                    padding-bottom: 24px;
-                }
 
                 &.hide {
                     max-width: 0;

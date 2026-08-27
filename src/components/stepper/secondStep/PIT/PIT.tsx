@@ -1,12 +1,11 @@
-import { useState } from "react"
+import { useElementHeight } from "../../../../hooks/useElementHeight"
 import type { PITType, ValuesProps } from "../../../../types/type"
-import Hint from "../../../UI/hint/Hint"
+import LumpSumRates from "./lump-sum-rates/LumpSumRates"
 import "./PIT.scss"
-import HintMessage from "../../../UI/hint/HintMessage"
 
 function PIT({ values, setValues }: ValuesProps) {
     const { pitType } = values
-    const [activeHint, setActiveHint] = useState(false)
+    const { ref, height } = useElementHeight<HTMLDivElement>()
 
     const handleClick = (type: PITType) => {
         setValues({
@@ -16,20 +15,50 @@ function PIT({ values, setValues }: ValuesProps) {
     }
 
     return (
-        <div className="pit">
+        <div className="pit" style={{
+            "--pit-height": `${height}px`
+        } as React.CSSProperties}>
             <div className="title-wrapper">
                 <p className="number">02</p>
                 <p className="title">Jak rozliczasz PIT?</p>
-                <Hint active={activeHint} setActive={setActiveHint} id="pit" />
             </div>
-            <div className="pit-content">
+
+            <div
+                className="pit-content"
+            >
                 <div className="pit-btns">
-                    <button className={`button button--chip btn-pit ${pitType === "scale" ? "active" : ""}`} onClick={() => handleClick("scale")}>skala<span> podatkowa</span></button>
-                    <button className={`button button--chip btn-pit ${pitType === "lumpSum" ? "active" : ""}`} onClick={() => handleClick("lumpSum")}>ryczałt</button>
-                    <button className={`button button--chip btn-pit ${pitType === "flat19" ? "active" : ""}`} onClick={() => handleClick("flat19")}><span>podatek </span>liniowy 19%</button>
-                    <HintMessage anchorName="pit" open={activeHint} title="Lorem Ipsum" text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget elit est. Fusce vestibulum eleifend quam ac efficitur' />
+                    <button
+                        className={`button button--chip btn-pit ${pitType === "scale" ? "active" : ""}`}
+                        onClick={() => handleClick("scale")}
+                    >
+                        skala<span> podatkowa</span>
+                    </button>
+
+                    <button
+                        className={`button button--chip btn-pit ${pitType === "lumpSum" ? "active" : ""}`}
+                        onClick={() => handleClick("lumpSum")}
+                    >
+                        ryczałt
+                    </button>
+
+                    <button
+                        className={`button button--chip btn-pit ${pitType === "flat19" ? "active" : ""}`}
+                        onClick={() => handleClick("flat19")}
+                    >
+                        <span>podatek </span>liniowy 19%
+                    </button>
+
+                    <LumpSumRates
+                        isOpen={pitType === "lumpSum"}
+                        ref={ref}
+                        setValues={setValues}
+                        values={values}
+                    />
                 </div>
-                <p className="text">Nie wiesz? Umowa o pracę i większość zleceń to skala podatkowa.</p>
+
+                <p className={`pit-text ${pitType !== "lumpSum" ? "active" : ""}`} style={{ height }}>
+                    Nie wiesz? Umowa o pracę i większość zleceń to skala podatkowa.
+                </p>
             </div>
         </div>
     )

@@ -7,6 +7,7 @@ export interface Values {
     pitType?: PITType,
     citType?: CITType,
     income: number,
+    lumpSum?: number
 }
 
 export interface ValuesProps {

@@ -5,6 +5,7 @@
   flex: 1;
   display: flex;
   flex-direction: column-reverse;
+  justify-content: flex-end;
 
   .stepper-count {
     display: grid;
@@ -228,6 +229,8 @@
 
     .stepper-box {
       flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .stepper-count {
@@ -290,12 +293,6 @@
             }
 
             &::before {
-              // display: inline-block;
-              // content: "✓ ";
-              // transform: scale(0);
-              // width: 0;
-              // transition: width 0.4s ease-in-out, transform 0.4s ease-in-out;
-              // margin-right: 0.2rem;
               position: relative;
             }
 
@@ -305,8 +302,6 @@
             // }
 
             &.checked {
-              // color: $text-primary;
-              // font-weight: 600;
 
               span {
                 transform: scale(1);
@@ -330,9 +325,15 @@
       padding: 0;
       padding-bottom: 28px;
       flex: 1;
+      display: flex;
+      flex-direction: column;
 
       .steps-box {
+        flex: 1;
+        height: auto !important;
+
         .step {
+          height: 100%;
           .step-content {
             .title-wrapper {
 

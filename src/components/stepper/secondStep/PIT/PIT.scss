@@ -1,24 +1,35 @@
 @use "./../../../../variables.scss" as *;
 
 .pit {
+    padding-bottom: 0;
 
     .pit-content {
         display: flex;
         gap: 10px;
         flex-direction: column;
-        padding-bottom: 55px;
 
-        .text {
+        .pit-text {
             font-size: 0.8125rem;
             line-height: 1.5;
             padding-bottom: 14px;
             color: $text-muted;
+            min-height: fit-content;
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+
+            &.active {
+                opacity: 1;
+                transition: opacity 0s ease-in-out 0.4s;
+                pointer-events: auto;
+            }
         }
 
         .pit-btns {
             display: flex;
             gap: 8px;
             position: relative;
+            flex-wrap: wrap;
 
             .btn-pit {
                 padding-left: 5px;
@@ -39,20 +50,21 @@
 
 @include desktop {
     .pit {
+        padding-bottom: calc(var(--pit-height) + 14px);
 
         .pit-content {
             flex-direction: column-reverse;
             gap: 14px;
             padding-bottom: 0;
 
-            .text {
+            .pit-text {
                 display: block;
                 padding-bottom: 0;
+                height: fit-content !important;
             }
 
             .pit-btns {
                 gap: 10px;
-                position: static;
 
                 .btn-pit {
                     padding-left: 20px;

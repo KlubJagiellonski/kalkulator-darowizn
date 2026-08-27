@@ -36,3 +36,9 @@ $text-green-secondary: #3E4150;
         @content;
     }
 }
+
+@mixin mobile {
+    @container (max-width: 768px) {
+        @content;
+    }
+}
