@@ -1,6 +1,5 @@
 import type { Values } from "../../../types/type"
 import { formatInputValue } from "../../../utils/formatInputValues"
-import Alert from "../../UI/alert/Alert"
 import "./FinishResult.scss"
 
 interface FinishResultProps {
@@ -177,11 +176,6 @@ function FinishResult({ values, donationSum, taxDeduction }: FinishResultProps) 
                 {formatInputValue(`${taxDeduction}`)} zł
                 {" "}niższego podatku
             </p>
-            <Alert
-                shortText="Nadwyżka trafi do organizacji, ale nie obniży podatku."
-                show={!!limitUsage} title={`Powyżej limitu odliczenia o ${formatInputValue(limitUsage.toString())} zł`}
-                text={`Odliczysz maksymalnie ${formatInputValue(`${donationSum}`)} zł rocznie. Nadwyżka nadal trafia do organizacji — po prostu nie obniża podatku.`}
-            />
             <p className="text text-3">
                 Wyliczenie szacunkowe, na podstawie stawki
                 obowiązującej dla podanego dochodu. Nie stanowi

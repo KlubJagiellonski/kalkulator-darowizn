@@ -8,6 +8,7 @@ import FourthStep from './components/stepper/fourthStep/FourthStep'
 import type { Values } from './types/type'
 import StepperNav from './components/stepper/nav/StepperNav'
 import Result from './components/result/Result'
+import { back } from './utils/back'
 
 function App() {
 
@@ -49,9 +50,17 @@ function App() {
       subtitle: "Jednorazowo albo co miesiąc",
       name: "Kwota",
       children: <FourthStep values={values} setValues={setValues} />,
-      isValid: (step===4 && !!values.donationAmount),
+      isValid: (step === 4 && !!values.donationAmount),
     },
   ]
+
+  const changeStep = (newStep: number) => {
+    if (step > newStep) {
+      back({ values, setValues, step: newStep, setStep })
+    } else {
+      setStep(newStep)
+    }
+  }
 
   return (
     <div className='calculator-container'>
@@ -70,8 +79,8 @@ function App() {
         </div>
         <div className='content-wrapper'>
           <div className='stepper-wrapper'>
-            <Stepper step={step} items={steps} setStep={setStep} />
-            <StepperNav values={values} step={step} setStep={setStep} />
+            <Stepper step={step} items={steps} setStep={changeStep} />
+            <StepperNav setValues={setValues} values={values} step={step} setStep={setStep} />
           </div>
           <Result setValues={setValues} values={values} step={step} setStep={setStep} />
         </div>

@@ -20,9 +20,7 @@ function PIT({ values, setValues }: ValuesProps) {
     }
 
     return (
-        <div className="pit" style={{
-            "--pit-height": `${height}px`
-        } as React.CSSProperties}>
+        <div className="pit">
             <div className="title-wrapper">
                 <p className="number">02</p>
                 <p className="title">Jak rozliczasz PIT?</p>

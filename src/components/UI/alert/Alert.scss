@@ -18,7 +18,6 @@
         margin-top: 10px;
 
         .alert-title {
-            display: none;
             font-weight: 600;
             font-size: 0.9375rem;
             line-height: 1.53;
@@ -52,10 +51,7 @@
     .alert-wrapper {
         .alert {
             margin-top: 14px;
-            .alert-title {
-                display: block;
-            }
-
+    
             .alert-text {
                 display: block;
 

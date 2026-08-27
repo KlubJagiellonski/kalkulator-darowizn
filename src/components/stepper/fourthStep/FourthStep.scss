@@ -1,11 +1,12 @@
 @use "./../../../variables.scss" as *;
 
 .count-step {
+    padding-bottom: 42px;
+
     .prices {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         padding-top: 12px;
-        padding-bottom: 42px;
         gap: 12px;
 
         .count-input {
@@ -43,7 +44,7 @@
                 width: 180px;
             }
 
-            .price-btn{
+            .price-btn {
                 width: 96px;
             }
         }

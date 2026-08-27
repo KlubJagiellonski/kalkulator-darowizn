@@ -4,13 +4,31 @@ import { formatInputValue } from "../../../utils/formatInputValues"
 import Input from "../../UI/input/Input"
 import Toggle from "../../UI/toggle/Toggle"
 import "./FourthStep.scss"
+import Alert from "../../UI/alert/Alert"
+import { calculateForPIT2022 } from "../../../alghorytm/2022/pit-calculations-2022"
 
 function FourthStep({ values, setValues }: ValuesProps) {
     const prices = [200, 500, 1000, 2500]
     const [value, setValue] = useState("")
     const [price, setPrice] = useState<null | number>(500)
 
-    const { donationPerid } = values
+    const { donationAmount, donationPerid, income, incomePeriod } = values
+    const { donationSum } =
+        calculateForPIT2022(
+            incomePeriod === "monthly"
+                ? income! * 12
+                : income!
+        )
+
+    const annualDonation =
+        donationPerid === "monthly"
+            ? (donationAmount ?? 0) * 12
+            : (donationAmount ?? 0)
+
+    const aboveLimit = Math.max(
+        0,
+        annualDonation - donationSum
+    )
 
     const handleChange = (value: string | number) => {
         let sanitized = `${value}`
@@ -66,6 +84,12 @@ function FourthStep({ values, setValues }: ValuesProps) {
         })
     }
 
+    const formatAmount = (amount: number) => {
+        return Number.isInteger(amount)
+            ? formatInputValue(`${amount}`)
+            : formatInputValue(amount.toFixed(2))
+    }
+
     return (
         <div className="count-step step-content">
             <div className="title-wrapper">
@@ -81,6 +105,12 @@ function FourthStep({ values, setValues }: ValuesProps) {
                     <Input onChange={handleChange} value={value} placeholder="własna kwota" prefix="zł" />
                 </div>
             </div>
+            <Alert
+                shortText="Nadwyżka trafi do organizacji, ale nie obniży podatku."
+                show={!!aboveLimit}
+                title={`Powyżej limitu odliczenia o ${formatAmount(aboveLimit)} zł`}
+                text={`Odliczysz maksymalnie ${formatInputValue(`${donationSum}`)} zł rocznie. Nadwyżka nadal trafia do organizacji — po prostu nie obniża podatku.`}
+            />
         </div>
     )
 }

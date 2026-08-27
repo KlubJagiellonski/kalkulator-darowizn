@@ -1,13 +1,15 @@
 import type { Values } from "../../../types/type"
+import { back } from "../../../utils/back"
 import "./StepperNav.scss"
 
 interface StepperNavProps {
     step: number,
     values: Values
     setStep: (step: number) => void
+    setValues: (values: Values)=>void
 }
 
-function StepperNav({ step, setStep, values }: StepperNavProps) {
+function StepperNav({ step, setStep, values, setValues }: StepperNavProps) {
     const text = () => {
         if (step == 2 && values.pit && !values.pitType) {
             return 1
@@ -23,14 +25,13 @@ function StepperNav({ step, setStep, values }: StepperNavProps) {
             return 6
         }
 
-
         return 0
     }
 
     return (
         <div className={`btns ${step == 1 ? "hide" : ""}`}>
             <div className={`btn-box`}>
-                <button disabled={step == 1} className={`button button--ghost button-stepper`} onClick={() => setStep(step - 1)}>← Wstecz</button>
+                <button disabled={step == 1} className={`button button--ghost button-stepper`} onClick={() => back({setStep, step: step-1, setValues, values})}>← Wstecz</button>
             </div>
             <div className="texts">
                 <p className={`text text-1 ${text() == 0 ? "active" : ""}`}>Dalej przejdziesz przyciskiem w panelu obok ↗</p>

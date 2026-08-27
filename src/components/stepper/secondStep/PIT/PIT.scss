@@ -1,7 +1,7 @@
 @use "./../../../../variables.scss" as *;
 
 .pit {
-    padding-bottom: 0;
+    padding-bottom: 20px;
 
     .hint-lumpsum {
         bottom: -55px;
@@ -61,13 +61,18 @@
     }
 }
 
+@include mobile {
+    .pit {
+        padding-bottom: 0;
+    }
+}
+
 @include tablet {
     .pit {
-        padding-bottom: calc(var(--pit-height) + 14px);
+        padding-bottom: 150px;
 
         .hint-lumpsum {
             left: 30px;
-            // top: 150px;
         }
 
 
@@ -115,6 +120,8 @@
 
 @include desktop {
     .pit {
+        padding-bottom: 0;
+
         .hint-lumpsum {
             left: -90px;
             top: 80px;
