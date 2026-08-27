@@ -14,7 +14,9 @@ function App() {
   const defaultValues: Values = {
     pit: false,
     cit: false,
-    incomePeriod: "yearly"
+    incomePeriod: "yearly",
+    donationPerid: "once",
+    donationAmount: 500
   }
 
   const [step, setStep] = useState(1)
