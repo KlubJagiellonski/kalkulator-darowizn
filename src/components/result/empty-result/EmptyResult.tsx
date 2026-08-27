@@ -13,7 +13,7 @@ function EmptyResult({ char, text, smallText, smallTextLonger }: EmptyResultProp
             <div className="icon">{char}</div>
             <p className="text text-1">{text}</p>
             {
-                smallText || smallTextLonger &&
+                (smallText || smallTextLonger) &&
                 <p className="text text-2">{smallText}<span> {smallTextLonger}</span></p>
             }
         </div>

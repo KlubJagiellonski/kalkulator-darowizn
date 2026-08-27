@@ -9,7 +9,7 @@ import YellowResult from "./yellow-result/yellowResult"
 interface ResultProps {
     step: number,
     values: Values,
-    setValues: (values: Values)=>void
+    setValues: (values: Values) => void
     setStep: (step: number) => void
 }
 
@@ -32,8 +32,15 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
             char: "%",
             text: 'Przy ryczałcie odliczenie liczy się od przychodu, a nie od dochodu. Wybierz swoją stawkę, a policzymy, ile realnie zyskasz na darowiźnie.',
             smallTextLonger: 'Limit odliczenia przy ryczałcie to również 6%.'
+        },
+        {
+            char: "%",
+            text: 'Wybierz stawkę CIT, którą stosuje Twoja firma. Od niej zależy, ile realnie zyskacie na darowiźnie.',
+            smallTextLonger: 'Stawkę znajdziesz w zeznaniu CIT-8 za zeszły rok.'
         }
     ]
+
+    console.log(step == 2 && values.pit && !values.pitType)
 
     return (
         <div className="result" style={{ height }}>
@@ -46,20 +53,20 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
             <div ref={step == 1 && values.cit ? ref : undefined} className={`result-card result-card-3 ${step == 1 && values.cit ? "active" : ""}`}>
                 <CheckedResultWho setStep={setStep} btn="stawka CIT" prec={10} />
             </div>
-            <div ref={step == 2 && !values.pitType ? ref : undefined} className={`result-card result-card-4 ${step == 2 && !values.pitType ? "active" : ""}`}>
+            <div ref={step == 2 && values.pit && !values.pitType ? ref : undefined} className={`result-card result-card-4 ${step == 2 && values.pit && !values.pitType ? "active" : ""}`}>
                 <EmptyResult {...emptyResults[1]} />
             </div>
-            <div ref={step == 2 && values.pitType == "scale" ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pitType == "scale" ? "active" : ""}`}>
+            <div ref={step == 2 && values.pit && values.pitType == "scale" ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "scale" ? "active" : ""}`}>
                 <GreenResult setStep={setStep} text="Rozliczając się na skali podatkowej możesz skorzystać z odliczenia. Przejdź dalej, by podać swoje dochody i policzyć Twój limit darowizn na 2026 rok." />
             </div>
-            <div ref={step == 2 && values.pitType == "lumpSum" && !values.lumpSum ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pitType == "lumpSum" && !values.lumpSum ? "active" : ""}`}>
+            <div ref={step == 2 && values.pit && values.pitType == "lumpSum" && !values.lumpSum ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "lumpSum" && !values.lumpSum ? "active" : ""}`}>
                 <EmptyResult {...emptyResults[2]} />
             </div>
-            <div ref={step == 2 && values.pitType == "lumpSum" && values.lumpSum ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pitType == "lumpSum" && values.lumpSum ? "active" : ""}`}>
+            <div ref={step == 2 && values.pit && values.pitType == "lumpSum" && values.lumpSum ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "lumpSum" && values.lumpSum ? "active" : ""}`}>
                 <GreenResult setStep={setStep} text='Ryczałt też pozwala odliczyć darowiznę — od przychodu, z limitem 6%. Przy stawce 12% każde odliczone 100 zł to 12 zł niższego podatku. Przejdź dalej, by podać swój przychód.' />
             </div>
-            <div ref={step == 2 && values.pitType == "flat19" ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pitType == "flat19" ? "active" : ""}`}>
-                <YellowResult setValues={setValues} values={values} setStep={setStep} />
+            <div ref={step == 2 && values.cit && !values.citType ? ref : undefined} className={`result-card result-card-6 ${step == 2 && values.cit && !values.citType ? "active" : ""}`}>
+                <EmptyResult {...emptyResults[3]} />
             </div>
         </div>
     )
