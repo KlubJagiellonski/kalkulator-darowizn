@@ -1,16 +1,29 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import type { ValuesProps } from "../../../../types/type"
 import Input from "../../../UI/input/Input"
-import "./Scale.scss"
+import "./PitInput.scss"
 import { formatInputValue } from "../../../../utils/formatInputValues"
 import Toggle from "../../../UI/toggle/Toggle"
 import Hint from "../../../UI/hint/Hint"
 import HintMessage from "../../../UI/hint/HintMessage"
 
-function Scale({ values, setValues }: ValuesProps) {
+interface PitInputProps extends ValuesProps{
+    taxRate: number,
+    info: string,
+    textEmpty: string,
+    text: string
+}
+
+function PitInput({ values, setValues, taxRate, info, text, textEmpty }: PitInputProps) {
     const { income, incomePeriod } = values
     const [value, setValue] = useState(formatInputValue(`${income ?? ""}`))
     const [showHint, setShowHint] = useState(false)
+
+    useEffect(()=>{
+        if(values.income === undefined){
+            setValue("")
+        }
+    }, [values])
 
     const handleToggle = () => {
         const come = incomePeriod === "monthly"
@@ -61,12 +74,6 @@ function Scale({ values, setValues }: ValuesProps) {
         })
     }
 
-    const yearlyIncome = incomePeriod === "monthly"
-        ? income && income * 12
-        : income
-
-    const taxRate = (yearlyIncome ?? 0) > 120000 ? 32 : 12
-
     return (
         <div className="scale">
             <div className="title-wrapper">
@@ -77,7 +84,7 @@ function Scale({ values, setValues }: ValuesProps) {
                     <HintMessage title="Dochód" text="Przychód pomniejszony o koszty jego uzyskania. To od dochodu liczy się podatek — i to on wyznacza limit odliczenia darowizn (6% dla osób prywatnych)." open={showHint} />
                 </div>
             </div>
-            <div className="info">Potrzebny wyłącznie do wyliczenia stawki i limitu 6%.</div>
+            <div className="info">{info}</div>
             <Toggle firstItem="Rocznie" secondItem="Miesięcznie" position={incomePeriod === "yearly" ? "first" : "second"} setPosition={handleToggle} />
             <div className="scale-content">
                 <div className="scale-input">
@@ -87,12 +94,12 @@ function Scale({ values, setValues }: ValuesProps) {
                     </div>
                 </div>
                 <div className="scale-texts">
-                    <p className={`brutto-text ${value === "" ? "active" : ""}`}>Kwota brutto, przed odliczeniem składek.</p>
-                    <p className={`brutto-text brutto-text-2  ${value !== "" ? "active" : ""}`}>Twoja stawka podatku: {taxRate}%</p>
+                    <p className={`brutto-text ${value === "" ? "active" : ""}`}>{textEmpty}</p>
+                    <p className={`brutto-text brutto-text-2  ${value !== "" ? "active" : ""}`}>{text} {taxRate}%</p>
                 </div>
             </div>
         </div>
     )
 }
 
-export default Scale
+export default PitInput

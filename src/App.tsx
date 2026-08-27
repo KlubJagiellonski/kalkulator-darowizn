@@ -35,7 +35,12 @@ function App() {
       title: "Forma rozliczenia PIT",
       subtitle: values.pit ? "Decyduje o tym, czy odliczenie jest możliwe" : "Decyduje o wysokości korzyści podatkowej",
       name: "Rozliczenie",
-      isValid: (!!values.cit && !!values.citType) || (!!values.pit && !!values.pitType),
+      isValid: !!(
+        (values.cit && values.citType) ||
+        (values.pit &&
+          values.pitType &&
+          (values.pitType !== "lumpSum" || values.lumpSum))
+      ),
       children: <SecondStep values={values} setValues={setValues} />
     },
     {

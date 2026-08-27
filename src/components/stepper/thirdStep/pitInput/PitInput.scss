@@ -9,6 +9,7 @@
 
     .scale-texts {
         position: relative;
+        flex: 1;
 
         .brutto-text {
             position: relative;
@@ -22,7 +23,8 @@
 
         .brutto-text-2 {
             position: absolute;
-            top: 0;
+            top: 50%;
+            transform: translateY(-50%);
         }
     }
 

@@ -46,6 +46,11 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
             text: 'Podaj swój dochód, a policzymy dokładną kwotę darowizn, którą możesz odliczyć w 2026 roku.',
             smallTextLonger: 'Wyliczenie zostaje na Twoim ekranie.',
             smallText: "Nigdzie nie zapisujemy tej liczby. "
+        },
+        {
+            char: "zł",
+            text: 'Podaj swój roczny przychód, a policzymy dokładną kwotę darowizn, którą możesz odliczyć w 2026 roku.',
+            smallText: "Nigdzie nie zapisujemy tej liczby."
         }
     ]
 
@@ -110,6 +115,21 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                 <EmptyResult {...emptyResults[4]} />
             </div>
             <div ref={step == 3 && values.pit && values.pitType === "scale" && values.income ? ref : undefined} className={`result-card result-card-7 ${step == 3 && values.pit && values.pitType === "scale" && values.income ? "active" : ""}`}>
+                <CountResult
+                    setStep={setStep}
+                    count={
+                        calculateForPIT2022(
+                            values.incomePeriod === "monthly"
+                                ? values.income! * 12
+                                : values.income!
+                        ).donationSum
+                    }
+                />
+            </div>
+            <div ref={step == 3 && values.pit && values.pitType === "lumpSum" && !values.income ? ref : undefined} className={`result-card result-card-6 ${step == 3 && values.pit && values.pitType === "lumpSum" && !values.income ? "active" : ""}`}>
+                <EmptyResult {...emptyResults[5]} />
+            </div>
+            <div ref={step == 3 && values.pit && values.pitType === "lumpSum" && values.income ? ref : undefined} className={`result-card result-card-7 ${step == 3 && values.pit && values.pitType === "lumpSum" && values.income ? "active" : ""}`}>
                 <CountResult
                     setStep={setStep}
                     count={

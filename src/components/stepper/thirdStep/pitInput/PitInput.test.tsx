@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { dumpValues } from "../../../../test/dumpValues";
-import Scale from "./Scale";
+import PitInput from "./PitInput";
 
 describe("scale", () => {
     it.each([
@@ -37,9 +37,13 @@ describe("scale", () => {
             const setValues = vi.fn()
 
             render(
-                <Scale
+                <PitInput
                     values={dumpValues}
                     setValues={setValues}
+                    info=""
+                    taxRate={2}
+                    textEmpty=""
+                    text=""
                 />
             )
 

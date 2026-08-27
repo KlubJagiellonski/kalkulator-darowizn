@@ -38,10 +38,6 @@ function FinishResult({ values, donationSum, taxDeduction }: FinishResultProps) 
 
     const taxCovered = annualDonation - displayedCost
 
-    const aboveLimit = Math.max(
-        0,
-        annualDonation - donationSum
-    )
 
     return (
         <div className="finish-result">
