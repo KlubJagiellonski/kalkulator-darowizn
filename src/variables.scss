@@ -2,6 +2,7 @@ $text-primary: #1A1B22;
 $text-secondary: #6E7180;
 $text-muted: #5A5D6B;
 $text-light: #C9C6BF;
+$text-light-gray: #A8AAB4;
 
 $color-primary: #C62D1F;
 $color-dark: #1A1B22;
@@ -29,6 +30,8 @@ $bg-green: #E9F4EC;
 $color-green: #2F8F57;
 $text-green-primary: #1B6B3D;
 $text-green-secondary: #3E4150;
+
+$color-red: #E0392B;
 
 @mixin desktop {
     @container (min-width: 1024px) {

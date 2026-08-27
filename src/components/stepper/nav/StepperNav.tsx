@@ -17,7 +17,12 @@ function StepperNav({ step, setStep, values }: StepperNavProps) {
             return 3
         } else if (step == 2 && values.cit && !values.citType) {
             return 4
+        } else if (step == 4) {
+            return 5
+        } else if (step == 3 && !values.income) {
+            return 6
         }
+
 
         return 0
     }
@@ -33,6 +38,8 @@ function StepperNav({ step, setStep, values }: StepperNavProps) {
                 <p className={`text text-3 ${text() == 2 ? "active" : ""}`}>Wybierz stawkę ryczałtu, żeby przejść dalej</p>
                 <p className={`text text-4 ${text() == 3 ? "active" : ""}`}>Odliczenie niedostępne — sprawdź opcje w panelu obok ↗</p>
                 <p className={`text text-5 ${text() == 4 ? "active" : ""}`}>Wybierz stawkę CIT, żeby przejść dalej</p>
+                <p className={`text text-6 ${text() == 5 ? "active" : ""}`}>Wszystko policzone — akcja w panelu obok ↗</p>
+                <p className={`text text-6 ${text() == 6 ? "active" : ""}`}>Podaj kwotę, żeby zobaczyć swój limit</p>
             </div>
         </div>
     )

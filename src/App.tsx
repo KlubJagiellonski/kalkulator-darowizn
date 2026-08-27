@@ -41,13 +41,15 @@ function App() {
       title: "Twój roczny dochód brutto",
       subtitle: "Wyznacza limit odliczenia",
       name: "Dochód",
-      children: <ThirdStep values={values} setValues={setValues} />
+      children: <ThirdStep values={values} setValues={setValues} />,
+      isValid: (!!values.income),
     },
     {
       title: "Kwota darowizny",
       subtitle: "Jednorazowo albo co miesiąc",
       name: "Kwota",
-      children: <FourthStep values={values} setValues={setValues}/>
+      children: <FourthStep values={values} setValues={setValues} />,
+      isValid: (step===4 && !!values.donationAmount),
     },
   ]
 

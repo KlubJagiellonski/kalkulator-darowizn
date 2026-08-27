@@ -52,10 +52,14 @@ function FourthStep({ values, setValues }: ValuesProps) {
     const handleClick = (count: number) => {
         setPrice(count)
         setValue("")
+        setValues({
+            ...values,
+            donationAmount: count
+        })
     }
 
     const handleToggle = () => {
-        
+
         setValues({
             ...values,
             donationPerid: donationPerid === "once" ? "monthly" : "once"

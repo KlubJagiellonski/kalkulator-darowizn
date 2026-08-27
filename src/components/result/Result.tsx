@@ -7,6 +7,7 @@ import GreenResult from "./green-result/GreenResult"
 import YellowResult from "./yellow-result/YellowResult"
 import CountResult from "./count-result/CountResult"
 import { calculateForPIT2022 } from "../../alghorytm/2022/pit-calculations-2022"
+import FinishResult from "./finish-result/FinishResult"
 
 interface ResultProps {
     step: number,
@@ -108,7 +109,7 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
             <div ref={step == 3 && values.pit && values.pitType === "scale" && !values.income ? ref : undefined} className={`result-card result-card-6 ${step == 3 && values.pit && values.pitType === "scale" && !values.income ? "active" : ""}`}>
                 <EmptyResult {...emptyResults[4]} />
             </div>
-            <div ref={step == 3 && values.pit && values.pitType === "scale" && values.income ? ref : undefined} className={`result-card result-card-6 ${step == 3 && values.pit && values.pitType === "scale" && values.income ? "active" : ""}`}>
+            <div ref={step == 3 && values.pit && values.pitType === "scale" && values.income ? ref : undefined} className={`result-card result-card-7 ${step == 3 && values.pit && values.pitType === "scale" && values.income ? "active" : ""}`}>
                 <CountResult
                     setStep={setStep}
                     count={
@@ -119,6 +120,13 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                         ).donationSum
                     }
                 />
+            </div>
+            <div ref={step == 4 ? ref : undefined} className={`result-card result-card-7 ${step == 4 ? "active" : ""}`}>
+                <FinishResult values={values} {...calculateForPIT2022(
+                    values.incomePeriod === "monthly"
+                        ? values.income! * 12
+                        : values.income!
+                )} />
             </div>
         </div>
     )
