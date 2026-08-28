@@ -45,7 +45,7 @@ function App() {
     },
     {
       title: "Twój roczny dochód brutto",
-      subtitle: "Wyznacza limit odliczenia",
+      subtitle: values.pit && values.pitType === "scale" ? "Wyznacza limit odliczenia" :  "Przy ryczałcie limit liczy się od przychodu",
       name: "Dochód",
       children: <ThirdStep values={values} setValues={setValues} />,
       isValid: (!!values.income),

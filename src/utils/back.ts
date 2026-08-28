@@ -15,6 +15,7 @@ export const back = ({ step, setStep, setValues, values }: Back) => {
             income: undefined,
             incomePeriod: "yearly",
             lumpSum: undefined,
+            donationAmount: 500
         })
     } else if (step === 2) {
         setValues({
@@ -22,13 +23,14 @@ export const back = ({ step, setStep, setValues, values }: Back) => {
             donationPerid: "once",
             income: undefined,
             incomePeriod: "yearly",
-            lumpSum: undefined,
+            donationAmount: 500
         })
     } else if (step === 3) {
         setValues({
             ...values,
             donationPerid: "once",
             lumpSum: undefined,
+            donationAmount: 500
         })
     }
 

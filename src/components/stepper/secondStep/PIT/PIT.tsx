@@ -15,7 +15,8 @@ function PIT({ values, setValues }: ValuesProps) {
     const handleClick = (type: PITType) => {
         setValues({
             ...values,
-            pitType: type
+            pitType: type,
+            lumpSum: undefined
         })
     }
 
