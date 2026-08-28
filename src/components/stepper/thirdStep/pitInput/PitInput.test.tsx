@@ -44,6 +44,8 @@ describe("scale", () => {
                     taxRate={2}
                     textEmpty=""
                     text=""
+                    hint=""
+                    title=""
                 />
             )
 

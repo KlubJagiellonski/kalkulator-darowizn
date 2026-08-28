@@ -16,6 +16,8 @@ function ThirdStep({ values, setValues }: ValuesProps) {
             {
                 values.pitType === "scale" &&
                 <PitInput
+                    hint="Przychód pomniejszony o koszty jego uzyskania. To od dochodu liczy się podatek — i to on wyznacza limit odliczenia darowizn (6% dla osób prywatnych)."
+                    title="Twój roczny dochód brutto"
                     setValues={setValues}
                     values={values}
                     taxRate={taxRate}
@@ -26,6 +28,8 @@ function ThirdStep({ values, setValues }: ValuesProps) {
             {
                 values.pitType === "lumpSum" &&
                 <PitInput
+                    hint="Wszystko, co firma lub przedsiębiorca zarobił, zanim odejmiemy koszty. Przy ryczałcie podatek i limit darowizn liczą się właśnie od przychodu."
+                    title="Twój roczny przychód"
                     setValues={setValues}
                     values={values}
                     taxRate={values.lumpSum ?? 0}

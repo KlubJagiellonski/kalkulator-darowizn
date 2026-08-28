@@ -100,7 +100,7 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
             <div ref={step == 2 && values.pit && values.pitType == "lumpSum" && values.lumpSum ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "lumpSum" && values.lumpSum ? "active" : ""}`}>
                 <GreenResult setStep={setStep} {...greenResults[1]} />
             </div>
-            <div ref={step == 2 && values.pit && values.pitType == "flat19" && values.lumpSum ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "flat19" && values.lumpSum ? "active" : ""}`}>
+            <div ref={step == 2 && values.pit && values.pitType === "flat19" ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "flat19" ? "active" : ""}`}>
                 <YellowResult setValues={setValues} values={values} setStep={setStep} />
             </div>
             <div ref={step == 2 && values.cit && !values.citType ? ref : undefined} className={`result-card result-card-6 ${step == 2 && values.cit && !values.citType ? "active" : ""}`}>

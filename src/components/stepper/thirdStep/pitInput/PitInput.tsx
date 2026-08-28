@@ -12,9 +12,11 @@ interface PitInputProps extends ValuesProps{
     info: string,
     textEmpty: string,
     text: string
+    title: string
+    hint: string
 }
 
-function PitInput({ values, setValues, taxRate, info, text, textEmpty }: PitInputProps) {
+function PitInput({ values, setValues, taxRate, info, text, textEmpty, title, hint }: PitInputProps) {
     const { income, incomePeriod } = values
     const [value, setValue] = useState(formatInputValue(`${income ?? ""}`))
     const [showHint, setShowHint] = useState(false)
@@ -78,10 +80,10 @@ function PitInput({ values, setValues, taxRate, info, text, textEmpty }: PitInpu
         <div className="scale">
             <div className="title-wrapper">
                 <p className="number">03</p>
-                <p className="title">Twój roczny dochód brutto</p>
+                <p className="title">{title}</p>
                 <Hint active={showHint} setActive={setShowHint} />
                 <div className="hint-message-1">
-                    <HintMessage title="Dochód" text="Przychód pomniejszony o koszty jego uzyskania. To od dochodu liczy się podatek — i to on wyznacza limit odliczenia darowizn (6% dla osób prywatnych)." open={showHint} />
+                    <HintMessage title="Dochód" text={hint} open={showHint} />
                 </div>
             </div>
             <div className="info">{info}</div>
@@ -90,7 +92,7 @@ function PitInput({ values, setValues, taxRate, info, text, textEmpty }: PitInpu
                 <div className="scale-input">
                     <Input value={value} placeholder="np. 96 000" onChange={handleChange} prefix="zł" />
                     <div className="hint-message-2">
-                        <HintMessage title="Dochód" text="Przychód pomniejszony o koszty jego uzyskania. To od dochodu liczy się podatek — i to on wyznacza limit odliczenia darowizn (6%)." open={showHint} />
+                        <HintMessage title="Dochód" text={hint} open={showHint} />
                     </div>
                 </div>
                 <div className="scale-texts">
