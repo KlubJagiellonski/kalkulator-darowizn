@@ -28,7 +28,7 @@ function LumpSumRates({ isOpen, ref, values, setValues, setShowHint, showHint }:
             <div ref={ref} className="lump-sum-box">
                 <div className="lump-sum-title-wrapper">
                     <h5 className="title">Twoja stawka ryczałtu</h5>
-                    <Hint active={showHint} setActive={setShowHint} />
+                    <Hint active={showHint} setActive={setShowHint} label="informacja o stawce ryczałtu"/>
                 </div>
                 <p className="text">Zależy od rodzaju działalności. Znajdziesz ją w ewidencji przychodów lub u księgowej.</p>
                 <div className="rates">

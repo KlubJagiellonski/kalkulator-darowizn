@@ -10,9 +10,9 @@ function CountResult({ setStep, count }: PitResultWhoProps) {
     return (
         <div className="count-result">
             <p className="tag">TWÓJ LIMIT DAROWIZN W 2026</p>
-            <h3 className="prec">{formatInputValue(`${count}`)} zł</h3>
+            <h3 className="prec">{Number.isFinite(count) ? `${formatInputValue(`${count}`)} zł` : "0 zł"}</h3>
             <p className="text text-1">Tyle darowizn możesz przekazać, by każda z nich obniżyła kwotę podatku, który płacisz. Przejdź dalej, by sprawdzić, ile zyskasz dzięki darowiźnie na konkretną kwotę.</p>
-            <button onClick={()=>{setStep(4)}} className="button button--primary button-next">Dalej: kwota darowizny →</button>
+            <button onClick={() => { setStep(4) }} className="button button--primary button-next">Dalej: kwota darowizny →</button>
         </div>
     )
 }

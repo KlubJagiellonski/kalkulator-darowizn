@@ -81,7 +81,7 @@ function PitInput({ values, setValues, taxRate, info, text, textEmpty, title, hi
             <div className="title-wrapper">
                 <p className="number">03</p>
                 <p className="title">{title}</p>
-                <Hint active={showHint} setActive={setShowHint} />
+                <Hint active={showHint} setActive={setShowHint} label="informacja o Przychodzie"/>
                 <div className="hint-message-1">
                     <HintMessage title="Dochód" text={hint} open={showHint} />
                 </div>
