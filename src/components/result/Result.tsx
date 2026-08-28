@@ -9,6 +9,7 @@ import CountResult from "./count-result/CountResult"
 import { calculateForPIT2022 } from "../../alghorytm/2022/pit-calculations-2022"
 import FinishResult from "./finish-result/FinishResult"
 import { calculateForPPE2022 } from "../../alghorytm/2022/ppe-calculations-2022"
+import FinisEmptyhResult from "./finish-empty-result/FinishEmptyResult"
 
 interface ResultProps {
     step: number,
@@ -164,6 +165,9 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                             : values.income!,
                         values.lumpSum ?? 0
                     )} />
+            </div>
+            <div ref={step == 4 && values.pit && values.pitType === "flat19" ? ref : undefined} className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "flat19" ? "active" : ""}`}>
+                <FinisEmptyhResult values={values}/>
             </div>
         </div>
     )
