@@ -128,7 +128,8 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                         calculateForPIT2022(
                             values.incomePeriod === "monthly"
                                 ? values.income! * 12
-                                : values.income!
+                                : values.income!,
+                            values.donationAmount
                         ).donationSum
                     }
                 />
@@ -143,7 +144,8 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                         calculateForPIT2022(
                             values.incomePeriod === "monthly"
                                 ? values.income! * 12
-                                : values.income!
+                                : values.income!,
+                            values.donationAmount
                         ).donationSum
                     }
                 />
@@ -173,7 +175,9 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                     {...calculateForPIT2022(
                         values.incomePeriod === "monthly"
                             ? values.income! * 12
-                            : values.income!
+                            : values.income!,
+                        values.donationAmount
+
                     )} />
             </div>
             <div ref={step == 4 && values.pit && values.pitType === "lumpSum" ? ref : undefined} className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "lumpSum" ? "active" : ""}`}>
@@ -185,11 +189,26 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                         values.incomePeriod === "monthly"
                             ? values.income! * 12
                             : values.income!,
-                        values.lumpSum ?? 0
+                        values.lumpSum ?? 0,
+                        values.donationAmount ?? 0
                     )} />
             </div>
             <div ref={step == 4 && values.pit && values.pitType === "flat19" ? ref : undefined} className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "flat19" ? "active" : ""}`}>
                 <FinisEmptyhResult values={values} />
+            </div>
+            <div ref={step == 4 && values.cit ? ref : undefined} className={`result-card result-card-7 ${step == 4 && values.cit ? "active" : ""}`}>
+                <FinishResult
+                    taxRate={values.citType === "cit19" ? 19 : 9}
+                    taxName="Stawka ryczałtu"
+                    values={values}
+                    {...calculateForPPE2022(
+                        values.incomePeriod === "monthly"
+                            ? values.income! * 12
+                            : values.income!,
+                        values.citType === "cit19" ? 19 : 9,
+                        values.donationAmount ?? 0,
+                        0.1
+                    )} />
             </div>
         </div>
     )

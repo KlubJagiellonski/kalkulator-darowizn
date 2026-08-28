@@ -6,7 +6,7 @@ import { calculateForPPE2022 } from "../../../alghorytm/2022/ppe-calculations-20
 
 function FourthStep({ values, setValues }: ValuesProps) {
 
-    const { incomePeriod, income, pit, pitType } = values
+    const { incomePeriod, income, pit, pitType, cit, citType } = values
 
     return (
         <>
@@ -19,7 +19,8 @@ function FourthStep({ values, setValues }: ValuesProps) {
                         calculateForPIT2022(
                             incomePeriod === "monthly"
                                 ? income! * 12
-                                : income!
+                                : income!,
+                            values.donationAmount
                         ).donationSum} />
             }
             {
@@ -32,7 +33,8 @@ function FourthStep({ values, setValues }: ValuesProps) {
                             incomePeriod === "monthly"
                                 ? income! * 12
                                 : income!,
-                            values.lumpSum ?? 0
+                            values.lumpSum ?? 0,
+                            values.donationAmount ?? 0
                         ).donationSum} />
             }
             {
@@ -40,6 +42,22 @@ function FourthStep({ values, setValues }: ValuesProps) {
                 <LastStep
                     setValues={setValues}
                     values={values}
+                />
+            }
+            {
+                cit &&
+                <LastStep
+                    setValues={setValues}
+                    values={values}
+                    donationSum={
+                        calculateForPPE2022(
+                            incomePeriod === "monthly"
+                                ? income! * 12
+                                : income!,
+                            citType === "cit19" ? 19 : 9,
+                            values.donationAmount ?? 0,
+                            0.1
+                        ).donationSum}
                 />
             }
         </>
