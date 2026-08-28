@@ -31,9 +31,9 @@ function FinisEmptyhResult({ values }: FinishResultProps) {
                         Realnie zapłacisz
                     </p>
 
-                    <h3 className="prec">
+                    <h2 className="prec">
                         {formatInputValue(`${annualDonation}`)} zł
-                    </h3>
+                    </h2>
                 </div>
 
                 <a className="details">

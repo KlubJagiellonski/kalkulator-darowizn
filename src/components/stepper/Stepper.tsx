@@ -58,7 +58,7 @@ function Stepper({ items, step, setStep }: StepperProps) {
                             onClick={() => changeStep(id + 1)}
                             disabled={!(items[id - 1]?.isValid || step > id + 1) || step === id + 1}
                             aria-current={step === 1 ? "step" : undefined}
-                            aria-label={`Krok ${id+1}: ${el.title}`}
+                            aria-label={`Krok ${id + 1}: ${el.title}`}
                         >
                             <span className={`dot`} />
                             <span className={`dot-title ${(id + 1 < step || (id + 1 === step && items[step - 1].isValid)) && !el.isBlock ? "checked" : id + 1 === step ? "active" : ""}`}>
@@ -86,11 +86,22 @@ function Stepper({ items, step, setStep }: StepperProps) {
             </div>
             <div className="steps">
                 <div className={`steps-box`} style={{ height, width: `${100 * items.length}%`, transform: `translateX(${-(step - 1) * 100 / items.length}%)` }}>
-                    {items.map((item, id) =>
-                        <div key={id} className={`step`} ref={step === id + 1 ? activeStepRef : undefined}>
-                            {item.children}
-                        </div>
-                    )}
+                    {items.map((item, id) => {
+                        const isActive = step === id + 1;
+
+                        return (
+                            <div
+                                key={id}
+                                className="step"
+                                ref={isActive ? activeStepRef : undefined}
+                                inert={isActive ? undefined : true}
+                                aria-hidden={!isActive}
+                                tabIndex={isActive ? 0 : -1}
+                            >
+                                {item.children}
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>

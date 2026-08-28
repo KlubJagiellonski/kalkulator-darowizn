@@ -7,7 +7,7 @@ import Toggle from "../../../UI/toggle/Toggle"
 import Hint from "../../../UI/hint/Hint"
 import HintMessage from "../../../UI/hint/HintMessage"
 
-interface PitInputProps extends ValuesProps{
+interface PitInputProps extends ValuesProps {
     taxRate: number,
     info: string,
     textEmpty: string,
@@ -21,16 +21,16 @@ function PitInput({ values, setValues, taxRate, info, text, textEmpty, title, hi
     const [value, setValue] = useState(formatInputValue(`${income ?? ""}`))
     const [showHint, setShowHint] = useState(false)
 
-    useEffect(()=>{
-        if(values.income === undefined){
+    useEffect(() => {
+        if (values.income === undefined) {
             setValue("")
         }
     }, [values])
 
     const handleToggle = () => {
         const come = incomePeriod === "monthly"
-                ? (income ?? 0) * 12
-                : (income ?? 0)/12
+            ? (income ?? 0) * 12
+            : (income ?? 0) / 12
 
         setValues({
             ...values,
@@ -64,7 +64,7 @@ function PitInput({ values, setValues, taxRate, info, text, textEmpty, title, hi
             sanitized = `${integer}.${decimal.slice(0, 2)}`
         }
 
-        if ((Number(sanitized) >= 100000000 && incomePeriod === "yearly") || (Number(sanitized) >= 100000000/12 && incomePeriod === "monthly")) {
+        if ((Number(sanitized) >= 100000000 && incomePeriod === "yearly") || (Number(sanitized) >= 100000000 / 12 && incomePeriod === "monthly")) {
             return
         }
 
@@ -81,7 +81,7 @@ function PitInput({ values, setValues, taxRate, info, text, textEmpty, title, hi
             <div className="title-wrapper">
                 <p className="number">03</p>
                 <p className="title">{title}</p>
-                <Hint active={showHint} setActive={setShowHint} label="informacja o Przychodzie"/>
+                <Hint active={showHint} setActive={setShowHint} label="informacja o Przychodzie" />
                 <div className="hint-message-1">
                     <HintMessage title="Dochód" text={hint} open={showHint} />
                 </div>
@@ -90,7 +90,7 @@ function PitInput({ values, setValues, taxRate, info, text, textEmpty, title, hi
             <Toggle firstItem="Rocznie" secondItem="Miesięcznie" position={incomePeriod === "yearly" ? "first" : "second"} setPosition={handleToggle} />
             <div className="scale-content">
                 <div className="scale-input">
-                    <Input value={value} placeholder="np. 96 000" onChange={handleChange} prefix="zł" />
+                    <Input ariaLabel={title} value={value} placeholder="np. 96 000" onChange={handleChange} prefix="zł" />
                     <div className="hint-message-2">
                         <HintMessage title="Dochód" text={hint} open={showHint} />
                     </div>

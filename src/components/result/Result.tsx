@@ -21,6 +21,15 @@ interface ResultProps {
 function Result({ step, values, setStep, setValues }: ResultProps) {
     const { ref, height } = useElementHeight()
 
+    // 🌟 FUNKCJA DO PROPSÓW DOSTĘPNOŚCI – poprawione typy
+    const getCardProps = (isActive: boolean) => {
+        return {
+            inert: isActive ? undefined : true,
+            "aria-hidden": !isActive ? true : undefined,  // ✅ true/false/undefined
+            tabIndex: isActive ? 0 : -1,
+        };
+    };
+
     const emptyResults = [
         {
             char: "%",
@@ -85,43 +94,120 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
 
     return (
         <div className="result" style={{ height }}>
-            <div ref={step == 1 && !values.pit && !values.cit ? ref : undefined} className={`result-card result-card-1 ${step == 1 && !values.pit && !values.cit ? "active" : ""}`}>
+            {/* Karta 1 */}
+            <div 
+                ref={step == 1 && !values.pit && !values.cit ? ref : undefined} 
+                className={`result-card result-card-1 ${step == 1 && !values.pit && !values.cit ? "active" : ""}`}
+                {...getCardProps(!!(step == 1 && !values.pit && !values.cit))}
+            >
                 <EmptyResult {...emptyResults[0]} />
             </div>
-            <div ref={step == 1 && values.pit ? ref : undefined} className={`result-card result-card-2 ${step == 1 && values.pit ? "active" : ""}`}>
+
+            {/* Karta 2 */}
+            <div 
+                ref={step == 1 && values.pit ? ref : undefined} 
+                className={`result-card result-card-2 ${step == 1 && values.pit ? "active" : ""}`}
+                {...getCardProps(!!(step == 1 && values.pit))}
+            >
                 <CheckedResultWho setStep={setStep} btn="forma rozliczenia" prec={6} />
             </div>
-            <div ref={step == 1 && values.cit ? ref : undefined} className={`result-card result-card-3 ${step == 1 && values.cit ? "active" : ""}`}>
+
+            {/* Karta 3 */}
+            <div 
+                ref={step == 1 && values.cit ? ref : undefined} 
+                className={`result-card result-card-3 ${step == 1 && values.cit ? "active" : ""}`}
+                {...getCardProps(!!(step == 1 && values.cit))}
+            >
                 <CheckedResultWho setStep={setStep} btn="stawka CIT" prec={10} />
             </div>
-            <div ref={step == 2 && values.pit && !values.pitType ? ref : undefined} className={`result-card result-card-4 ${step == 2 && values.pit && !values.pitType ? "active" : ""}`}>
+
+            {/* Karta 4 */}
+            <div 
+                ref={step == 2 && values.pit && !values.pitType ? ref : undefined} 
+                className={`result-card result-card-4 ${step == 2 && values.pit && !values.pitType ? "active" : ""}`}
+                {...getCardProps(!!(step == 2 && values.pit && !values.pitType))}
+            >
                 <EmptyResult {...emptyResults[1]} />
             </div>
-            <div ref={step == 2 && values.pit && values.pitType == "scale" ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "scale" ? "active" : ""}`}>
+
+            {/* Karta 5 - scale */}
+            <div 
+                ref={step == 2 && values.pit && values.pitType == "scale" ? ref : undefined} 
+                className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "scale" ? "active" : ""}`}
+                {...getCardProps(!!(step == 2 && values.pit && values.pitType == "scale"))}
+            >
                 <GreenResult setStep={setStep} {...greenResults[0]} />
             </div>
-            <div ref={step == 2 && values.pit && values.pitType == "lumpSum" && !values.lumpSum ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "lumpSum" && !values.lumpSum ? "active" : ""}`}>
+
+            {/* Karta 6 - lumpSum bez stawki */}
+            <div 
+                ref={step == 2 && values.pit && values.pitType == "lumpSum" && !values.lumpSum ? ref : undefined} 
+                className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "lumpSum" && !values.lumpSum ? "active" : ""}`}
+                {...getCardProps(!!(step == 2 && values.pit && values.pitType == "lumpSum" && !values.lumpSum))}
+            >
                 <EmptyResult {...emptyResults[2]} />
             </div>
-            <div ref={step == 2 && values.pit && values.pitType == "lumpSum" && values.lumpSum ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "lumpSum" && values.lumpSum ? "active" : ""}`}>
+
+            {/* Karta 7 - lumpSum ze stawką */}
+            <div 
+                ref={step == 2 && values.pit && values.pitType == "lumpSum" && values.lumpSum ? ref : undefined} 
+                className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "lumpSum" && values.lumpSum ? "active" : ""}`}
+                {...getCardProps(!!(step == 2 && values.pit && values.pitType == "lumpSum" && values.lumpSum))}
+            >
                 <GreenResult setStep={setStep} {...greenResults[1]} />
             </div>
-            <div ref={step == 2 && values.pit && values.pitType === "flat19" ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "flat19" ? "active" : ""}`}>
+
+            {/* Karta 8 - flat19 */}
+            <div 
+                ref={step == 2 && values.pit && values.pitType === "flat19" ? ref : undefined} 
+                className={`result-card result-card-5 ${step == 2 && values.pit && values.pitType == "flat19" ? "active" : ""}`}
+                {...getCardProps(!!(step == 2 && values.pit && values.pitType == "flat19"))}
+            >
                 <YellowResult setValues={setValues} values={values} setStep={setStep} />
             </div>
-            <div ref={step == 2 && values.cit && !values.citType ? ref : undefined} className={`result-card result-card-6 ${step == 2 && values.cit && !values.citType ? "active" : ""}`}>
+
+            {/* Karta 9 - CIT bez stawki */}
+            <div 
+                ref={step == 2 && values.cit && !values.citType ? ref : undefined} 
+                className={`result-card result-card-6 ${step == 2 && values.cit && !values.citType ? "active" : ""}`}
+                {...getCardProps(!!(step == 2 && values.cit && !values.citType))}
+            >
                 <EmptyResult {...emptyResults[3]} />
             </div>
-            <div ref={step == 2 && values.cit && values.citType == "cit19" ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.cit && values.citType == "cit19" ? "active" : ""}`}>
+
+            {/* Karta 10 - CIT 19% */}
+            <div 
+                ref={step == 2 && values.cit && values.citType == "cit19" ? ref : undefined} 
+                className={`result-card result-card-5 ${step == 2 && values.cit && values.citType == "cit19" ? "active" : ""}`}
+                {...getCardProps(!!(step == 2 && values.cit && values.citType == "cit19"))}
+            >
                 <GreenResult setStep={setStep} {...greenResults[2]} />
             </div>
-            <div ref={step == 2 && values.cit && values.citType == "cit9" ? ref : undefined} className={`result-card result-card-5 ${step == 2 && values.cit && values.citType == "cit9" ? "active" : ""}`}>
+
+            {/* Karta 11 - CIT 9% */}
+            <div 
+                ref={step == 2 && values.cit && values.citType == "cit9" ? ref : undefined} 
+                className={`result-card result-card-5 ${step == 2 && values.cit && values.citType == "cit9" ? "active" : ""}`}
+                {...getCardProps(!!(step == 2 && values.cit && values.citType == "cit9"))}
+            >
                 <GreenResult setStep={setStep} {...greenResults[3]} />
             </div>
-            <div ref={step == 3 && values.pit && values.pitType === "scale" && !values.income ? ref : undefined} className={`result-card result-card-6 ${step == 3 && values.pit && values.pitType === "scale" && !values.income ? "active" : ""}`}>
+
+            {/* Karta 12 - scale bez dochodu */}
+            <div 
+                ref={step == 3 && values.pit && values.pitType === "scale" && !values.income ? ref : undefined} 
+                className={`result-card result-card-6 ${step == 3 && values.pit && values.pitType === "scale" && !values.income ? "active" : ""}`}
+                {...getCardProps(!!(step == 3 && values.pit && values.pitType === "scale" && !values.income))}
+            >
                 <EmptyResult {...emptyResults[4]} />
             </div>
-            <div ref={step == 3 && values.pit && values.pitType === "scale" && values.income ? ref : undefined} className={`result-card result-card-7 ${step == 3 && values.pit && values.pitType === "scale" && values.income ? "active" : ""}`}>
+
+            {/* Karta 13 - scale z dochodem */}
+            <div 
+                ref={step == 3 && values.pit && values.pitType === "scale" && values.income ? ref : undefined} 
+                className={`result-card result-card-7 ${step == 3 && values.pit && values.pitType === "scale" && values.income ? "active" : ""}`}
+                {...getCardProps(!!(step == 3 && values.pit && values.pitType === "scale" && values.income))}
+            >
                 <CountResult
                     setStep={setStep}
                     count={
@@ -134,10 +220,22 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                     }
                 />
             </div>
-            <div ref={step == 3 && values.pit && values.pitType === "lumpSum" && !values.income ? ref : undefined} className={`result-card result-card-6 ${step == 3 && values.pit && values.pitType === "lumpSum" && !values.income ? "active" : ""}`}>
+
+            {/* Karta 14 - lumpSum bez dochodu */}
+            <div 
+                ref={step == 3 && values.pit && values.pitType === "lumpSum" && !values.income ? ref : undefined} 
+                className={`result-card result-card-6 ${step == 3 && values.pit && values.pitType === "lumpSum" && !values.income ? "active" : ""}`}
+                {...getCardProps(!!(step == 3 && values.pit && values.pitType === "lumpSum" && !values.income))}
+            >
                 <EmptyResult {...emptyResults[5]} />
             </div>
-            <div ref={step == 3 && values.pit && values.pitType === "lumpSum" && values.income ? ref : undefined} className={`result-card result-card-7 ${step == 3 && values.pit && values.pitType === "lumpSum" && values.income ? "active" : ""}`}>
+
+            {/* Karta 15 - lumpSum z dochodem */}
+            <div 
+                ref={step == 3 && values.pit && values.pitType === "lumpSum" && values.income ? ref : undefined} 
+                className={`result-card result-card-7 ${step == 3 && values.pit && values.pitType === "lumpSum" && values.income ? "active" : ""}`}
+                {...getCardProps(!!(step == 3 && values.pit && values.pitType === "lumpSum" && values.income))}
+            >
                 <CountResult
                     setStep={setStep}
                     count={
@@ -150,10 +248,22 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                     }
                 />
             </div>
-            <div ref={step == 3 && values.cit && !values.income ? ref : undefined} className={`result-card result-card-6 ${step == 3 && values.cit && !values.income ? "active" : ""}`}>
+
+            {/* Karta 16 - CIT bez dochodu */}
+            <div 
+                ref={step == 3 && values.cit && !values.income ? ref : undefined} 
+                className={`result-card result-card-6 ${step == 3 && values.cit && !values.income ? "active" : ""}`}
+                {...getCardProps(!!(step == 3 && values.cit && !values.income))}
+            >
                 <EmptyResult {...emptyResults[6]} />
             </div>
-            <div ref={step == 3 && values.cit && values.income ? ref : undefined} className={`result-card result-card-7 ${step == 3 && values.cit && values.income ? "active" : ""}`}>
+
+            {/* Karta 17 - CIT z dochodem */}
+            <div 
+                ref={step == 3 && values.cit && values.income ? ref : undefined} 
+                className={`result-card result-card-7 ${step == 3 && values.cit && values.income ? "active" : ""}`}
+                {...getCardProps(!!(step == 3 && values.cit && values.income))}
+            >
                 <CountResult
                     setStep={setStep}
                     count={
@@ -167,7 +277,13 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                     }
                 />
             </div>
-            <div ref={step == 4 && values.pit && values.pitType === "scale" ? ref : undefined} className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "scale" ? "active" : ""}`}>
+
+            {/* Karta 18 - Finish Result scale */}
+            <div 
+                ref={step == 4 && values.pit && values.pitType === "scale" ? ref : undefined} 
+                className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "scale" ? "active" : ""}`}
+                {...getCardProps(!!(step == 4 && values.pit && values.pitType === "scale"))}
+            >
                 <FinishResult
                     taxRate={(values.income ?? 0) <= 120000 ? 12 : 32}
                     taxName="Stawka podatku"
@@ -177,10 +293,16 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                             ? values.income! * 12
                             : values.income!,
                         values.donationAmount
-
-                    )} />
+                    )} 
+                />
             </div>
-            <div ref={step == 4 && values.pit && values.pitType === "lumpSum" ? ref : undefined} className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "lumpSum" ? "active" : ""}`}>
+
+            {/* Karta 19 - Finish Result lumpSum */}
+            <div 
+                ref={step == 4 && values.pit && values.pitType === "lumpSum" ? ref : undefined} 
+                className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "lumpSum" ? "active" : ""}`}
+                {...getCardProps(!!(step == 4 && values.pit && values.pitType === "lumpSum"))}
+            >
                 <FinishResult
                     taxRate={values.lumpSum ?? 0}
                     taxName="Stawka ryczałtu"
@@ -191,12 +313,25 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                             : values.income!,
                         values.lumpSum ?? 0,
                         values.donationAmount ?? 0
-                    )} />
+                    )} 
+                />
             </div>
-            <div ref={step == 4 && values.pit && values.pitType === "flat19" ? ref : undefined} className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "flat19" ? "active" : ""}`}>
+
+            {/* Karta 20 - Finish Empty Result flat19 */}
+            <div 
+                ref={step == 4 && values.pit && values.pitType === "flat19" ? ref : undefined} 
+                className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "flat19" ? "active" : ""}`}
+                {...getCardProps(!!(step == 4 && values.pit && values.pitType === "flat19"))}
+            >
                 <FinisEmptyhResult values={values} />
             </div>
-            <div ref={step == 4 && values.cit ? ref : undefined} className={`result-card result-card-7 ${step == 4 && values.cit ? "active" : ""}`}>
+
+            {/* Karta 21 - Finish Result CIT */}
+            <div 
+                ref={step == 4 && values.cit ? ref : undefined} 
+                className={`result-card result-card-7 ${step == 4 && values.cit ? "active" : ""}`}
+                {...getCardProps(!!(step == 4 && values.cit))}
+            >
                 <FinishResult
                     taxRate={values.citType === "cit19" ? 19 : 9}
                     taxName="Stawka ryczałtu"
@@ -208,7 +343,8 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                         values.citType === "cit19" ? 19 : 9,
                         values.donationAmount ?? 0,
                         0.1
-                    )} />
+                    )} 
+                />
             </div>
         </div>
     )

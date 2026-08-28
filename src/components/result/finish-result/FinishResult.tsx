@@ -57,9 +57,9 @@ function FinishResult({ values, donationSum, taxDeduction, taxRate, taxName }: F
                         Realnie zapłacisz
                     </p>
 
-                    <h3 className="prec">
+                    <h2 className="prec">
                         {formatInputValue(`${displayedCost}`)} zł
-                    </h3>
+                    </h2>
                 </div>
 
                 <a className="details">

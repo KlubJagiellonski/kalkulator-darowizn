@@ -8,6 +8,7 @@ import Alert from "../../../UI/alert/Alert"
 
 interface LastStepProps extends ValuesProps {
     donationSum?: number
+    ariaLabel?: string
 }
 
 function LastStep({ values, setValues, donationSum }: LastStepProps) {
@@ -105,7 +106,7 @@ function LastStep({ values, setValues, donationSum }: LastStepProps) {
                     prices.map(count => <button onClick={() => handleClick(count)} key={count} className={`price-btn ${donationAmount === count ? "active" : ""}`}>{count} zł</button>)
                 }
                 <div className="count-input">
-                    <Input onChange={handleChange} value={value} placeholder="własna kwota" prefix="zł" />
+                    <Input ariaLabel="Kwota darowizny w złotych" onChange={handleChange} value={value} placeholder="własna kwota" prefix="zł" />
                 </div>
             </div>
             {
