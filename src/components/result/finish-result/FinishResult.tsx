@@ -12,7 +12,7 @@ interface FinishResultProps {
 
 function FinishResult({ values, donationSum, taxDeduction, taxRate, taxName }: FinishResultProps) {
 
-    const { donationAmount, donationPerid, income } = values
+    const { donationAmount, donationPerid } = values
 
     const annualDonation =
         donationPerid === "monthly"

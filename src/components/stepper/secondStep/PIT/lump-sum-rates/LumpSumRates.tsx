@@ -1,8 +1,7 @@
-import { useState, type Ref } from "react"
+import { type Ref } from "react"
 import "./LumpSumRates.scss"
 import type { Values } from "../../../../../types/type"
 import Hint from "../../../../UI/hint/Hint"
-import HintMessage from "../../../../UI/hint/HintMessage"
 
 interface LumpSumRates {
     isOpen: boolean
