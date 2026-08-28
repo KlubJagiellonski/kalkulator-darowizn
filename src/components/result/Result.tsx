@@ -8,6 +8,7 @@ import YellowResult from "./yellow-result/YellowResult"
 import CountResult from "./count-result/CountResult"
 import { calculateForPIT2022 } from "../../alghorytm/2022/pit-calculations-2022"
 import FinishResult from "./finish-result/FinishResult"
+import { calculateForPPE2022 } from "../../alghorytm/2022/ppe-calculations-2022"
 
 interface ResultProps {
     step: number,
@@ -141,12 +142,28 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                     }
                 />
             </div>
-            <div ref={step == 4 ? ref : undefined} className={`result-card result-card-7 ${step == 4 ? "active" : ""}`}>
-                <FinishResult values={values} {...calculateForPIT2022(
-                    values.incomePeriod === "monthly"
-                        ? values.income! * 12
-                        : values.income!
-                )} />
+            <div ref={step == 4 && values.pit && values.pitType === "scale" ? ref : undefined} className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "scale" ? "active" : ""}`}>
+                <FinishResult
+                    taxRate={(values.income ?? 0) <= 120000 ? 12 : 32}
+                    taxName="Stawka podatku"
+                    values={values}
+                    {...calculateForPIT2022(
+                        values.incomePeriod === "monthly"
+                            ? values.income! * 12
+                            : values.income!
+                    )} />
+            </div>
+            <div ref={step == 4 && values.pit && values.pitType === "lumpSum" ? ref : undefined} className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "lumpSum" ? "active" : ""}`}>
+                <FinishResult
+                    taxRate={values.lumpSum ?? 0}
+                    taxName="Stawka ryczałtu"
+                    values={values}
+                    {...calculateForPPE2022(
+                        values.incomePeriod === "monthly"
+                            ? values.income! * 12
+                            : values.income!,
+                        values.lumpSum ?? 0
+                    )} />
             </div>
         </div>
     )

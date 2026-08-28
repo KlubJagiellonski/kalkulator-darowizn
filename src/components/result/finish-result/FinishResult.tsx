@@ -6,9 +6,11 @@ interface FinishResultProps {
     values: Values
     donationSum: number
     taxDeduction: number
+    taxRate: number
+    taxName: string
 }
 
-function FinishResult({ values, donationSum, taxDeduction }: FinishResultProps) {
+function FinishResult({ values, donationSum, taxDeduction, taxRate, taxName }: FinishResultProps) {
 
     const { donationAmount, donationPerid, income } = values
 
@@ -29,7 +31,7 @@ function FinishResult({ values, donationSum, taxDeduction }: FinishResultProps) 
         realCost
     )
 
-    const taxRate = (income ?? 0) <= 120000 ? 12 : 32
+    // const taxRate = (income ?? 0) <= 120000 ? 12 : 32
 
     const limitUsage =
         donationSum > 0
@@ -132,7 +134,7 @@ function FinishResult({ values, donationSum, taxDeduction }: FinishResultProps) 
 
                 <div className="info-box">
                     <p className="info-text">
-                        Stawka podatku
+                        {taxName}
                     </p>
 
                     <p className="info-count">
