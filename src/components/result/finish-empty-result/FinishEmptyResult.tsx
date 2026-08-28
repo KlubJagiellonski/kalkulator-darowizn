@@ -10,6 +10,11 @@ function FinisEmptyhResult({ values }: FinishResultProps) {
 
     const { donationPerid, donationAmount } = values
 
+    const annualDonation =
+        donationPerid === "monthly"
+            ? (donationAmount ?? 0) * 12
+            : (donationAmount ?? 0)
+
     return (
         <div className="finish-result finish-result-empty">
 
@@ -27,7 +32,7 @@ function FinisEmptyhResult({ values }: FinishResultProps) {
                     </p>
 
                     <h3 className="prec">
-                        {formatInputValue(`${donationAmount}`)} zł
+                        {formatInputValue(`${annualDonation}`)} zł
                     </h3>
                 </div>
 
@@ -39,7 +44,7 @@ function FinisEmptyhResult({ values }: FinishResultProps) {
             <p className="text text-2">
                 z darowizny{" "}
                 <span className="bold">
-                    {formatInputValue(`${donationAmount}`)} zł
+                    {formatInputValue(`${annualDonation}`)} zł
                 </span>{" "}
                 rocznie
             </p>
@@ -55,7 +60,7 @@ function FinisEmptyhResult({ values }: FinishResultProps) {
                     </p>
 
                     <p className="belt-count">
-                        {formatInputValue(`${donationAmount}`)} zł
+                        {formatInputValue(`${annualDonation}`)} zł
                     </p>
                 </div>
 
@@ -71,12 +76,11 @@ function FinisEmptyhResult({ values }: FinishResultProps) {
 
                 <p className="belt-text-2">
                     z darowizny{" "}
-                    {formatInputValue(`${donationAmount}`)} zł
+                    {formatInputValue(`${annualDonation}`)} zł
                 </p>
 
                 <p className="belt-text-3">
-                    0 zł
-                    {" "}pokrywa niższy podatek
+                    0 zł pokrywa niższy podatek
                 </p>
 
             </div>
@@ -118,6 +122,7 @@ function FinisEmptyhResult({ values }: FinishResultProps) {
             <p className="info-alg">
                 brak odliczenia przy tej formie rozliczenia
             </p>
+
             <p className="text text-3">
                 Wyliczenie szacunkowe, na podstawie stawki
                 obowiązującej dla podanego dochodu. Nie stanowi

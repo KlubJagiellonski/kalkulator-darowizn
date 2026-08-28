@@ -53,6 +53,11 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
             char: "zł",
             text: 'Podaj swój roczny przychód, a policzymy dokładną kwotę darowizn, którą możesz odliczyć w 2026 roku.',
             smallText: "Nigdzie nie zapisujemy tej liczby."
+        },
+        {
+            char: "zł",
+            text: 'Podaj roczny dochód firmy, a policzymy dokładną kwotę darowizn, którą możecie odliczyć w 2026 roku.',
+            smallText: "Nigdzie nie zapisujemy tej liczby."
         }
     ]
 
@@ -143,6 +148,23 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                     }
                 />
             </div>
+            <div ref={step == 3 && values.cit && !values.income ? ref : undefined} className={`result-card result-card-6 ${step == 3 && values.cit && !values.income ? "active" : ""}`}>
+                <EmptyResult {...emptyResults[6]} />
+            </div>
+            <div ref={step == 3 && values.cit && values.income ? ref : undefined} className={`result-card result-card-7 ${step == 3 && values.cit && values.income ? "active" : ""}`}>
+                <CountResult
+                    setStep={setStep}
+                    count={
+                        calculateForPPE2022(
+                            values.incomePeriod === "monthly"
+                                ? values.income! * 12
+                                : values.income!,
+                            values.citType === "cit19" ? 19 : 9,
+                            0.1
+                        ).donationSum
+                    }
+                />
+            </div>
             <div ref={step == 4 && values.pit && values.pitType === "scale" ? ref : undefined} className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "scale" ? "active" : ""}`}>
                 <FinishResult
                     taxRate={(values.income ?? 0) <= 120000 ? 12 : 32}
@@ -167,7 +189,7 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                     )} />
             </div>
             <div ref={step == 4 && values.pit && values.pitType === "flat19" ? ref : undefined} className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "flat19" ? "active" : ""}`}>
-                <FinisEmptyhResult values={values}/>
+                <FinisEmptyhResult values={values} />
             </div>
         </div>
     )

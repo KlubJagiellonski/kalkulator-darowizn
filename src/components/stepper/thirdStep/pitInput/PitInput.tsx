@@ -96,8 +96,8 @@ function PitInput({ values, setValues, taxRate, info, text, textEmpty, title, hi
                     </div>
                 </div>
                 <div className="scale-texts">
-                    <p className={`brutto-text ${value === "" ? "active" : ""}`}>{textEmpty}</p>
-                    <p className={`brutto-text brutto-text-2  ${value !== "" ? "active" : ""}`}>{text} {taxRate}%</p>
+                    <p className={`brutto-text ${!value ? "active" : ""}`}>{textEmpty}</p>
+                    <p className={`brutto-text brutto-text-2  ${value ? "active" : ""}`}>{text} {taxRate}%</p>
                 </div>
             </div>
         </div>
