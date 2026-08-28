@@ -1,4 +1,3 @@
-import { Children, useState } from "react"
 import "./Stepper.scss"
 import { useElementHeight } from "../../hooks/useElementHeight"
 
@@ -9,6 +8,7 @@ interface StepperProps {
         subtitle: string
         name: string
         isValid?: boolean
+        isBlock?: boolean
     }[],
     step: number,
     setStep: (step: number) => void
@@ -43,25 +43,26 @@ function Stepper({ items, step, setStep }: StepperProps) {
                             clipPath: `inset(0 ${rightMarg}% 0 0 round 999px)`
                         }}
                     >
-                        {items.map((_, id) => (
+                        {items.map((el, id) => (
                             <div
                                 key={id}
-                                className={`dot`}
+                                className={`dot ${el.isBlock ? "block" : ""}`}
                             />
                         ))}
                     </div>
                     {items.map((el, id) => (
                         <button
-                            className="dot-box"
+                            className={`dot-box ${el.isBlock ? "block" : ""}`}
                             data-testid={`step-${id + 1}`}
                             key={id}
                             onClick={() => changeStep(id + 1)}
                             disabled={!(items[id - 1]?.isValid || step > id + 1) || step === id+1}
                         >
                             <span className={`dot`} />
-                            <span className={`dot-title ${id + 1 < step || (id + 1 === step && items[step - 1].isValid) ? "checked" : id + 1 === step ? "active" : ""}`}>
+                            <span className={`dot-title ${(id + 1 < step || (id + 1 === step && items[step - 1].isValid)) && !el.isBlock ? "checked" : id + 1 === step ? "active" : ""}`}>
                                 <span>{id + 1}</span>
                                 <span className="title-extend"> · {el.name}</span>
+                                <span className="block-text"> · Pominięty</span>
                             </span>
                         </button>
                     ))}

@@ -83,6 +83,7 @@
       gap: 6px;
       margin-top: 8px;
       margin-bottom: 12px;
+      align-items: flex-start;
 
       .dot-box {
         flex: 1;
@@ -93,16 +94,29 @@
         text-align: left;
         cursor: pointer;
 
+
+        &.block, &.block.checked {
+          pointer-events: none;
+
+          .dot {
+            position: relative;
+            border: 1px dashed $text-light;
+            background-color: $white;
+          }
+
+          .dot-title {
+            color: $text-light-gray;
+          }
+        }
+
         &:disabled {
           cursor: default;
         }
 
         .dot-title {
           font-size: 0.6875rem;
-          // font-size: 0.75rem;
           color: $text-secondary;
           line-height: 1.45;
-          // line-height: 1.125;
           padding-top: 8px;
           transition: all 0.4s ease-in-out;
           font-weight: 400;
@@ -110,6 +124,11 @@
           width: 100%;
           position: relative;
           display: block;
+
+          .block-text {
+            display: none;
+          }
+
 
           span {
             display: block;
@@ -278,6 +297,17 @@
 
 
         .dot-box {
+          &.block {
+
+            .dot-title {
+
+              .block-text {
+                display: inline;
+              }
+
+            }
+          }
+
           .dot-title {
             font-size: 0.75rem;
             line-height: 1.125;
@@ -285,7 +315,6 @@
 
             span {
               display: inline;
-              // transition: transform 0.4s ease-in-out;
             }
 
             .title-extend {
@@ -295,11 +324,6 @@
             &::before {
               position: relative;
             }
-
-            // &.active {
-            //   color: $text-primary;
-            //   font-weight: 600;
-            // }
 
             &.checked {
 
@@ -334,6 +358,7 @@
 
         .step {
           height: 100%;
+
           .step-content {
             .title-wrapper {
 

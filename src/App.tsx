@@ -49,6 +49,7 @@ function App() {
       name: "Dochód",
       children: <ThirdStep values={values} setValues={setValues} />,
       isValid: (!!values.income),
+      isBlock: (values.pitType === "flat19")
     },
     {
       title: "Kwota darowizny",
