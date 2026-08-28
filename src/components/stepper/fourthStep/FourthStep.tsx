@@ -35,6 +35,13 @@ function FourthStep({ values, setValues }: ValuesProps) {
                             values.lumpSum ?? 0
                         ).donationSum} />
             }
+            {
+                pit && pitType === "flat19" &&
+                <LastStep
+                    setValues={setValues}
+                    values={values}
+                />
+            }
         </>
     )
 }

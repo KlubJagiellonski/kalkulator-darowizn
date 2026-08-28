@@ -6,16 +6,16 @@ import Toggle from "../../../UI/toggle/Toggle"
 import "./LastStep.scss"
 import Alert from "../../../UI/alert/Alert"
 
-interface LastStepProps extends ValuesProps{
-    donationSum: number
+interface LastStepProps extends ValuesProps {
+    donationSum?: number
 }
 
 function LastStep({ values, setValues, donationSum }: LastStepProps) {
     const prices = [200, 500, 1000, 2500]
     const [value, setValue] = useState("")
-    
-    const { donationAmount, donationPerid} = values
-   
+
+    const { donationAmount, donationPerid } = values
+
     const annualDonation =
         donationPerid === "monthly"
             ? (donationAmount ?? 0) * 12
@@ -23,7 +23,7 @@ function LastStep({ values, setValues, donationSum }: LastStepProps) {
 
     const aboveLimit = Math.max(
         0,
-        annualDonation - donationSum
+        annualDonation - (donationSum ?? 0)
     )
 
     const handleChange = (value: string | number) => {
@@ -89,6 +89,16 @@ function LastStep({ values, setValues, donationSum }: LastStepProps) {
                 <p className="number">04</p>
                 <p className="title">Ile chcesz przekazać?</p>
             </div>
+            {
+                donationSum === undefined &&
+                < Alert
+                    shortText="Przy PIT liniowym pokazujemy pełny koszt. Wsparcie nadal ma sens."
+                    shortTitle="Darowizna nie obniży Twojego podatku"
+                    show={!!aboveLimit}
+                    title={`Przy PIT liniowym darowizna nie obniża podatku`}
+                    text={`Pokazujemy pełny koszt. Wsparcie nadal ma sens — tylko bez korzyści podatkowej.`}
+                />
+            }
             <Toggle firstItem="Jednorazowo" secondItem="Co miesiąc" position={donationPerid === "once" ? "first" : "second"} setPosition={handleToggle} />
             <div className="prices">
                 {
@@ -98,12 +108,15 @@ function LastStep({ values, setValues, donationSum }: LastStepProps) {
                     <Input onChange={handleChange} value={value} placeholder="własna kwota" prefix="zł" />
                 </div>
             </div>
-            <Alert
-                shortText="Nadwyżka trafi do organizacji, ale nie obniży podatku."
-                show={!!aboveLimit}
-                title={`Powyżej limitu odliczenia o ${formatAmount(aboveLimit)} zł`}
-                text={`Odliczysz maksymalnie ${formatInputValue(`${donationSum}`)} zł rocznie. Nadwyżka nadal trafia do organizacji — po prostu nie obniża podatku.`}
-            />
+            {
+                donationSum !== undefined &&
+                < Alert
+                    shortText="Nadwyżka trafi do organizacji, ale nie obniży podatku."
+                    show={!!aboveLimit}
+                    title={`Powyżej limitu odliczenia o ${formatAmount(aboveLimit)} zł`}
+                    text={`Odliczysz maksymalnie ${formatInputValue(`${donationSum}`)} zł rocznie. Nadwyżka nadal trafia do organizacji — po prostu nie obniża podatku.`}
+                />
+            }
         </div>
     )
 }

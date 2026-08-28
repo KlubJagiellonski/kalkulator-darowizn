@@ -16,12 +16,18 @@
         border-bottom-right-radius: 16px;
         border-left: 3px solid $warning-color;
         margin-top: 10px;
+        margin-bottom: 15px;
 
         .alert-title {
             font-weight: 600;
             font-size: 0.9375rem;
             line-height: 1.53;
             color: $warning-text;
+            display: none;
+        }
+
+        .alert-title-short {
+            display: block;
         }
 
         .alert-text {
@@ -51,7 +57,7 @@
     .alert-wrapper {
         .alert {
             margin-top: 14px;
-    
+
             .alert-text {
                 display: block;
 
@@ -60,6 +66,16 @@
             .alert-short-text {
                 display: none;
             }
+
+
+            .alert-title {
+                display: block;
+            }
+
+            .alert-title-short {
+                display: none;
+            }
+
         }
     }
 
