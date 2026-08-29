@@ -18,7 +18,7 @@ describe("SecondStep", () => {
         )
 
         expect(screen.getByRole("button", { name: /skala/i })).not.toHaveClass("active")
-        expect(screen.getByRole("button", { name: /ryczałt/i })).not.toHaveClass("active")
+        expect(screen.getByRole("button", { name: "ryczałt" })).not.toHaveClass("active")
         expect(screen.getByRole("button", { name: /liniowy/i })).toHaveClass("active")
     })
 
