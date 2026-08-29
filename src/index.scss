@@ -74,7 +74,7 @@ p {
   &--primary {
     background-color: $color-primary;
     border: none;
-    outline: none;
+    // outline: none;
     color: $white;
     font-weight: 600;
   }
@@ -82,7 +82,7 @@ p {
   &--dark {
     background-color: $color-dark;
     border: none;
-    outline: none;
+    // outline: none;
     color: $white;
     font-weight: 600;
   }
@@ -90,7 +90,7 @@ p {
   &--ghost {
     background-color: $color-ghost;
     border: $border-secondary;
-    outline: none;
+    // outline: none;
     transition: opacity 0.3s ease-in-out;
 
     &:disabled {

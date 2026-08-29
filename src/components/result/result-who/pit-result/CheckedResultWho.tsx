@@ -12,7 +12,7 @@ function PitResultWho({ setStep, prec, btn }: PitResultWhoProps) {
             <p className="tag">TWÓJ LIMIT ODLICZENIA</p>
             <h2 className="prec">{prec}%</h2>
             <p className="text text-1">To limit dochodu, do którego kwoty przekazywane przez Ciebie darowizny będą obniżać Twój podatek. Przejdź dalej, by zyskać konkretne wyliczenie dla Twoich zarobków.</p>
-            <button onClick={()=>{setStep(2)}} className="button button--primary button-next">Dalej: {btn} →</button>
+            <button aria-label={`Dalej: ${btn}`} onClick={()=>{setStep(2)}} className="button button--primary button-next">Dalej: {btn} →</button>
         </div>
     )
 }

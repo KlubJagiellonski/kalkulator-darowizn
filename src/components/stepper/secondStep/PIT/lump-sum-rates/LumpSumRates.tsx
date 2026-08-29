@@ -33,7 +33,7 @@ function LumpSumRates({ isOpen, ref, values, setValues, setShowHint, showHint }:
                 <p className="text">Zależy od rodzaju działalności. Znajdziesz ją w ewidencji przychodów lub u księgowej.</p>
                 <div className="rates">
                     {
-                        rates.map(rate => <button onClick={() => { handleClick(rate) }} key={rate} className={`rate ${lumpSum === rate ? "active" : ""}`}>{`${rate}`.replace(".", ",")}%</button>)
+                        rates.map(rate => <button aria-label={`ryczałt ${`${rate}`.replace(".", ",")}%`} onClick={() => { handleClick(rate) }} key={rate} className={`rate ${lumpSum === rate ? "active" : ""}`}>{`${rate}`.replace(".", ",")}%</button>)
                     }
                 </div>
             </div>

@@ -56,7 +56,7 @@ function Stepper({ items, step, setStep }: StepperProps) {
                             data-testid={`step-${id + 1}`}
                             key={id}
                             onClick={() => changeStep(id + 1)}
-                            disabled={!(items[id - 1]?.isValid || step > id + 1) || step === id + 1}
+                            disabled={!(items[id - 1]?.isValid || step > id + 1) || step === id + 1 || el.isBlock}
                             aria-current={step === 1 ? "step" : undefined}
                             aria-label={`Krok ${id + 1}: ${el.title}`}
                         >
@@ -92,11 +92,10 @@ function Stepper({ items, step, setStep }: StepperProps) {
                         return (
                             <div
                                 key={id}
-                                className="step"
+                                className={`step ${isActive ? "active" : ""}`}
                                 ref={isActive ? activeStepRef : undefined}
-                                inert={isActive ? undefined : true}
                                 aria-hidden={!isActive}
-                                tabIndex={isActive ? 0 : -1}
+                                inert={!isActive}
                             >
                                 {item.children}
                             </div>

@@ -18,16 +18,19 @@
         top: 0;
         bottom: 0;
         display: flex;
-        transition: opacity 0.3s ease-in-out;
+        transition: opacity 0.3s ease-in-out, visibility 0s ease-in-out 0.3s;
         opacity: 0;
         pointer-events: none;
         height: fit-content;
         width: 100%;
+        visibility: hidden;
 
         &.active {
             opacity: 1;
             pointer-events: auto;
             position: relative;
+            visibility: visible;
+            transition: opacity 0.3s ease-in-out;
         }
     }
 

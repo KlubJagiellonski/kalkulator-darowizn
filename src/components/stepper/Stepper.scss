@@ -95,7 +95,8 @@
         cursor: pointer;
 
 
-        &.block, &.block.checked {
+        &.block,
+        &.block.checked {
           pointer-events: none;
 
           .dot {
@@ -209,6 +210,13 @@
       .step {
         flex: 1;
         overflow: hidden;
+        visibility: hidden;
+        transition: visibility 0s ease-in-out 0.5s;
+
+        &.active {
+          visibility: visible;
+          transition: none;
+        }
 
         .step-content {
           .title-wrapper {

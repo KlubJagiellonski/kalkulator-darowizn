@@ -7,6 +7,13 @@ interface HintProps {
 }
 
 function Hint({ active, setActive, label }: HintProps) {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setActive(!active);
+        }
+    };
+
     return (
         <button
             aria-label={label}
@@ -15,7 +22,9 @@ function Hint({ active, setActive, label }: HintProps) {
             onPointerCancel={() => setActive(false)}
             onPointerLeave={() => setActive(false)}
             onPointerEnter={() => setActive(true)}
-            className={`hint-wrapper ${active ? "active" : ""}`}>
+            onKeyDown={handleKeyDown}
+            className={`hint-wrapper ${active ? "active" : ""}`}
+        >
             ?
         </button>
     )
