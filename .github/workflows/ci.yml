@@ -1,18 +1,22 @@
-name: CI
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - dev
-      - main
 
-  pull_request:
-    branches:
-      - main
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  test-and-build:
+  deploy:
     runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout
@@ -30,5 +34,18 @@ jobs:
       - name: Test
         run: npm run test
 
+
       - name: Build
         run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
