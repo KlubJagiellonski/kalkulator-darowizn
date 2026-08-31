@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:pages": "vite build --config vite.github-pages.config.ts",
+    "build:web-component": "vite build --config vite.webcomponent.config.ts",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest"

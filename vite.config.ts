@@ -6,7 +6,6 @@ export default defineConfig({
   server: {
     host: true
   },
-  base: "/kalkulator-darowizn-2/",
   test: {
     globals: true,
     environment: 'jsdom',
