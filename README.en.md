@@ -8,7 +8,21 @@ The tool allows users to estimate what portion of a donation can be deducted fro
 
 ## Demo
 
-The demo version is available at: https://kalkulator-darowizn.netlify.app/
+The demo version is automatically deployed to GitHub Pages whenever changes are pushed to the `dev` branch.
+
+To publish changes to the demo:
+
+```bash
+git add .
+git commit -m "describe changes"
+git push origin dev
+```
+
+After the push, GitHub Actions automatically builds and deploys the application.
+
+The current demo version is available at:
+
+https://zyzik1248.github.io/kalkulator-darowizn-2/
 
 ## Technologies
 

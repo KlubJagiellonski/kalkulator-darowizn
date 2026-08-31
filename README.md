@@ -8,7 +8,21 @@ Narzędzie pozwala użytkownikowi oszacować, jaką część przekazanej darowiz
 
 ## Demo
 
-Wersja demo znajduje się pod adresem: https://kalkulator-darowizn.netlify.app/
+Wersja demo jest automatycznie publikowana na GitHub Pages po wykonaniu push na gałąź dev.
+
+Aby opublikować zmiany na demo:
+
+```bash
+git add .
+git commit -m "opis zmian"
+git push origin dev
+```
+
+Po wykonaniu push uruchamia się automatyczny proces budowania i wdrażania aplikacji za pomocą GitHub Actions.
+
+Aktualna wersja demo jest dostępna pod adresem:
+
+https://zyzik1248.github.io/kalkulator-darowizn-2/
 
 ## Technologie
 
