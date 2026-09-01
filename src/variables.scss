@@ -33,6 +33,16 @@ $text-green-secondary: #3E4150;
 
 $color-red: #E0392B;
 
+$outline-primary: inset 0 0 0 3px #e0392b;
+
+$color-primary-hover: #AB2317;
+$color-primary-active: #8B1F15;
+$color-primary-focus: #C62D1F;
+
+$color-chip-hover: #F1EFEA;
+$color-chip-active: #EFEDE8;
+$color-chip-focus: #FFFFFF;
+
 @mixin desktop {
     @container (min-width: 1024px) {
         @content;

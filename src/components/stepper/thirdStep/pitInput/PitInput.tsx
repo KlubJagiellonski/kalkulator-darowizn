@@ -27,14 +27,14 @@ function PitInput({ values, setValues, taxRate, info, text, textEmpty, title, hi
         }
     }, [values])
 
-    const handleToggle = () => {
+    const handleToggle = (value: "first" | "second") => {
         const come = incomePeriod === "monthly"
             ? (income ?? 0) * 12
             : (income ?? 0) / 12
 
         setValues({
             ...values,
-            incomePeriod: incomePeriod === "monthly" ? "yearly" : "monthly",
+            incomePeriod: value === "first" ? "yearly" : "monthly",
             income: come
         })
 

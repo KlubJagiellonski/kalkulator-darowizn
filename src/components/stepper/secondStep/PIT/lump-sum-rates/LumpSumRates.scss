@@ -55,19 +55,6 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border: $border-secondary;
-                background-color: $white;
-                border-radius: 14px;
-                font-size: 0.9375em;
-                transition: all 0.3s ease-in-out;
-                cursor: pointer;
-
-                &.active {
-                    font-weight: 600;
-                    color: $white;
-                    background-color: $color-primary;
-                    border-color: $color-primary;
-                }
             }
         }
     }

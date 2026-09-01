@@ -70,11 +70,11 @@ function LastStep({ values, setValues, donationSum }: LastStepProps) {
         })
     }
 
-    const handleToggle = () => {
+    const handleToggle = (value:  "first" | "second") => {
 
         setValues({
             ...values,
-            donationPerid: donationPerid === "once" ? "monthly" : "once"
+            donationPerid: value === "first" ? "once" : "monthly"
         })
     }
 
