@@ -28,15 +28,16 @@
         transition: max-height 0.5s ease-in-out;
 
         .text {
-            font-size: 0.8125rem;
+            font-size: 0.8125em;
             line-height: 1.53;
             padding-top: 12px;
             color: $text-muted;
             display: none;
+            margin-bottom: 0;
         }
 
         .title {
-            font-size: 0.875rem;
+            font-size: 0.875em;
             font-weight: 600;
             line-height: 1.5;
         }
@@ -57,7 +58,7 @@
                 border: $border-secondary;
                 background-color: $white;
                 border-radius: 14px;
-                font-size: 0.9375rem;
+                font-size: 0.9375em;
                 transition: all 0.3s ease-in-out;
                 cursor: pointer;
 

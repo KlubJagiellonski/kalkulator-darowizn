@@ -42,7 +42,7 @@
       position: relative;
 
       .subtitle {
-        font-size: 0.8125rem;
+        font-size: 0.8125em;
         color: $text-secondary;
         line-height: 1.46;
         transition: transform 0.5s ease-in-out;
@@ -72,9 +72,10 @@
     .text {
       color: $color-primary;
       font-family: IBM Plex Mono;
-      font-size: 0.6875rem;
+      font-size: 0.6875em;
       line-height: 1.54;
-      letter-spacing: 0.055rem;
+      letter-spacing: 0.055em;
+      margin-bottom: 0;
     }
 
     .dots-wrapper {
@@ -115,7 +116,7 @@
         }
 
         .dot-title {
-          font-size: 0.6875rem;
+          font-size: 0.6875em;
           color: $text-secondary;
           line-height: 1.45;
           padding-top: 8px;
@@ -146,7 +147,7 @@
             transform: scale(0);
             width: 0;
             transition: width 0.4s ease-in-out, transform 0.4s ease-in-out;
-            margin-right: 0.2rem;
+            margin-right: 0.2em;
             position: absolute;
           }
 
@@ -165,7 +166,7 @@
 
             &::before {
               transform: scale(1);
-              width: 0.5625rem;
+              width: 0.5625em;
             }
           }
         }
@@ -226,15 +227,16 @@
             padding-bottom: 10px;
 
             .number {
-              font-size: 0.75rem;
+              font-size: 0.75em;
               line-height: 1.5;
               color: $text-secondary;
               display: none;
               font-family: IBM Plex Mono;
+              margin-bottom: 0;
             }
 
             .title {
-              font-size: 0.9375rem;
+              font-size: 0.9375em;
               font-weight: 600;
             }
           }
@@ -317,7 +319,7 @@
           }
 
           .dot-title {
-            font-size: 0.75rem;
+            font-size: 0.75em;
             line-height: 1.125;
             text-align: left;
 
@@ -341,7 +343,7 @@
 
               &::before {
                 transform: scale(1);
-                width: 0.5625rem;
+                width: 0.5625em;
               }
             }
           }

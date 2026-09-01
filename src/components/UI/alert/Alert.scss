@@ -20,7 +20,7 @@
 
         .alert-title {
             font-weight: 600;
-            font-size: 0.9375rem;
+            font-size: 0.9375em;
             line-height: 1.53;
             color: $warning-text;
             display: none;
@@ -32,14 +32,14 @@
 
         .alert-text {
             display: none;
-            font-size: 0.875rem;
+            font-size: 0.875em;
             color: $warning-text;
             line-height: 1.57;
         }
 
         .alert-short-text {
             font-weight: 400;
-            font-size: 0.8125rem;
+            font-size: 0.8125em;
             line-height: 1.53;
             color: $warning-text
         }

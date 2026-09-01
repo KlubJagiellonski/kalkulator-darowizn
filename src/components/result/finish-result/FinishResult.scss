@@ -11,12 +11,12 @@
 
 
         .tag {
-            font-size: 0.6875rem;
+            font-size: 0.6875em;
             line-height: 1.54;
             padding-bottom: 12px;
             font-family: IBM Plex Mono;
             color: $text-muted;
-            letter-spacing: 0.055rem;
+            letter-spacing: 0.055em;
             display: none;
             // display: block;
 
@@ -31,19 +31,19 @@
         .details {
             // display: none;
             display: block;
-            font-size: 0.78125rem;
+            font-size: 0.78125em;
             line-height: 1.5;
             color: $white;
             text-decoration: underline;
         }
 
         .prec {
-            font-size: 1.75rem;
-            // font-size: 3.5rem;
+            font-size: 1.75em;
+            // font-size: 3.5em;
             font-weight: 600;
             // line-height: 1.03;
             line-height: 1.21;
-            letter-spacing: -0.1225rem;
+            letter-spacing: -0.01225em;
             margin: 0;
             padding: 0;
             // color: $text-primary
@@ -51,16 +51,16 @@
         }
 
         .text-1 {
-            font-size: 0.75rem;
+            font-size: 0.75em;
             line-height: 1.5;
-            // font-size: 0.9375rem;
+            // font-size: 0.9375em;
             // line-height: 1.53;
             // color: $text-muted;
             color: $text-light-gray;
         }
 
         .text-2 {
-            font-size: 0.9375rem;
+            font-size: 0.9375em;
             line-height: 1.53;
             color: $text-muted;
             padding-top: 10px;
@@ -103,14 +103,14 @@
 
             .belt-text-2 {
                 color: $text-light-gray;
-                font-size: 0.75rem;
+                font-size: 0.75em;
                 line-height: 1.5;
                 display: block;
             }
 
             .belt-text-3 {
                 color: $color-red;
-                font-size: 0.75rem;
+                font-size: 0.75em;
                 line-height: 1.5;
                 display: block;
             }
@@ -123,14 +123,14 @@
 
                 .belt-text {
                     color: $text-muted;
-                    font-size: 0.8125rem;
+                    font-size: 0.8125em;
                     line-height: 1.53;
                     padding-top: 2px;
                     padding-left: 16px;
                 }
 
                 .belt-count {
-                    font-size: 1rem;
+                    font-size: 1em;
                     line-height: 1.5;
                     font-weight: 600;
                     padding-left: 16px;
@@ -158,13 +158,13 @@
                 justify-content: space-between;
 
                 .info-text {
-                    font-size: 0.875rem;
+                    font-size: 0.875em;
                     line-height: 1.5;
                     color: $text-muted;
                 }
 
                 .info-count {
-                    font-size: 0.875rem;
+                    font-size: 0.875em;
                     line-height: 1.5;
                     font-weight: 600;
                 }
@@ -198,7 +198,7 @@
 
         .info-alg {
             font-family: IBM Plex Mono;
-            font-size: 0.75rem;
+            font-size: 0.75em;
             line-height: 1.5;
             color: $text-muted;
             padding-top: 10px;
@@ -206,7 +206,7 @@
         }
 
         .text-3 {
-            font-size: 0.75rem;
+            font-size: 0.75em;
             line-height: 1.5;
             color: $text-muted;
             padding-top: 10px;
@@ -236,13 +236,13 @@
             }
 
             .prec {
-                font-size: 3.5rem;
+                font-size: 3.5em;
                 line-height: 1.03;
                 color: $text-primary
             }
 
             .text-1 {
-                font-size: 0.9375rem;
+                font-size: 0.9375em;
                 line-height: 1.53;
                 color: $text-muted;
             }

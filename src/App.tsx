@@ -75,7 +75,6 @@ function App() {
           <div className='header-box'>
             <div className='header-text'>
               <p className='company-name'>Klub Jagielloński</p>
-              <h1 className='title'>Ile naprawdę kosztuje Cię darowizna?</h1>
               <p className='text'>Cztery pytania. Policzymy Twój limit odliczenia i pokażemy, ile z darowizny pokrywa niższy podatek.</p>
             </div>
             <p className='header-year'>

@@ -18,9 +18,9 @@
     .header-box {
       .header-year {
         font-family: IBM Plex Mono;
-        font-size: 0.6875rem;
+        font-size: 0.6875em;
         line-height: 1.54;
-        letter-spacing: 0.055rem;
+        letter-spacing: 0.055em;
         color: $text-muted;
         background-color: $bg-secondary;
         padding: 8px 14px;
@@ -37,15 +37,16 @@
         .text {
           color: $text-muted;
           display: none;
+          margin-bottom: 0;
         }
 
         .company-name {
           font-family: IBM Plex Mono;
           font-weight: 400;
           font-style: Regular;
-          font-size: 0.625rem;
+          font-size: 0.625em;
           line-height: 1.5;
-          letter-spacing: 0.05rem;
+          letter-spacing: 0.05em;
           color: $text-muted;
         }
       }
