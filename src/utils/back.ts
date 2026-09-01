@@ -6,7 +6,12 @@ interface Back extends ValuesProps {
 }
 
 export const back = ({ step, setStep, setValues, values }: Back) => {
-    if (step === 1) {
+    let newStep = step
+    if(values.pitType === "flat19" && values.pit && step === 3){
+        newStep = 2
+    }
+
+    if (newStep === 1) {
         setValues({
             ...values,
             citType: undefined,
@@ -17,7 +22,7 @@ export const back = ({ step, setStep, setValues, values }: Back) => {
             lumpSum: undefined,
             donationAmount: 500
         })
-    } else if (step === 2) {
+    } else if (newStep === 2) {
         setValues({
             ...values,
             donationPerid: "once",
@@ -25,7 +30,7 @@ export const back = ({ step, setStep, setValues, values }: Back) => {
             incomePeriod: "yearly",
             donationAmount: 500
         })
-    } else if (step === 3) {
+    } else if (newStep === 3) {
         setValues({
             ...values,
             donationPerid: "once",
@@ -34,5 +39,5 @@ export const back = ({ step, setStep, setValues, values }: Back) => {
         })
     }
 
-    setStep(step)
+    setStep(newStep)
 }
