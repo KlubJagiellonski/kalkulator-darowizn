@@ -8,9 +8,11 @@ interface FinishResultProps {
     taxDeduction: number
     taxRate: number
     taxName: string
+    setOpenDetails: (open: boolean) => void
+
 }
 
-function FinishResult({ values, donationSum, taxDeduction, taxRate, taxName }: FinishResultProps) {
+function FinishResult({ values, donationSum, taxDeduction, taxRate, taxName, setOpenDetails }: FinishResultProps) {
 
     const { donationAmount, donationPerid } = values
 
@@ -30,8 +32,6 @@ function FinishResult({ values, donationSum, taxDeduction, taxRate, taxName }: F
         0,
         realCost
     )
-
-    // const taxRate = (income ?? 0) <= 120000 ? 12 : 32
 
     const limitUsage =
         donationSum > 0
@@ -62,9 +62,9 @@ function FinishResult({ values, donationSum, taxDeduction, taxRate, taxName }: F
                     </h2>
                 </div>
 
-                <a className="details">
+                <button className="details" onClick={()=>{setOpenDetails(true)}}>
                     Szczegóły wyliczenia
-                </a>
+                </button>
             </div>
 
             <p className="text text-2">

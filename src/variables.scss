@@ -43,6 +43,8 @@ $color-chip-hover: #F1EFEA;
 $color-chip-active: #EFEDE8;
 $color-chip-focus: #FFFFFF;
 
+$dark-accent: #FF6B5A;
+
 @mixin desktop {
     @container (min-width: 1024px) {
         @content;

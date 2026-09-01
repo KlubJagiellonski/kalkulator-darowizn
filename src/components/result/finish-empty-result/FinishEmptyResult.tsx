@@ -4,9 +4,11 @@ import "./../finish-result/FinishResult.scss"
 
 interface FinishResultProps {
     values: Values
+    setOpenDetails: (open: boolean) => void
+
 }
 
-function FinisEmptyhResult({ values }: FinishResultProps) {
+function FinisEmptyhResult({ values, setOpenDetails }: FinishResultProps) {
 
     const { donationPerid, donationAmount } = values
 
@@ -36,9 +38,9 @@ function FinisEmptyhResult({ values }: FinishResultProps) {
                     </h2>
                 </div>
 
-                <a className="details">
+                <button className="details" onClick={()=>setOpenDetails(true)}>
                     Szczegóły wyliczenia
-                </a>
+                </button>
             </div>
 
             <p className="text text-2">

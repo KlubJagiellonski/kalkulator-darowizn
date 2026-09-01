@@ -16,9 +16,10 @@ interface ResultProps {
     values: Values,
     setValues: (values: Values) => void
     setStep: (step: number) => void
+    setOpenDetails: (open: boolean) => void
 }
 
-function Result({ step, values, setStep, setValues }: ResultProps) {
+function Result({ step, values, setStep, setValues, setOpenDetails }: ResultProps) {
     const { ref, height } = useElementHeight()
 
     const emptyResults = [
@@ -226,6 +227,7 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                     taxRate={(values.income ?? 0) <= 120000 ? 12 : 32}
                     taxName="Stawka podatku"
                     values={values}
+                    setOpenDetails={setOpenDetails}
                     {...calculateForPIT2022(
                         values.incomePeriod === "monthly"
                             ? values.income! * 12
@@ -242,6 +244,7 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                     taxRate={values.lumpSum ?? 0}
                     taxName="Stawka ryczałtu"
                     values={values}
+                    setOpenDetails={setOpenDetails}
                     {...calculateForPPE2022(
                         values.incomePeriod === "monthly"
                             ? values.income! * 12
@@ -255,7 +258,7 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                 ref={step == 4 && values.pit && values.pitType === "flat19" ? ref : undefined}
                 className={`result-card result-card-7 ${step == 4 && values.pit && values.pitType === "flat19" ? "active" : ""}`}
             >
-                <FinisEmptyhResult values={values} />
+                <FinisEmptyhResult values={values} setOpenDetails={setOpenDetails} />
             </div>
             <div
                 ref={step == 4 && values.cit ? ref : undefined}
@@ -265,6 +268,7 @@ function Result({ step, values, setStep, setValues }: ResultProps) {
                     taxRate={values.citType === "cit19" ? 19 : 9}
                     taxName="Stawka ryczałtu"
                     values={values}
+                    setOpenDetails={setOpenDetails}
                     {...calculateForPPE2022(
                         values.incomePeriod === "monthly"
                             ? values.income! * 12

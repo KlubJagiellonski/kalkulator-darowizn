@@ -9,6 +9,7 @@ import type { Values } from './types/type'
 import StepperNav from './components/stepper/nav/StepperNav'
 import Result from './components/result/Result'
 import { back } from './utils/back'
+import ResultDetail from './components/result-details/ResultDatil'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
 
   const [step, setStep] = useState(1)
   const [values, setValues] = useState(defaultValues)
+  const [openDetails, setOpenDetails] = useState(false)
 
   const steps = [
     {
@@ -45,7 +47,7 @@ function App() {
     },
     {
       title: values.pit && values.pitType === "scale" ? "Twój roczny dochód brutto" : "Twój roczny przychód",
-      subtitle: values.cit ? "Wyznacza limit odliczenia 10%" : values.pit && values.pitType === "scale" ? "Wyznacza limit odliczenia" :  "Przy ryczałcie limit liczy się od przychodu",
+      subtitle: values.cit ? "Wyznacza limit odliczenia 10%" : values.pit && values.pitType === "scale" ? "Wyznacza limit odliczenia" : "Przy ryczałcie limit liczy się od przychodu",
       name: "Dochód",
       children: <ThirdStep values={values} setValues={setValues} />,
       isValid: (!!values.income),
@@ -87,8 +89,9 @@ function App() {
             <Stepper step={step} items={steps} setStep={changeStep} />
             <StepperNav setValues={setValues} values={values} step={step} setStep={setStep} />
           </div>
-          <Result setValues={setValues} values={values} step={step} setStep={setStep} />
+          <Result setOpenDetails={setOpenDetails} setValues={setValues} values={values} step={step} setStep={setStep} />
         </div>
+        <ResultDetail values={values} open={openDetails} setOpen={setOpenDetails}/>
       </div>
     </div>
   )

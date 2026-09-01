@@ -1,0 +1,109 @@
+@use "./../../variables.scss" as *;
+
+.result-details {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+
+    .cover {
+        background-color: rgba($color: #000000, $alpha: 0);
+        transition: background-color 0.4s ease-in-out;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .result-details-box {
+        background-color: $color-dark;
+        border-top-left-radius: 24px;
+        border-top-right-radius: 24px;
+        padding: 24px 20px 28px 20px;
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        transition: transform 0.4s ease-in-out;
+        transform: translateY(100%);
+
+        .text {
+            color: $white;
+            font-size: 0.9375em;
+            line-height: 1.6;
+        }
+
+        .legal {
+            color: $text-light-gray;
+            font-size: 0.8125em;
+            line-height: 1.46;
+        }
+
+        .details {
+            color: $text-light-gray;
+            font-size: 0.9375em;
+            line-height: 1.6;
+        }
+
+        .calculate {
+            font-weight: 600;
+            color: $white;
+            font-size: 1.0625em;
+            line-height: 1.375;
+        }
+
+        .summary {
+            font-family: "IBM Plex Mono";
+            color: $dark-accent;
+            font-size: 0.6875em;
+            line-height: 1.45;
+        }
+
+        .result-details-header {
+            display: flex;
+            justify-content: space-between;
+
+            .title {
+                color: $white;
+                font-size: 1.375em;
+                line-height: 1.27;
+            }
+
+            .btn-close {
+                background-color: transparent;
+                border: none;
+                color: $white;
+                font-size: 0.8125em;
+                line-height: 1.46;
+                outline: none;
+                border-radius: 14px;
+
+                &:focus {
+                    box-shadow: $outline-primary;
+                }
+            }
+        }
+    }
+
+    &.open {
+        pointer-events: auto;
+
+        .cover {
+            background-color: rgba($color: #000000, $alpha: 0.1);
+        }
+
+        .result-details-box {
+            transform: translate(0);
+        }
+    }
+}
+
+@include desktop {
+    .result-details {
+        display: none;
+    }
+}
