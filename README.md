@@ -24,6 +24,31 @@ Aktualna wersja demo jest dostępna pod adresem:
 
 https://zyzik1248.github.io/kalkulator-darowizn-2/
 
+## Web Component
+
+Kalkulator może zostać zbudowany jako **Web Component** i osadzony na dowolnej stronie internetowej.
+
+Aby przygotować wersję Web Component, uruchom:
+
+```bash
+npm run build:web-component
+```
+
+Wygenerowane pliki JavaScript oraz CSS zostaną umieszczone w folderze `web-component`.
+
+Następnie należy dołączyć wygenerowane pliki do strony:
+
+```html
+<link rel="stylesheet" href="path/to/donation-calculator.css">
+<script src="path/to/donation-calculator.js"></script>
+```
+
+i umieścić komponent w wybranym miejscu:
+
+```html
+<donation-calculator></donation-calculator>
+```
+
 ## Technologie
 
 Kalkulator został przygotowany w **React + TypeScript** z wykorzystaniem **Vite** oraz **SCSS**.

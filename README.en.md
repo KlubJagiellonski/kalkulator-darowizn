@@ -24,6 +24,32 @@ The current demo version is available at:
 
 https://zyzik1248.github.io/kalkulator-darowizn-2/
 
+## Web Component
+
+The calculator can be built as a **Web Component** and embedded on any website.
+
+To build the Web Component version, run:
+
+```bash
+npm run build:web-component
+```
+
+The generated JavaScript and CSS files will be placed in the `web-component` folder.
+
+Then include the generated files on the target website:
+
+```html
+<link rel="stylesheet" href="path/to/donation-calculator.css">
+<script src="path/to/donation-calculator.js"></script>
+```
+
+and add the component wherever you want it to appear:
+
+```html
+<donation-calculator></donation-calculator>
+```
+
+
 ## Technologies
 
 The calculator was built with **React + TypeScript**, using **Vite** and **SCSS**.
