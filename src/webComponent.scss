@@ -77,7 +77,7 @@ donation-calculator {
     transition: all 0.3s ease-in-out;
     height: auto;
     width: auto;
-    ;
+    outline: none;
 
     &:disabled {
       cursor: default;
@@ -88,26 +88,61 @@ donation-calculator {
       border: $border-secondary;
       font-weight: 400;
 
+      &:hover {
+        background-color: $color-chip-hover;
+      }
+
+      &:active {
+        background-color: $color-chip-active;
+      }
+
+      &:focus {
+        box-shadow: $outline-primary;
+      }
+
       &.active {
         background-color: $color-primary;
         color: $white;
         font-weight: 600;
         border-color: $color-primary;
+
+        &:hover {
+          background-color: $color-primary-hover;
+        }
+
+        &:active {
+          background-color: $color-primary-hover;
+        }
+
+        &:focus {
+          box-shadow: $outline-primary;
+        }
       }
     }
 
     &--primary {
       background-color: $color-primary;
       border: none;
-      // outline: none;
+      outline: none;
       color: $white;
       font-weight: 600;
+
+      &:hover {
+        background-color: $color-primary-hover;
+      }
+
+      &:active {
+        background-color: $color-primary-hover;
+      }
+
+      &:focus {
+        box-shadow: $outline-primary;
+      }
     }
 
     &--dark {
       background-color: $color-dark;
       border: none;
-      // outline: none;
       color: $white;
       font-weight: 600;
     }
@@ -121,6 +156,19 @@ donation-calculator {
       &:disabled {
         opacity: 0.5;
       }
+
+      &:hover {
+        background-color: $color-chip-hover;
+      }
+
+      &:active {
+        background-color: $color-chip-active;
+      }
+
+      &:focus {
+        box-shadow: $outline-primary;
+      }
+
     }
   }
 
