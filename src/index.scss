@@ -43,7 +43,7 @@ h4,
 h5,
 h6 {
   margin: 0;
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
   color: $text-primary;
 }
 
@@ -85,6 +85,10 @@ p {
     border: $border-secondary;
     font-weight: 400;
 
+    &:not(:disabled):hover {
+      background-color: $color-chip-hover;
+    }
+
     &:hover {
       background-color: $color-chip-hover;
     }
@@ -102,6 +106,10 @@ p {
       color: $white;
       font-weight: 600;
       border-color: $color-primary;
+
+      &:not(:disabled):hover {
+        background-color: $color-primary-hover;
+      }
 
       &:hover {
         background-color: $color-primary-hover;
@@ -123,6 +131,10 @@ p {
     outline: none;
     color: $white;
     font-weight: 600;
+
+    &:not(:disabled):hover {
+      background-color: $color-primary-hover;
+    }
 
     &:hover {
       background-color: $color-primary-hover;
@@ -152,6 +164,10 @@ p {
 
     &:disabled {
       opacity: 0.5;
+    }
+
+    &:not(:disabled):hover {
+      background-color: $color-chip-hover;
     }
 
     &:hover {
