@@ -1,0 +1,102 @@
+@use "./variables" as *;
+
+.calculator-container {
+  container-type: inline-size;
+}
+
+.calculator-wrapper {
+  border: $border-primary;
+  margin: auto;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+
+  .header-wrapper {
+    border-bottom: $border-primary;
+    padding: 20px;
+
+    .header-box {
+      .header-year {
+        font-family: IBM Plex Mono;
+        font-size: 0.6875em;
+        line-height: 1.54;
+        letter-spacing: 0.055em;
+        color: $text-muted;
+        background-color: $bg-secondary;
+        padding: 8px 14px;
+        border-radius: 999px;
+        display: none;
+      }
+
+      .header-text {
+        padding-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        .text {
+          color: $text-muted;
+          display: none;
+          margin-bottom: 0;
+        }
+
+        .company-name {
+          font-family: IBM Plex Mono;
+          font-weight: 400;
+          font-style: Regular;
+          font-size: 0.625em;
+          line-height: 1.5;
+          letter-spacing: 0.05em;
+          color: $text-muted;
+        }
+      }
+    }
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+}
+
+@include tablet {
+  .calculator-wrapper {
+    max-width: 1240px;
+    border-radius: 28px;
+    height: auto;
+    overflow: hidden;
+    min-height: 645px;
+
+    .header-wrapper {
+      padding: 32px 36px;
+
+      .header-box {
+        display: flex;
+        max-width: none;
+        justify-content: space-between;
+        align-items: center;
+
+        .header-year {
+          display: block;
+
+        }
+
+        .header-text {
+          max-width: 560px;
+          gap: 8px;
+
+          .text {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .content-wrapper {
+      flex: none;
+      flex-direction: row;
+      min-height: 645px;
+    }
+  }
+}

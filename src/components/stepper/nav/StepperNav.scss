@@ -1,0 +1,88 @@
+@use "./../../../variables.scss" as *;
+
+.stepper-wrapper {
+    .btns {
+        align-items: center;
+        padding-top: 0;
+
+        &.hide {
+            .btn-box {
+                max-height: 0;
+                .button-stepper {
+                    opacity: 0;
+                }
+            }
+        }
+
+        .btn-box {
+            flex: 1;
+            max-height: 70px;
+            overflow: hidden;
+            transition: max-width 0.5s ease-in-out, max-height 0.5s ease-in-out;
+
+            .button-stepper {
+                width: 116px;
+                transition: opacity 0.4s ease-in-out;
+                margin-bottom: 20px;
+            }
+
+
+        }
+
+        .texts {
+            position: relative;
+            max-width: 340px;
+            flex: 1;
+            display: none;
+            height: 100%;
+            margin-top: -20px;
+
+            .text {
+                position: absolute;
+                font-size: 0.8125em;
+                line-height: 1.2em;
+                text-align: right;
+                color: $text-secondary;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+                pointer-events: none;
+                display: flex;
+                justify-self: center;
+                align-self: center;
+
+                &.active {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+            }
+        }
+    }
+}
+
+@include tablet {
+    .stepper-wrapper {
+        .btns {
+            display: flex;
+            padding-top: 24px;
+            border-top: $border-primary;
+
+            .btn-box {
+                max-width: 100%;
+            }
+
+            &.hide {
+                .btn-box {
+                    max-height: none;
+                    max-width: 0;
+                }
+            }
+
+            .texts {
+                display: block;
+            }
+        }
+    }
+}

@@ -1,0 +1,82 @@
+@use "./../../variables.scss" as *;
+
+.result {
+    background-color: $bg-primary;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    transition: height 0.3s ease-in-out;
+
+    .result-inner {
+        position: relative;
+    }
+
+    .result-card {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        transition: opacity 0.3s ease-in-out, visibility 0s ease-in-out 0.3s;
+        opacity: 0;
+        pointer-events: none;
+        height: fit-content;
+        width: 100%;
+        visibility: hidden;
+
+        &.active {
+            opacity: 1;
+            pointer-events: auto;
+            position: relative;
+            visibility: visible;
+            transition: opacity 0.3s ease-in-out;
+        }
+    }
+
+    .button-next {
+        width: 100%;
+        font-size: 1em;
+        padding: 18px 24px;
+    }
+
+    .icon {
+        width: 76px;
+        height: 76px;
+        border-radius: 22px;
+        background: $icon-gradient;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Schibsted Grotesk;
+        font-weight: 600;
+        font-size: 2.125em;
+        color: $color-primary;
+        flex-shrink: 0;
+
+        &::after {
+            content: "";
+            border: 1px solid $color-primary;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 999px;
+            opacity: 0.18;
+        }
+    }
+}
+
+@include tablet {
+    .result {
+        position: relative;
+        width: 34%;
+        height: auto !important;
+
+        .result-card {
+            height: auto;
+        }
+    }
+}

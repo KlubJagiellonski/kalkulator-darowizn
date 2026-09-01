@@ -1,0 +1,65 @@
+@use "./../../../variables.scss" as *;
+
+.hint-message-wrapper {
+    transform: translateY(80%);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    // overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    max-width: 330px;
+    z-index: 100;
+
+    .hint-message {
+        background-color: $color-dark;
+        padding: 14px 16px;
+        border-radius: 14px;
+
+        .title {
+            padding-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.8125em;
+            line-height: 1.53;
+            color: $white;
+        }
+
+        .text-hint {
+            color: $text-light;
+            font-size: 0.8125em;
+            line-height: 1.46;
+        }
+    }
+
+    &.open {
+        transform: translateY(100%);
+        opacity: 1;
+    }
+}
+
+@include tablet {
+    .hint-message-wrapper {
+        top: 0;
+        width: 300px;
+        bottom: -10px;
+        left: 50%;
+    }
+}
+
+@include desktop {
+    .hint-message-wrapper {
+        top: 0;
+        transform: translateX(95%);
+        max-width: 320px;
+        position: absolute;
+        left: auto;
+        bottom: auto;
+        right: 0;
+
+        &.open {
+            transform: translate(100%);
+        }
+    }
+}

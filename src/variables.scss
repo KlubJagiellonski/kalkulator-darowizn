@@ -1,0 +1,64 @@
+$text-primary: #1A1B22;
+$text-secondary: #6E7180;
+$text-muted: #5A5D6B;
+$text-light: #C9C6BF;
+$text-light-gray: #A8AAB4;
+
+$color-primary: #C62D1F;
+$color-dark: #1A1B22;
+$color-ghost: transparent;
+$color-disabled: #E3E1DC;
+
+$bg-primary: #F7F6F3;
+$bg-secondary: #F1EFEA;
+
+$border-primary: 1px solid #E3E1DC;
+$border-secondary: 1px solid #C9C6BF;
+
+$white: #ffffff;
+
+$warning-text: #7A4F0E;
+$warning-bg: #FBF3E2;
+$warning-color: #C98A1E;
+
+$bg-hint: #EFEDE8;
+
+$icon-gradient: linear-gradient(120.17deg, #FFE4DE 0%, #FDF1DC 73.53%);
+$shadow: 0 -4px 12px #1A1A212E;
+
+$bg-green: #E9F4EC;
+$color-green: #2F8F57;
+$text-green-primary: #1B6B3D;
+$text-green-secondary: #3E4150;
+
+$color-red: #E0392B;
+
+$outline-primary: inset 0 0 0 3px #e0392b;
+
+$color-primary-hover: #AB2317;
+$color-primary-active: #8B1F15;
+$color-primary-focus: #C62D1F;
+
+$color-chip-hover: #F1EFEA;
+$color-chip-active: #EFEDE8;
+$color-chip-focus: #FFFFFF;
+
+$dark-accent: #FF6B5A;
+
+@mixin desktop {
+    @container (min-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @container (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @container (min-width: 375px) {
+        @content;
+    }
+}

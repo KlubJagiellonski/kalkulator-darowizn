@@ -1,0 +1,209 @@
+@use "./variables" as *;
+
+@font-face {
+  font-family: SchibstedGrotesk;
+  src: url("./assets/SchibstedGrotesk-Regular.ttf");
+}
+
+.title {
+  margin-bottom: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  font-family: "Schibsted Grotesk", sans-serif;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 1.25em;
+  letter-spacing: -0.0025em;
+  line-height: 1.25;
+  font-weight: 600;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.125em;
+  letter-spacing: -0.001125em;
+  font-weight: 600;
+  line-height: 1.4375;
+}
+
+p,
+button,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  margin-bottom: 0 !important;
+  color: $text-primary;
+}
+
+.stdtxt p,
+.stdtxt button,
+.stdtxt h1,
+.stdtxt h2,
+.stdtxt h3,
+.stdtxt h4,
+.stdtxt h5,
+.stdtxt h6 {
+  margin-bottom: 0;
+}
+
+p {
+  font-size: 0.9375em;
+  line-height: 1.6;
+  margin-bottom: 0;
+  margin: 0;
+}
+
+.button {
+  padding: 14px 24px;
+  font-size: 0.9375em;
+  font-family: SchibstedGrotesk;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  height: auto;
+  width: auto;
+  outline: none;
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &--chip {
+    background-color: $white;
+    border: $border-secondary;
+    font-weight: 400;
+
+    &:not(:disabled):hover {
+      background-color: $color-chip-hover;
+    }
+
+    &:hover {
+      background-color: $color-chip-hover;
+    }
+
+    &:active {
+      background-color: $color-chip-active;
+    }
+
+    &:focus {
+      box-shadow: $outline-primary;
+    }
+
+    &.active {
+      background-color: $color-primary;
+      color: $white;
+      font-weight: 600;
+      border-color: $color-primary;
+
+      &:not(:disabled):hover {
+        background-color: $color-primary-hover;
+      }
+
+      &:hover {
+        background-color: $color-primary-hover;
+      }
+
+      &:active {
+        background-color: $color-primary-hover;
+      }
+
+      &:focus {
+        box-shadow: $outline-primary;
+      }
+    }
+  }
+
+  &--primary {
+    background-color: $color-primary;
+    border: none;
+    outline: none;
+    color: $white;
+    font-weight: 600;
+
+    &:not(:disabled):hover {
+      background-color: $color-primary-hover;
+    }
+
+    &:hover {
+      background-color: $color-primary-hover;
+    }
+
+    &:active {
+      background-color: $color-primary-hover;
+    }
+
+    &:focus {
+      box-shadow: $outline-primary;
+    }
+  }
+
+  &--dark {
+    background-color: $color-dark;
+    border: none;
+    color: $white;
+    font-weight: 600;
+  }
+
+  &--ghost {
+    background-color: $color-ghost;
+    border: $border-secondary;
+    // outline: none;
+    transition: opacity 0.3s ease-in-out;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+
+    &:not(:disabled):hover {
+      background-color: $color-chip-hover;
+    }
+
+    &:hover {
+      background-color: $color-chip-hover;
+    }
+
+    &:active {
+      background-color: $color-chip-active;
+    }
+
+    &:focus {
+      box-shadow: $outline-primary;
+    }
+
+  }
+}
+
+@include tablet {
+  h1 {
+    font-size: 1.625em;
+    line-height: 1.269;
+    letter-spacing: -0.00325em;
+  }
+
+  h3 {
+    font-size: 1.375em;
+    line-height: 1.269;
+    letter-spacing: -0.00275em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}

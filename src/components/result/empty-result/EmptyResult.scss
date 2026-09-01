@@ -1,0 +1,50 @@
+@use "./../../../variables.scss" as *;
+
+.result {
+    .empty-result {
+        padding: 24px 20px 28px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        justify-content: center;
+        flex: 1;
+
+        .text-1 {
+            font-size: 1em;
+            line-height: 1.56;
+        }
+
+        .text-2 {
+            font-size: 0.75em;
+            line-height: 1.5;
+            color: $text-muted;
+
+            span {
+                display: none;
+            }
+        }
+    }
+}
+
+@include tablet {
+    .result {
+        .empty-result {
+            gap: 20px;
+            padding: 36px;
+
+            .text-1 {
+                font-size: 1.0625em;
+                line-height: 1.58;
+            }
+
+            .text-2 {
+                font-size: 0.8125em;
+                line-height: 1.53;
+
+                span {
+                    display: inline;
+                }
+            }
+        }
+    }
+}

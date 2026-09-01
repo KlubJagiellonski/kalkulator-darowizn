@@ -1,0 +1,24 @@
+@use "./../../../variables.scss" as *;
+
+.hint-wrapper {
+    border: $border-secondary;
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background-color: $bg-hint;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75em;
+    line-height: 1;
+    color: $text-muted;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    user-select: none;
+
+    &.active {
+        background-color: $color-dark;
+        border-color: $color-dark;
+        color: $white;
+    }
+}

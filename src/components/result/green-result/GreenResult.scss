@@ -1,0 +1,80 @@
+@use "./../../../variables.scss" as *;
+
+.result {
+    .green-result {
+        flex: 1;
+        padding: 24px 20px 28px 20px;
+        border-top: 1px solid $color-green;
+        background-color: $bg-green;
+
+        .tag {
+            font-size: 0.6875em;
+            line-height: 1.54;
+            font-family: IBM Plex Mono;
+            color: $text-muted;
+            letter-spacing: 0.055em;
+            background-color: $white;
+            border: 1px solid $color-green;
+            padding: 6px 11px;
+            width: fit-content;
+            border-radius: 999px;
+            color: $text-green-primary;
+        }
+
+        .info {
+            color: $text-green-primary;
+            font-size: 1.75em;
+            font-weight: 600;
+            line-height: 1.21;
+            letter-spacing: -0.0035em;
+            padding-top: 14px;
+        }
+
+        .text-1 {
+            color: $text-green-secondary;
+            font-size: 0.9375em;
+            line-height: 1.53;
+            padding-top: 10px;
+            padding-bottom: 20px;
+
+            span {
+                display: none;
+            }
+        }
+    }
+}
+
+@include tablet {
+    .result {
+        .green-result {
+            border-top: none;
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: transparent;
+
+            .text-1 {
+                font-size: 1em;
+                line-height: 1.56;
+                padding-top: 14px;
+                padding-bottom: 24px;
+
+                span {
+                    display: block;
+                }
+            }
+
+            .info {
+                font-size: 2.125em;
+                line-height: 1.17;
+                letter-spacing: -0.00425em;
+                padding-top: 18px;
+            }
+
+            .tag {
+                background-color: $bg-green;
+            }
+        }
+    }
+}

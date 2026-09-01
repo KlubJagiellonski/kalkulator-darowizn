@@ -1,0 +1,52 @@
+@use "./../../../variables.scss" as *;
+
+.count-step {
+    padding-bottom: 42px;
+
+    .prices {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding-top: 12px;
+        gap: 12px;
+
+        .count-input {
+            grid-column: 1 / -1;
+        }
+
+        .price-btn {
+            font-size: 0.9375em;
+            background-color: $white;
+            border: $border-secondary;
+            border-radius: 14px;
+            padding: 14px 5px;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+
+            &.active {
+                background-color: $color-primary;
+                font-weight: 600;
+                color: $white;
+                border-color: $color-primary;
+            }
+        }
+    }
+}
+
+@include tablet {
+    .count-step {
+        .prices {
+            display: flex;
+            flex-wrap: wrap;
+            padding-top: 14px;
+            gap: 10px;
+
+            .count-input {
+                width: 180px;
+            }
+
+            .price-btn {
+                width: 96px;
+            }
+        }
+    }
+}

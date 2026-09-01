@@ -1,0 +1,100 @@
+import { useState } from 'react'
+import './App.scss'
+import Stepper from './components/stepper/Stepper'
+import FirstStep from './components/stepper/firstStep/FirstStep'
+import SecondStep from './components/stepper/secondStep/SecondStep'
+import ThirdStep from './components/stepper/thirdStep/ThirdStep'
+import FourthStep from './components/stepper/fourthStep/FourthStep'
+import type { Values } from './types/type'
+import StepperNav from './components/stepper/nav/StepperNav'
+import Result from './components/result/Result'
+import { back } from './utils/back'
+import ResultDetail from './components/result-details/ResultDatil'
+
+function App() {
+
+  const defaultValues: Values = {
+    pit: false,
+    cit: false,
+    incomePeriod: "yearly",
+    donationPerid: "once",
+    donationAmount: 500
+  }
+
+  const [step, setStep] = useState(1)
+  const [values, setValues] = useState(defaultValues)
+  const [openDetails, setOpenDetails] = useState(false)
+
+  const steps = [
+    {
+      title: "Kto przekazuje darowiznę?",
+      subtitle: "Osoba prywatna czy firma",
+      name: "Kto",
+      isValid: values.cit || values.pit,
+      children: <FirstStep values={values} setValues={setValues} />
+    },
+    {
+      title: "Forma rozliczenia PIT",
+      subtitle: values.pit ? "Decyduje o tym, czy odliczenie jest możliwe" : "Decyduje o wysokości korzyści podatkowej",
+      name: "Rozliczenie",
+      isValid: !!(
+        (values.cit && values.citType) ||
+        (values.pit &&
+          values.pitType &&
+          (values.pitType !== "lumpSum" || values.lumpSum))
+      ),
+      children: <SecondStep values={values} setValues={setValues} />
+    },
+    {
+      title: values.pit && values.pitType === "scale" ? "Twój roczny dochód brutto" : "Twój roczny przychód",
+      subtitle: values.cit ? "Wyznacza limit odliczenia 10%" : values.pit && values.pitType === "scale" ? "Wyznacza limit odliczenia" : "Przy ryczałcie limit liczy się od przychodu",
+      name: "Dochód",
+      children: <ThirdStep values={values} setValues={setValues} />,
+      isValid: (!!values.income),
+      isBlock: (values.pitType === "flat19")
+    },
+    {
+      title: "Kwota darowizny",
+      subtitle: "Jednorazowo albo co miesiąc",
+      name: "Kwota",
+      children: <FourthStep values={values} setValues={setValues} />,
+      isValid: (step === 4 && !!values.donationAmount),
+    },
+  ]
+
+  const changeStep = (newStep: number) => {
+    if (step > newStep) {
+      back({ values, setValues, step: newStep, setStep })
+    } else {
+      setStep(newStep)
+    }
+  }
+
+  return (
+    <div className='calculator-container'>
+      <div className='calculator-wrapper'>
+        <div className='header-wrapper'>
+          <div className='header-box'>
+            <div className='header-text'>
+              <p className='company-name'>Klub Jagielloński</p>
+              <p className='text'>Cztery pytania. Policzymy Twój limit odliczenia i pokażemy, ile z darowizny pokrywa niższy podatek.</p>
+            </div>
+            <p className='header-year'>
+              ROK PODATKOWY 2026
+            </p>
+          </div>
+        </div>
+        <div className='content-wrapper'>
+          <div className='stepper-wrapper'>
+            <Stepper step={step} items={steps} setStep={changeStep} />
+            <StepperNav setValues={setValues} values={values} step={step} setStep={setStep} />
+          </div>
+          <Result setOpenDetails={setOpenDetails} setValues={setValues} values={values} step={step} setStep={setStep} />
+        </div>
+        <ResultDetail values={values} open={openDetails} setOpen={setOpenDetails}/>
+      </div>
+    </div>
+  )
+}
+
+export default App

@@ -1,0 +1,327 @@
+@use "./../../../variables.scss" as *;
+
+.result {
+    .finish-result {
+        flex: 1;
+        padding: 24px 20px 28px 20px;
+        background-color: $text-primary;
+        width: 100%;
+        border-top-left-radius: 24px;
+        border-top-right-radius: 24px;
+
+
+        .tag {
+            font-size: 0.6875em;
+            line-height: 1.54;
+            padding-bottom: 12px;
+            font-family: IBM Plex Mono;
+            color: $text-muted;
+            letter-spacing: 0.055em;
+            display: none;
+            // display: block;
+
+        }
+
+        .texts-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .details {
+            // display: none;
+            display: block;
+            font-size: 0.78125em;
+            line-height: 1.5;
+            color: $white;
+            text-decoration: underline;
+            background-color: transparent;
+            padding: 0;
+            border: none;
+            outline: none;
+        }
+
+        .prec {
+            font-size: 1.75em;
+            // font-size: 3.5em;
+            font-weight: 600;
+            // line-height: 1.03;
+            line-height: 1.21;
+            letter-spacing: -0.01225em;
+            margin: 0;
+            padding: 0;
+            // color: $text-primary
+            color: $white;
+        }
+
+        .text-1 {
+            font-size: 0.75em;
+            line-height: 1.5;
+            // font-size: 0.9375em;
+            // line-height: 1.53;
+            // color: $text-muted;
+            color: $text-light-gray;
+        }
+
+        .text-2 {
+            font-size: 0.9375em;
+            line-height: 1.53;
+            color: $text-muted;
+            padding-top: 10px;
+            // display: block;
+            display: none;
+
+            span.bold {
+                color: $text-primary;
+                font-weight: bold;
+            }
+        }
+
+        .belt-wrapper {
+            background-color: $white;
+            height: 6px;
+            border-radius: 999px;
+            margin-top: 12px;
+            position: relative;
+            overflow: hidden;
+
+            .belt {
+                background-color: $color-red;
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                border-left: 2px solid $text-primary;
+                border-top-right-radius: 999px;
+                border-bottom-right-radius: 999px;
+                right: 0;
+                transition: transform 0.5s ease-in-out;
+            }
+        }
+
+        .belt-legend {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding-top: 12px;
+
+            .belt-text-2 {
+                color: $text-light-gray;
+                font-size: 0.75em;
+                line-height: 1.5;
+                display: block;
+            }
+
+            .belt-text-3 {
+                color: $color-red;
+                font-size: 0.75em;
+                line-height: 1.5;
+                display: block;
+            }
+
+            .belt-1,
+            .belt-2 {
+                flex-shrink: 0;
+                position: relative;
+                display: none;
+
+                .belt-text {
+                    color: $text-muted;
+                    font-size: 0.8125em;
+                    line-height: 1.53;
+                    padding-top: 2px;
+                    padding-left: 16px;
+                }
+
+                .belt-count {
+                    font-size: 1em;
+                    line-height: 1.5;
+                    font-weight: 600;
+                    padding-left: 16px;
+                }
+            }
+
+            .belt-2 {
+                text-align: right;
+
+                .belt-count {
+                    color: $color-primary;
+                }
+            }
+        }
+
+        .info-wrapper {
+            gap: 10px;
+            flex-direction: column;
+            border-top: $border-primary;
+            padding-top: 20px;
+            display: none;
+
+            .info-box {
+                display: none;
+                justify-content: space-between;
+
+                .info-text {
+                    font-size: 0.875em;
+                    line-height: 1.5;
+                    color: $text-muted;
+                }
+
+                .info-count {
+                    font-size: 0.875em;
+                    line-height: 1.5;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .belt-limit {
+            display: none;
+            height: 6px;
+            background-color: $color-disabled;
+            // background-color: $warning-color;
+            border-radius: 999px;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+
+            .b-limit {
+                content: "";
+                border-radius: 999px;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: $text-primary;
+                transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+
+                &.full {
+                    background-color: $warning-color;
+                }
+            }
+        }
+
+        .info-alg {
+            font-family: IBM Plex Mono;
+            font-size: 0.75em;
+            line-height: 1.5;
+            color: $text-muted;
+            padding-top: 10px;
+            display: none;
+        }
+
+        .text-3 {
+            font-size: 0.75em;
+            line-height: 1.5;
+            color: $text-muted;
+            padding-top: 10px;
+            display: none;
+        }
+    }
+}
+
+@include tablet {
+    .result {
+        .finish-result {
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            background-color: transparent;
+
+            .tag {
+                display: block;
+            }
+
+
+            .details {
+                display: none;
+            }
+
+            .prec {
+                font-size: 3.5em;
+                line-height: 1.03;
+                color: $text-primary
+            }
+
+            .text-1 {
+                font-size: 0.9375em;
+                line-height: 1.53;
+                color: $text-muted;
+            }
+
+            .text-2 {
+                display: block;
+            }
+
+            .belt-wrapper {
+                background-color: $text-primary;
+                height: 14px;
+                margin-top: 20px;
+
+                .belt {
+                    border-left: 2px solid $white;
+                }
+            }
+
+            .belt-legend {
+                padding-top: 20px;
+                padding-bottom: 20px;
+
+                .belt-text-2 {
+                    display: none;
+                }
+
+                .belt-text-3 {
+                    display: none;
+                }
+
+                .belt-1,
+                .belt-2 {
+                    display: block;
+
+                    &::before {
+                        content: "";
+                        width: 8px;
+                        height: 8px;
+                        display: block;
+                        position: absolute;
+                    }
+                }
+
+                .belt-1 {
+                    &::before {
+                        background-color: $text-primary;
+                    }
+                }
+
+                .belt-2 {
+                    &::before {
+                        background-color: $color-red;
+                    }
+                }
+            }
+
+            .info-wrapper {
+                display: flex;
+
+                .info-box {
+                    display: flex;
+                }
+            }
+
+            .belt-limit {
+                display: block;
+            }
+
+            .info-alg {
+                display: block;
+            }
+
+            .text-3 {
+                display: block;
+            }
+        }
+    }
+}
