@@ -1,7 +1,7 @@
 @use "./../../../../variables.scss" as *;
 
 .stepper-wrapper .steps .steps-box .step .step-content .scale {
-    padding-bottom: 120px;
+    padding-bottom: 42px;
 
     .hint-message-1 {
         display: none;
@@ -61,12 +61,6 @@
             padding-top: 14px;
             position: relative;
         }
-    }
-}
-
-@include mobile {
-    .stepper-wrapper .steps .steps-box .step .step-content .scale {
-        padding-bottom: 90px;
     }
 }
 

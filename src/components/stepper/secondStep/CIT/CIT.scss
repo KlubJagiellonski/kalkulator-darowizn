@@ -7,8 +7,12 @@
 
     }
 
+    .hint-message-1 {
+        display: none;
+    }
+
     .cit-content {
-        padding-bottom: 100px;
+        padding-bottom: 42px;
 
         .text {
             font-size: 0.875em;
@@ -22,6 +26,7 @@
         .cit-btns {
             display: flex;
             gap: 8px;
+            position: relative;
 
             .btn-cit {
                 padding-left: 5px;
@@ -42,6 +47,14 @@
 
 @include tablet {
     .cit {
+        .hint-message-2 {
+            display: none;
+        }
+
+        .hint-message-1 {
+            display: block;
+        }
+
         .cit-content {
             .text {
                 display: block;

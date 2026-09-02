@@ -4,6 +4,7 @@
     .btns {
         align-items: center;
         padding-top: 0;
+        padding: 0 20px;
 
         &.hide {
             .btn-box {
@@ -23,7 +24,7 @@
             .button-stepper {
                 width: 116px;
                 transition: opacity 0.4s ease-in-out;
-                margin-bottom: 20px;
+                margin-bottom: 20px !important;
             }
 
 
@@ -66,8 +67,9 @@
     .stepper-wrapper {
         .btns {
             display: flex;
-            padding-top: 24px;
             border-top: $border-primary;
+            padding: 0 36px;
+            padding-top: 24px;
 
             .btn-box {
                 max-width: 100%;

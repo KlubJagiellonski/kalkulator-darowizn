@@ -5,7 +5,8 @@
     display: flex;
     position: relative;
     overflow: hidden;
-    transition: height 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    flex: 1;
 
     .result-inner {
         position: relative;
@@ -18,10 +19,10 @@
         top: 0;
         bottom: 0;
         display: flex;
-        transition: opacity 0.3s ease-in-out, visibility 0s ease-in-out 0.3s;
+        transition: all 0.3s ease-in-out, visibility 0s ease-in-out 0.3s;
         opacity: 0;
         pointer-events: none;
-        height: fit-content;
+        // height: fit-content;
         width: 100%;
         visibility: hidden;
 

@@ -34,7 +34,7 @@ function App() {
       children: <FirstStep values={values} setValues={setValues} />
     },
     {
-      title: "Forma rozliczenia PIT",
+      title: values.pit ? "Forma rozliczenia PIT" : "Stawka CIT",
       subtitle: values.pit ? "Decyduje o tym, czy odliczenie jest możliwe" : "Decyduje o wysokości korzyści podatkowej",
       name: "Rozliczenie",
       isValid: !!(

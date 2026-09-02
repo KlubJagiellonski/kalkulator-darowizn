@@ -1,10 +1,23 @@
 @use "./../../../../variables.scss" as *;
 
 .pit {
-    padding-bottom: 20px;
+    padding-bottom: 28px;
+
+    .lump-wrapper {
+        position: absolute;
+        bottom: -14px;
+        transform: translateY(100%);
+    }
 
     .hint-lumpsum {
-        bottom: -55px;
+        top: 50px;
+        bottom: 0;
+        left: 40px;
+        transform: translateY(-5%);
+
+        &.open {
+            transform: translateY(0);
+        }
     }
 
     .hint-message-1 {
@@ -19,22 +32,24 @@
         display: flex;
         gap: 10px;
         flex-direction: column;
-        min-height: 250px;
 
         .pit-text {
             font-size: 0.8125em;
             line-height: 1.5;
-            padding-bottom: 14px;
             color: $text-muted;
-            min-height: fit-content;
+            min-height: auto;
             transition: opacity 0.3s ease-in-out;
             opacity: 0;
             pointer-events: none;
+            height: 0;
+            padding-bottom: 0;
 
             &.active {
                 opacity: 1;
                 transition: opacity 0s ease-in-out 0.4s;
                 pointer-events: auto;
+                min-height: fit-content;
+                padding-bottom: 14px;
             }
         }
 
@@ -61,20 +76,14 @@
     }
 }
 
-@include mobile {
-    .pit {
-        padding-bottom: 0;
-    }
-}
-
 @include tablet {
     .pit {
-        padding-bottom: 150px;
 
-        .hint-lumpsum {
-            left: 30px;
+        .lump-wrapper {
+            position: relative;
+            bottom: auto;
+            transform: translateY(0);
         }
-
 
         .title-wrapper {
             width: fit-content;
@@ -84,7 +93,7 @@
             display: block;
         }
 
-        .hint-massage-2 {
+        .hint-message-2 {
             display: none;
         }
 
@@ -99,6 +108,10 @@
                 padding-bottom: 0;
                 height: fit-content !important;
                 opacity: 1;
+
+                &.active{
+                    padding-bottom: 0;
+                }
             }
 
             .pit-btns {
@@ -123,8 +136,10 @@
         padding-bottom: 0;
 
         .hint-lumpsum {
-            left: -90px;
-            top: 80px;
+            top: 16px;
+            bottom: 0;
+            left: 210px;
+            transform: translatex(-5%);
         }
     }
 }
