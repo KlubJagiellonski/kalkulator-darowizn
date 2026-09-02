@@ -1,11 +1,9 @@
 @use "./../../../../../variables.scss" as *;
 
 .lump-sum-rates {
-    position: absolute;
-    top: calc(100% + 10px);
     left: 0;
     right: 0;
-
+    position: relative;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease-in-out, visibility 0s ease-in-out 0.5s;
@@ -73,7 +71,7 @@
 
 @include tablet {
     .lump-sum-rates {
-        top: calc(100% + 14px);
+        position: relative;
 
         .lump-sum-box {
             .text {

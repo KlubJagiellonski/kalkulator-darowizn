@@ -25,11 +25,8 @@ function PIT({ values, setValues }: ValuesProps) {
             <div className="title-wrapper">
                 <p className="number">02</p>
                 <p className="title">Jak rozliczasz PIT?</p>
-                <Hint active={showHint} setActive={setShowHint} label="informacja o stawce PIT"/>
+                <Hint active={showHint} setActive={setShowHint} label="informacja o stawce PIT" />
                 <div className="hint-message-1">
-                    <HintMessage open={showHint} text="Skala podatkowa (12% i 32%) to domyślne rozliczenie umowy o pracę i większości zleceń. Ryczałt i podatek liniowy 19% wybierają osoby prowadzące działalność gospodarczą." title="Formy rozliczenia PIT" />
-                </div>
-                <div className="hint-message-2">
                     <HintMessage open={showHint} text="Skala podatkowa (12% i 32%) to domyślne rozliczenie umowy o pracę i większości zleceń. Ryczałt i podatek liniowy 19% wybierają osoby prowadzące działalność gospodarczą." title="Formy rozliczenia PIT" />
                 </div>
             </div>
@@ -58,15 +55,20 @@ function PIT({ values, setValues }: ValuesProps) {
                     >
                         <span>podatek </span>liniowy 19%
                     </button>
-                    <LumpSumRates
-                        isOpen={pitType === "lumpSum"}
-                        ref={ref}
-                        setValues={setValues}
-                        values={values}
-                        setShowHint={setShowHintLumpSum}
-                        showHint={showHintLumpSum}
-                    />
-                    <HintMessage className="hint-lumpsum" open={showHintLumpSum} title="Stawka ryczałtu" text="Procent, którym opodatkowany jest Twój przychód. Zależy od rodzaju działalności — od 3% w handlu do 17% w wolnych zawodach. Znajdziesz ją w ewidencji przychodów." />
+                    <div className="hint-message-2">
+                        <HintMessage open={showHint} text="Skala podatkowa (12% i 32%) to domyślne rozliczenie umowy o pracę i większości zleceń. Ryczałt i podatek liniowy 19% wybierają osoby prowadzące działalność gospodarczą." title="Formy rozliczenia PIT" />
+                    </div>
+                    <div className="lump-wrapper">
+                        <LumpSumRates
+                            isOpen={pitType === "lumpSum"}
+                            ref={ref}
+                            setValues={setValues}
+                            values={values}
+                            setShowHint={setShowHintLumpSum}
+                            showHint={showHintLumpSum}
+                        />
+                        <HintMessage className="hint-lumpsum" open={showHintLumpSum} title="Stawka ryczałtu" text="Procent, którym opodatkowany jest Twój przychód. Zależy od rodzaju działalności — od 3% w handlu do 17% w wolnych zawodach. Znajdziesz ją w ewidencji przychodów." />
+                    </div>
                 </div>
                 <p className={`pit-text ${pitType !== "lumpSum" ? "active" : ""}`} style={{ height }}>
                     Nie wiesz? Umowa o pracę i większość zleceń to skala podatkowa.

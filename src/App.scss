@@ -10,6 +10,7 @@
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   .header-wrapper {
     border-bottom: $border-primary;
