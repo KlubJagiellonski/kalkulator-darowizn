@@ -10,6 +10,7 @@ import { calculateForPIT2022 } from "../../alghorytm/2022/pit-calculations-2022"
 import FinishResult from "./finish-result/FinishResult"
 import { calculateForPPE2022 } from "../../alghorytm/2022/ppe-calculations-2022"
 import FinisEmptyhResult from "./finish-empty-result/FinishEmptyResult"
+import { getPit32CalculateInfo } from "../../utils/pitCalculateInfo"
 
 interface ResultProps {
     step: number,
@@ -228,6 +229,7 @@ function Result({ step, values, setStep, setValues, setOpenDetails }: ResultProp
                     taxName="Stawka podatku"
                     values={values}
                     setOpenDetails={setOpenDetails}
+                    calculate={(values.income ?? 0) <= 120000 ? undefined : getPit32CalculateInfo}
                     {...calculateForPIT2022(
                         values.incomePeriod === "monthly"
                             ? values.income! * 12

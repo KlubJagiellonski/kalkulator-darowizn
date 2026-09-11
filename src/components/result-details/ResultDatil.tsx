@@ -1,6 +1,7 @@
 import { calculateForPIT2022 } from "../../alghorytm/2022/pit-calculations-2022"
 import { calculateForPPE2022 } from "../../alghorytm/2022/ppe-calculations-2022"
 import type { Values } from "../../types/type"
+import { getPit32CalculateInfo } from "../../utils/pitCalculateInfo"
 import ResultDetails from "./ResultDatils"
 import "./ResultDatils.scss"
 import ResultDetailsEmpty from "./ResultDatilsEmpty"
@@ -24,6 +25,7 @@ function ResultDetail({ open, values, setOpen }: ResultDetailProps) {
                     values={values}
                     taxName="skala podatkowa"
                     setOpen={setOpen}
+                    calculate={(values.income ?? 0) <= 120000 ? undefined : getPit32CalculateInfo}
                     {...calculateForPIT2022(
                         values.incomePeriod === "monthly"
                             ? values.income! * 12

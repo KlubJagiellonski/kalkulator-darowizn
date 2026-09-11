@@ -1,6 +1,8 @@
+import type React from "react"
 import type { Values } from "../../../types/type"
 import { formatInputValue } from "../../../utils/formatInputValues"
 import "./FinishResult.scss"
+import { getCalculateInfo } from "../../../utils/pitCalculateInfo"
 
 interface FinishResultProps {
     values: Values
@@ -8,12 +10,12 @@ interface FinishResultProps {
     taxDeduction: number
     taxRate: number
     taxName: string
+    calculate?: (values: Values, taxDeduction: number, taxRate: number) => React.ReactNode
     setOpenDetails: (open: boolean) => void
 
 }
 
-function FinishResult({ values, donationSum, taxDeduction, taxRate, taxName, setOpenDetails }: FinishResultProps) {
-
+function FinishResult({ values, donationSum, taxDeduction, taxRate, taxName, calculate, setOpenDetails }: FinishResultProps) {
     const { donationAmount, donationPerid } = values
 
     const annualDonation =
@@ -62,7 +64,7 @@ function FinishResult({ values, donationSum, taxDeduction, taxRate, taxName, set
                     </h2>
                 </div>
 
-                <button className="details" onClick={()=>{setOpenDetails(true)}}>
+                <button className="details" onClick={() => { setOpenDetails(true) }}>
                     Szczegóły wyliczenia
                 </button>
             </div>
@@ -169,10 +171,11 @@ function FinishResult({ values, donationSum, taxDeduction, taxRate, taxName, set
             </div>
 
             <p className="info-alg">
-                {formatInputValue(`${deductibleAmount}`)} zł
-                {" "}odliczenia × {taxRate}% ={" "}
-                {formatInputValue(`${taxDeduction}`)} zł
-                {" "}niższego podatku
+                {
+                    calculate ?
+                        calculate(values, taxDeduction, taxRate) :
+                        getCalculateInfo(values, taxDeduction, taxRate)
+                }
             </p>
             <p className="text text-3">
                 Wyliczenie szacunkowe, na podstawie stawki
