@@ -5,7 +5,7 @@ import { formatInputValue } from "./formatInputValues"
 export const getPit32CalculateInfo = (
     values: Values,
     taxDeduction: number,
-    taxRate: number
+    _taxRate: number
 ): ReactNode => {
     const annualIncome =
         values.incomePeriod === "monthly"
