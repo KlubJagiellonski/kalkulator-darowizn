@@ -85,11 +85,18 @@ npm run build
 
 ## Tests
 
-The project's tests can be run with:
+Unit and integration tests can be run using:
 
 ```bash
 npm run test
 ```
+
+E2E tests can be run using:
+
+```bash
+npm run test:e2e
+```
+
 ## Calculation function
 
 X = annual income/revenue Y = maximum amount of donations possible to deduct from tax Z = amount by which the tax payable (PIT or CIT) will be reduced as a result of deducting donations Z1 = tax without deducting donations Z2 = tax taking donations into account Z = Z1 - Z2

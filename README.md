@@ -84,11 +84,18 @@ npm run build
 
 ## Testy
 
-Testy projektu można uruchomić za pomocą:
+Testy jednostkowe i inetgracyjne można uruchomić za pomocą:
 
 ```bash
 npm run test
 ```
+
+Testy e2e można uruchomić za pomocą:
+
+```bash
+npm run test:e2e
+```
+
 ## Funkcja licząca
 X = dochód/przychód roczny Y = maksymalna kwota darowizn możliwa do odliczenia od podatku Z = kwota, o którą zmniejszy się podatek do zapłacenia (PIT lub CIT) w wyniku odliczenia darowizn Z1 = podatek bez odliczenia darowizn Z2 = podatek przy uwzględnieniu darowizn Z = Z1 - Z2
 
