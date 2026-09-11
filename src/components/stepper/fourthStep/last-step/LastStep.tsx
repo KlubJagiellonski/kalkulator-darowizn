@@ -58,7 +58,7 @@ function LastStep({ values, setValues, donationSum }: LastStepProps) {
 
         setValues({
             ...values,
-            donationAmount: Number(sanitized)
+            donationAmount: Number(sanitized) ? Number(sanitized): 500
         })
     }
 

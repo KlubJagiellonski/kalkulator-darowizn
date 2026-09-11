@@ -1,5 +1,6 @@
 import type { Values } from "../../types/type"
 import { formatInputValue } from "../../utils/formatInputValues"
+import { getCalculateInfo } from "../../utils/pitCalculateInfo"
 import "./ResultDatils.scss"
 
 interface ResultDetailsProps {
@@ -11,10 +12,11 @@ interface ResultDetailsProps {
     taxRate: number
     taxName: string
     taxText?: string
+    calculate?: (values: Values, taxDeduction: number, taxRate: number) => React.ReactNode
 }
 
-function ResultDetails({open, values, setOpen, donationSum, taxDeduction, taxRate, taxName, taxText}: ResultDetailsProps) {
-    
+function ResultDetails({ open, values, setOpen, donationSum, taxDeduction, taxRate, taxName, taxText, calculate }: ResultDetailsProps) {
+
     const { donationAmount, donationPerid, income } = values
 
     const annualDonation =
@@ -32,12 +34,12 @@ function ResultDetails({open, values, setOpen, donationSum, taxDeduction, taxRat
     const taxCovered = annualDonation - displayedCost
 
     return (
-        <div className={`result-details ${open? "open" : "close"}`}>
-            <div className="cover" onClick={()=>setOpen(false)}></div>
+        <div className={`result-details ${open ? "open" : "close"}`}>
+            <div className="cover" onClick={() => setOpen(false)}></div>
             <div className="result-details-box">
                 <div className="result-details-header">
                     <h3 className="title">Jak obliczyliśmy {formatInputValue(`${displayedCost}`)} zł?</h3>
-                    <button className="btn-close" onClick={()=>setOpen(false)}>zamknij</button>
+                    <button className="btn-close" onClick={() => setOpen(false)}>zamknij</button>
                 </div>
                 <p className="summary">PODSUMOWANIE</p>
                 <p className="calculate">{formatInputValue(`${donationAmount}`)} zł darowizny − {formatInputValue(`${taxCovered}`)} zł niższego podatku = {formatInputValue(`${displayedCost}`)} zł realnego kosztu</p>
@@ -48,7 +50,11 @@ function ResultDetails({open, values, setOpen, donationSum, taxDeduction, taxRat
                     Kwota odliczenia: {formatInputValue(`${donationAmount}`)} zł<br />
                     {taxText ?? "Stawka podatku"}: {taxRate}%
                 </p>
-                <p className="text">{formatInputValue(`${donationAmount}`)} zł × {taxRate}% = {formatInputValue(`${taxCovered}`)} zł niższego podatku</p>
+                <p className="text">{
+                    calculate ?
+                        calculate(values, taxDeduction, taxRate) :
+                        getCalculateInfo(values, taxDeduction, taxRate)
+                }</p>
                 <p className="legal">Wyliczenie jest szacunkowe i nie stanowi porady podatkowej.</p>
             </div>
         </div>
